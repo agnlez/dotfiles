@@ -1,15 +1,17 @@
-# Sources
+# sources
 tap "homebrew/bundle"
 tap "homebrew/services"
 
-# Applications
+# tools
+brew "fnm"
+brew "git"
+
+# applications
 cask "1password"
 cask "1password-cli"
 cask "discord"
 cask "docker"
 cask "firefox"
-brew "fnm"
-brew "git"
 cask "google-chrome"
 cask "notion-calendar"
 cask "postman"
