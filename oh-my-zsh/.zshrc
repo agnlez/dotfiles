@@ -100,7 +100,6 @@ export NVM_DIR="$HOME/.nvm"
 #
 # Example aliases
 alias zshconfig="code ~/.zshrc"
-alias sourcezshconfig="source ~/.zshrc"
-alias update="sh update.sh"
-alias power="sudo sh power-management.sh"
+alias zshsource="source ~/.zshrc"
+alias update="sh -c \"$(curl -fsSL https://raw.githubusercontent.com/andresgnlez/dotfiles/master/scripts/update.sh)\""
 # alias ohmyzsh="mate ~/.oh-my-zsh"

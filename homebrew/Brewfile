@@ -1,0 +1,27 @@
+# sources
+tap "homebrew/bundle"
+tap "homebrew/services"
+
+# tools
+brew "fnm"
+brew "git"
+
+# applications
+cask "1password"
+cask "1password-cli"
+cask "discord"
+cask "docker"
+cask "firefox"
+cask "google-chrome"
+cask "notion-calendar"
+cask "postman"
+cask "proton-mail-bridge"
+cask "protonvpn"
+cask "raycast"
+cask "slack"
+cask "spotify"
+cask "telegram"
+cask "warp"
+cask "webstorm"
+cask "whatsapp"
+cask "zoom"
