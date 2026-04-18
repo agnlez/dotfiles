@@ -1,3 +1,13 @@
+## Claude Code configuration
+
+All Claude Code global configuration is managed through `~/Developer/dotfiles` and symlinked to `~/.claude/`. When creating or modifying rules, skills, hooks, or settings, edit the source files in the dotfiles repo so changes are tracked in git:
+
+- `~/Developer/dotfiles/claude/settings.json` → `~/.claude/settings.json`
+- `~/Developer/dotfiles/claude/CLAUDE.md` → `~/.claude/CLAUDE.md`
+- `~/Developer/dotfiles/claude/rules/` → `~/.claude/rules/`
+- `~/Developer/dotfiles/claude/skills/` → `~/.claude/skills/`
+- `~/Developer/dotfiles/claude/hooks/` → `~/.claude/hooks/`
+
 ## Tool preferences
 
 - Assume `rg`, `fd`, `bat`, `eza`, `jq`, and `yq` are available in the environment
