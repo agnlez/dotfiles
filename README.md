@@ -10,6 +10,7 @@ Personal dotfiles for macOS (Apple Silicon).
 | `git/` | Git config with GPG signing, delta pager, aliases |
 | `starship/` | Starship prompt preset (bracket style) |
 | `ghostty/` | Ghostty terminal config (Catppuccin theme, Monaspace font) |
+| `claude/` | Claude Code rules, skills, hooks, and global config |
 | `homebrew/` | Brewfile with formulas, casks, and fonts |
 
 ## Install

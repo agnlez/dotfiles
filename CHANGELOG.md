@@ -20,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Brewfile casks: `brave-browser`, `claude`, `claude-code`, `ghostty`, `signal`
 - Brewfile fonts: `font-intel-one-mono`, `font-monaspace`
 - `CLAUDE.md` with project structure conventions and changelog instructions
+- `claude/` directory with Claude Code configuration merged from `agnlez/claude-setup`
+- `claude/CLAUDE.md` global Claude instructions (symlinked to `~/.claude/CLAUDE.md`)
+- `claude/rules/` with `context7.md`, `documentation-driven-development.md`, `esm-exports.md`
+- `claude/skills/fix-vulnerabilities/` vulnerability audit and fix skill
+- `claude/hooks/optimize-images/` pre-commit image optimization hook
+- `claude/settings.json` with sandbox, plugins, hooks, and `acceptEdits` default mode
 
 ### Changed
 - Renamed `oh-my-zsh/` folder to `zsh/`
@@ -34,6 +40,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Legacy scripts: `power-management.sh`, `update.sh`
 - Stale git branches: `develop`, `delete-me`
 - Deprecated Homebrew taps: `homebrew/bundle`, `homebrew/services`
+- Redundant `context7-mcp` skill (covered by `context7.md` rule)
+- Duplicate "Docs Fetching" section from global `claude/CLAUDE.md`
+- Duplicate optimize-images hook entry from settings
+- `effortLevel` and `skipDangerousModePermissionPrompt` from settings (unnecessary defaults)
 
 ## [1.0.0] - 2019-02-01
 ### Added

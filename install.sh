@@ -78,6 +78,13 @@ link_file "$DOTFILES/ghostty/config" "$HOME/Library/Application Support/com.mitc
 # editorconfig
 link_file "$DOTFILES/.editorconfig" "$HOME/.editorconfig"
 
+# claude code
+link_file "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+link_file "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
+link_file "$DOTFILES/claude/rules" "$HOME/.claude/rules"
+link_file "$DOTFILES/claude/skills" "$HOME/.claude/skills"
+link_file "$DOTFILES/claude/hooks" "$HOME/.claude/hooks"
+
 echo ""
 success "Done! Open a new terminal to load the updated config."
 echo ""
