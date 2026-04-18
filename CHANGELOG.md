@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/skills/fix-vulnerabilities/` vulnerability audit and fix skill
 - `claude/hooks/optimize-images/` pre-commit image optimization hook
 - `claude/settings.json` with sandbox, plugins, hooks, and `acceptEdits` default mode
+- `gpg.ssh.program` pointing to 1Password's `op-ssh-sign` for commit signing inside sandbox
 - 1Password SSH agent socket to sandbox `allowUnixSockets` for git SSH access inside sandbox
 - Auto-allow permissions for safe tools: `Read`, `Edit`, `Write`, `Glob`, `Grep`, `WebFetch`, `WebSearch`
 - Auto-allow permissions for git operations: `add`, `commit`, `fetch`, `pull`, `push`, `branch`, `branch -d`, `checkout`, `merge`, `stash`, `tag`, `config`, `log`, `diff`, `show`, `rebase`, `cherry-pick`, `revert`
