@@ -26,6 +26,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/skills/fix-vulnerabilities/` vulnerability audit and fix skill
 - `claude/hooks/optimize-images/` pre-commit image optimization hook
 - `claude/settings.json` with sandbox, plugins, hooks, and `acceptEdits` default mode
+- 1Password SSH agent socket to sandbox `allowUnixSockets` for git SSH access inside sandbox
+- Auto-allow permissions for safe tools: `Read`, `Edit`, `Write`, `Glob`, `Grep`, `WebFetch`, `WebSearch`
+- Auto-allow permissions for git operations: `add`, `commit`, `fetch`, `pull`, `push`, `branch`, `branch -d`, `checkout`, `merge`, `stash`, `tag`, `config`, `log`, `diff`, `show`, `rebase`, `cherry-pick`, `revert`
+- Auto-allow permissions for CLI tools: `pnpm`, `npm`, `npx`, `node`, `curl`, `gh`, `jq`, `bat`, `lsof`
+- Auto-allow permissions for MCP servers: Context7, Figma, Playwright, Next.js devtools, Atlassian
+- Ask-before-run rules for destructive git operations: `push --force`, `push --delete`, `reset --hard`, `clean -f`, `branch -D`, `checkout --`
+- Ask-before-run rules for destructive GitHub CLI operations: `pr close`, `pr merge`, `issue close`, `issue delete`, `repo delete`
+- Ask-before-run rules for Atlassian write operations: create/edit/transition issues, worklogs, comments, Confluence pages
 
 ### Changed
 - Renamed `oh-my-zsh/` folder to `zsh/`
@@ -44,6 +52,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Duplicate "Docs Fetching" section from global `claude/CLAUDE.md`
 - Duplicate optimize-images hook entry from settings
 - `effortLevel` and `skipDangerousModePermissionPrompt` from settings (unnecessary defaults)
+- `autoAllowBashIfSandboxed` from sandbox config (replaced by explicit per-command permissions)
+- Vizzhub MCP from permissions (unused)
 
 ## [1.0.0] - 2019-02-01
 ### Added
