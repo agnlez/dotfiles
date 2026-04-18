@@ -9,20 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `.zshenv` setting `ZDOTDIR` to `~/.config/zsh`
 - `.zprofile` for Homebrew shell environment setup
 - `aliases.zsh` with personal aliases, zoxide shortcuts, and modern CLI replacements
-- Brewfile formulas: `bat`, `eza`, `fd`, `fzf`, `ripgrep`, `starship`, `zoxide`
+- `git/.gitconfig` with GPG signing, delta pager, custom aliases, rebase workflow, rerere, histogram diffs
+- `git/.gitconfig.local` include pattern for personal identity (not tracked)
+- `git/.gitignore_global` for system-wide git ignores
+- `ghostty/config` with Catppuccin theme, Monaspace font, window padding, and clipboard settings
+- `starship/starship.toml` prompt configuration (bracket preset)
+- `install.sh` bootstrap script with symlink management and backup
+- `.gitignore` for the repo itself
+- Brewfile formulas: `bat`, `eza`, `fd`, `fzf`, `git-delta`, `ripgrep`, `starship`, `zoxide`
 - Brewfile casks: `brave-browser`, `claude`, `claude-code`, `ghostty`, `signal`
 - Brewfile fonts: `font-intel-one-mono`, `font-monaspace`
-- `CLAUDE.md` with project instructions
+- `CLAUDE.md` with project structure conventions and changelog instructions
 
 ### Changed
 - Renamed `oh-my-zsh/` folder to `zsh/`
 - Replaced old oh-my-zsh `.zshrc` with current zinit-based configuration
 - Replaced `warp` cask with `ghostty`
+- Renamed `docker` cask to `docker-desktop`
+- Rewrote `README.md` with install instructions and project overview
 
 ### Removed
 - Legacy oh-my-zsh configuration (NVM, steeef theme)
 - Brewfile casks: `1password-cli`, `notion-calendar`, `postman`, `proton-mail-bridge`, `protonvpn`, `warp`, `zoom`
 - Legacy scripts: `power-management.sh`, `update.sh`
+- Stale git branches: `develop`, `delete-me`
+- Deprecated Homebrew taps: `homebrew/bundle`, `homebrew/services`
 
 ## [1.0.0] - 2019-02-01
 ### Added

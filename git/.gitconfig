@@ -1,0 +1,39 @@
+[gpg]
+    format = ssh
+[commit]
+    gpgsign = true
+[include]
+	path = ~/.gitconfig.local
+[core]
+	excludesFile = ~/.gitignore
+	pager = delta
+[push]
+	autoSetupRemote = true
+[alias]
+	log = log --graph --all --format=\"%C(yellow)%h%C(reset) %C(magenta)%s%C(reset)%C(red)%d%C(reset) %C(cyan)%ad%C(reset) %C(blue)%an%C(reset)\" --date=short
+	lg = log --graph --format=\"%C(yellow)%h%C(reset) %C(magenta)%s%C(reset)%C(red)%d%C(reset) %C(cyan)%ad%C(reset) %C(blue)%an%C(reset)\" --date=short
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+[fetch]
+	prune = true
+[rerere]
+	enabled = true
+	autoUpdate = true
+[diff]
+	algorithm = histogram
+[branch]
+	sort = -committerdate
+[tag]
+	sort = -version:refname
+	gpgSign = true
+[init]
+	defaultBranch = main
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	side-by-side = true
+[merge]
+	conflictStyle = zdiff3
