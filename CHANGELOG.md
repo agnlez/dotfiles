@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `install.sh` bootstrap script with symlink management and backup
 - `.gitignore` for the repo itself
 - Brewfile formulas: `bat`, `eza`, `fd`, `fzf`, `git-delta`, `ripgrep`, `starship`, `zoxide`
-- Brewfile casks: `brave-browser`, `claude`, `claude-code`, `ghostty`, `signal`
+- Brewfile casks: `brave-browser`, `claude`, `claude-code`, `dbeaver-community`, `ghostty`, `signal`
 - Brewfile fonts: `font-intel-one-mono`, `font-monaspace`
 - `CLAUDE.md` with project structure conventions and changelog instructions
 - `claude/` directory with Claude Code configuration merged from `agnlez/claude-setup`
