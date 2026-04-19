@@ -28,7 +28,7 @@ diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 modified = "!"
 staged = "+"
 untracked = "?"
-stashed = "$"
+stashed = '\$'
 deleted = "✘"
 
 [git_state]

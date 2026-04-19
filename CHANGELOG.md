@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `install.sh` creates `~/.gitconfig.local` from the template instead of echoing commands
 
+### Fixed
+- Starship `git_status.stashed` parse warning (escaped `$` as `\$` in a TOML literal string)
+
 ## [2.1.0] - 2026-04-19
 ### Added
 - `atuin/config.toml` with compact style, host filter, directory-scoped up-arrow, workspace support, daemon, and stats
