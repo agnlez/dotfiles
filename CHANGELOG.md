@@ -6,6 +6,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-04-19
+### Added
+- `atuin/config.toml` with compact style, host filter, directory-scoped up-arrow, workspace support, daemon, and stats
+- `atuin`, `jq`, `yq` formulas in Brewfile
+- Claude Code npm install to `install.sh` (auto-updates, replaces Homebrew cask)
+- Git config: `push.default = current`, `fetch.pruneTags`, `diff.colorMoved`, `delta.dark`, `column.ui`, `help.autoCorrect = prompt`
+- Git aliases: `aliases` (list all), `undo` (soft reset HEAD~1), `oops` (amend without editing)
+- `eval "$(atuin init zsh)"` in `.zshrc`
+- `FZF_DEFAULT_OPTS`, `FZF_DEFAULT_COMMAND`, `FZF_CTRL_T_COMMAND` for consistent fzf UX and `fd` as default source
+- `font-monaspice-nerd-font` cask in Brewfile (Monaspace patched with Nerd Font glyphs)
+- `ll`, `lt`, `lta` eza aliases for long-listing (with git status and group column) and tree views
+
+### Changed
+- Split git log aliases: `lg` (current branch) and `lga` (all branches). Added `gl` and `gla` shell aliases.
+- Deferred OMZ git plugin loading via `zinit wait lucid` for faster shell startup
+- `cat` alias now uses `bat --paging=never` to match `cat`'s non-paging behavior
+- Ghostty `font-family` from `Monaspace Neon` to `MonaspiceNe Nerd Font` for icon support
+- `ls` alias to `eza --icons --group-directories-first`
+- Rewrote `starship.toml`: explicit two-line prompt format with only the modules used (directory, git, nodejs, docker, duration, jobs, character)
+- Guarded tool init lines in `.zshrc` (`fnm`, `fzf`, `zoxide`, `atuin`, `starship`) with `command -v` checks so missing binaries don't error on shell startup
+- Reordered `yq` in Brewfile to keep tools alphabetic
+- Rewrote `README.md` with current stack, install steps, and git identity setup
+
+### Removed
+- Brewfile cask `claude-code` (replaced by npm install for auto-updates)
+- Bun configuration from `.zshrc` and `starship.toml` (unused)
+- `git log` shell wrapper in `.zshrc` (was silently rewriting flags; use `gl`/`gla` instead)
+- Ineffective `log` alias from `.gitconfig` (git refuses aliases that shadow built-ins)
+
 ## [2.0.0] - 2026-04-18
 ### Added
 - `.zshenv` setting `ZDOTDIR` to `~/.config/zsh`
@@ -19,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `install.sh` bootstrap script with symlink management and backup
 - `.gitignore` for the repo itself
 - Brewfile formulas: `bat`, `eza`, `fd`, `fzf`, `git-delta`, `ripgrep`, `starship`, `zoxide`
-- Brewfile casks: `brave-browser`, `claude`, `claude-code`, `dbeaver-community`, `ghostty`, `signal`
+- Brewfile casks: `brave-browser`, `claude`, `dbeaver-community`, `ghostty`, `signal`
 - Brewfile fonts: `font-intel-one-mono`, `font-monaspace`
 - `CLAUDE.md` with project structure conventions and changelog instructions
 - `claude/` directory with Claude Code configuration merged from `agnlez/claude-setup`

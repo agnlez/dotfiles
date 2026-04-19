@@ -3,9 +3,6 @@ ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
 [ ! -d "$ZINIT_HOME" ] && mkdir -p "$(dirname $ZINIT_HOME)" && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# OMZ git plugin (same aliases: ga, gco, gst, etc.)
-zinit snippet OMZP::git
-
 # Turbo-loaded plugins (deferred until after first prompt)
 zinit wait lucid for \
     atinit"zicompinit; zicdreplay" \
@@ -13,27 +10,26 @@ zinit wait lucid for \
     atload"_zsh_autosuggest_start" \
         zsh-users/zsh-autosuggestions \
     blockf atpull'zinit creinstall -q .' \
-        zsh-users/zsh-completions
+        zsh-users/zsh-completions \
+    OMZP::git
 
 # Personal aliases
 source "$ZDOTDIR/aliases.zsh"
 
-# Git wrapper — redirects `git log` to the fancy `git lg` alias
-git() {
-  if [[ "$1" == "log" ]]; then
-    command git lg "${@:2}"
-  else
-    command git "$@"
-  fi
-}
-
 export ARCHFLAGS="-arch $(uname -m)"
 
 # fnm completions
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
+command -v fnm >/dev/null && eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+command -v fzf >/dev/null && source <(fzf --zsh)
+
+# Global fzf defaults (UI + keybindings)
+export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border --bind 'ctrl-/:toggle-preview'"
+
+# Use fd for standalone fzf and Ctrl+T
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # fzf completion options
 export FZF_COMPLETION_OPTS='--border --info=inline'
@@ -62,15 +58,11 @@ _fzf_comprun() {
 
 . "$HOME/.local/bin/env"
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
 # zoxide
-eval "$(zoxide init zsh)"
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
+
+# atuin (shell history)
+command -v atuin >/dev/null && eval "$(atuin init zsh)"
 
 # starship
-eval "$(starship init zsh)"
+command -v starship >/dev/null && eval "$(starship init zsh)"

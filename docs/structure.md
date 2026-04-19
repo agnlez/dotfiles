@@ -1,6 +1,6 @@
 # Structure
 
-Each tool gets a top-level directory (`git/`, `zsh/`, `starship/`, `homebrew/`, `ghostty/`, `claude/`).
+Each tool gets a top-level directory (`atuin/`, `claude/`, `ghostty/`, `git/`, `homebrew/`, `starship/`, `zsh/`).
 Files are symlinked to their target locations by `install.sh`.
 
 The `zsh/.zshenv` file is special: it symlinks to `~/.zshenv` (not `~/.config/zsh/`), because it's the bootstrap file that sets `ZDOTDIR`.

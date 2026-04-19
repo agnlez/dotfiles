@@ -1,0 +1,36 @@
+# Search
+search_mode = "daemon-fuzzy"
+filter_mode = "host"
+filter_mode_shell_up_key_binding = "directory"
+workspaces = true
+
+# UI
+style = "compact"
+show_preview = true
+enter_accept = true
+
+# Secrets are auto-filtered (AWS keys, GitHub tokens, Slack, Stripe)
+secrets_filter = true
+
+[stats]
+common_subcommands = [
+  "cargo",
+  "docker",
+  "git",
+  "gh",
+  "kubectl",
+  "npm",
+  "npx",
+  "pnpm",
+]
+common_prefix = ["sudo"]
+
+[sync]
+records = true
+
+[daemon]
+enabled = true
+autostart = true
+
+[ai]
+enabled = true

@@ -11,20 +11,26 @@
 	pager = delta
 [push]
 	autoSetupRemote = true
+	default = current
 [alias]
-	log = log --graph --all --format=\"%C(yellow)%h%C(reset) %C(magenta)%s%C(reset)%C(red)%d%C(reset) %C(cyan)%ad%C(reset) %C(blue)%an%C(reset)\" --date=short
 	lg = log --graph --format=\"%C(yellow)%h%C(reset) %C(magenta)%s%C(reset)%C(red)%d%C(reset) %C(cyan)%ad%C(reset) %C(blue)%an%C(reset)\" --date=short
+	lga = log --graph --all --format=\"%C(yellow)%h%C(reset) %C(magenta)%s%C(reset)%C(red)%d%C(reset) %C(cyan)%ad%C(reset) %C(blue)%an%C(reset)\" --date=short
+	aliases = config --get-regexp ^alias\\.
+	undo = reset --soft HEAD~1
+	oops = commit --amend --no-edit
 [pull]
 	rebase = true
 [rebase]
 	autoStash = true
 [fetch]
 	prune = true
+	pruneTags = true
 [rerere]
 	enabled = true
 	autoUpdate = true
 [diff]
 	algorithm = histogram
+	colorMoved = default
 [branch]
 	sort = -committerdate
 [tag]
@@ -37,5 +43,10 @@
 [delta]
 	navigate = true
 	side-by-side = true
+	dark = true
 [merge]
 	conflictStyle = zdiff3
+[column]
+	ui = auto
+[help]
+	autoCorrect = prompt

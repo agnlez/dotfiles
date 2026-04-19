@@ -6,11 +6,12 @@ Personal dotfiles for macOS (Apple Silicon).
 
 | Directory | Contents |
 |-----------|----------|
-| `zsh/` | Zsh config with zinit, fzf, zoxide, starship |
-| `git/` | Git config with GPG signing, delta pager, aliases |
-| `starship/` | Starship prompt preset (bracket style) |
-| `ghostty/` | Ghostty terminal config (Catppuccin theme, Monaspace font) |
-| `claude/` | Claude Code rules, skills, hooks, and global config |
+| `zsh/` | Zsh config with zinit, fzf (with `fd`), zoxide, atuin history |
+| `git/` | Git config with SSH signing (1Password), delta pager, trunk-based defaults |
+| `starship/` | Custom two-line prompt (directory, git, nodejs, docker, duration) |
+| `ghostty/` | Ghostty terminal config (Catppuccin Macchiato, Monaspice Nerd Font) |
+| `atuin/` | Atuin shell history config (daemon, directory-scoped up-arrow) |
+| `claude/` | Claude Code global settings, rules, skills, and hooks |
 | `homebrew/` | Brewfile with formulas, casks, and fonts |
 
 ## Install
@@ -26,10 +27,28 @@ The install script will:
 1. Install Xcode Command Line Tools (if missing)
 2. Install Homebrew (if missing)
 3. Install all packages from the Brewfile
-4. Symlink config files to their expected locations
-5. Back up any existing files to `~/.dotfiles-backup/`
+4. Install Claude Code via npm (for auto-updates)
+5. Symlink config files to their expected locations
+6. Back up any existing files to `~/.dotfiles-backup/`
 
 ## Manual steps after install
 
+### Git identity
+
+Create `~/.gitconfig.local` (not tracked — contains personal info):
+
+```sh
+git config --file ~/.gitconfig.local user.name "Your Name"
+git config --file ~/.gitconfig.local user.email "your@email.com"
+git config --file ~/.gitconfig.local user.signingkey "/path/to/.ssh/id_ed25519.pub"
+```
+
+### 1Password
+
 - Sign into 1Password and enable the SSH agent
-- Sign into apps (Slack, Discord, Spotify, etc.)
+- Add your SSH key to 1Password and register the public key on GitHub as **both** an authentication key *and* a signing key
+- The gitconfig uses `op-ssh-sign` at the default macOS path (`/Applications/1Password.app/...`) — adjust in `git/.gitconfig` if installed elsewhere
+
+### Apps
+
+Sign into the rest (Slack, Discord, Spotify, etc.)

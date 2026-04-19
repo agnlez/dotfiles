@@ -50,6 +50,12 @@ fi
 info "Installing Homebrew packages..."
 brew bundle --file="$DOTFILES/homebrew/Brewfile"
 
+# Claude Code (via npm for auto-updates)
+if ! command -v claude &>/dev/null; then
+  info "Installing Claude Code..."
+  npm install -g @anthropic-ai/claude-code
+fi
+
 # Directories
 mkdir -p "$HOME/Developer"
 
@@ -74,6 +80,10 @@ link_file "$DOTFILES/starship/starship.toml" "$HOME/.config/starship.toml"
 # ghostty
 mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
 link_file "$DOTFILES/ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+
+# atuin
+mkdir -p "$HOME/.config/atuin"
+link_file "$DOTFILES/atuin/config.toml" "$HOME/.config/atuin/config.toml"
 
 # editorconfig
 link_file "$DOTFILES/.editorconfig" "$HOME/.editorconfig"

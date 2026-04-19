@@ -1,4 +1,5 @@
 # tools
+brew "atuin"
 brew "bat"
 brew "eza"
 brew "fd"
@@ -6,15 +7,16 @@ brew "fnm"
 brew "fzf"
 brew "git"
 brew "git-delta"
+brew "jq"
 brew "ripgrep"
 brew "starship"
+brew "yq"
 brew "zoxide"
 
 # applications
 cask "1password"
 cask "brave-browser"
 cask "claude"
-cask "claude-code"
 cask "dbeaver-community"
 cask "discord"
 cask "docker-desktop"
@@ -32,3 +34,4 @@ cask "whatsapp"
 # fonts
 cask "font-intel-one-mono"
 cask "font-monaspace"
+cask "font-monaspice-nerd-font"
