@@ -35,19 +35,13 @@ The install script will:
 
 ### Git identity
 
-Create `~/.gitconfig.local` (not tracked — contains personal info):
-
-```sh
-git config --file ~/.gitconfig.local user.name "Your Name"
-git config --file ~/.gitconfig.local user.email "your@email.com"
-git config --file ~/.gitconfig.local user.signingkey "/path/to/.ssh/id_ed25519.pub"
-```
+`install.sh` creates `~/.gitconfig.local` from `git/.gitconfig.local.example` on first run. Edit it with your name, email, and SSH signing key path. It's loaded via `[include]` and **overrides** the tracked gitconfig, so machine-specific values (e.g. a non-default 1Password path) belong here too.
 
 ### 1Password
 
 - Sign into 1Password and enable the SSH agent
 - Add your SSH key to 1Password and register the public key on GitHub as **both** an authentication key *and* a signing key
-- The gitconfig uses `op-ssh-sign` at the default macOS path (`/Applications/1Password.app/...`) — adjust in `git/.gitconfig` if installed elsewhere
+- The gitconfig uses `op-ssh-sign` at the default macOS path (`/Applications/1Password.app/...`) — override in `~/.gitconfig.local` under `[gpg "ssh"]` if installed elsewhere
 
 ### Apps
 

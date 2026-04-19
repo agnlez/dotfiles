@@ -72,6 +72,10 @@ link_file "$DOTFILES/zsh/aliases.zsh" "$HOME/.config/zsh/aliases.zsh"
 # git
 link_file "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
 link_file "$DOTFILES/git/.gitignore_global" "$HOME/.gitignore"
+if [ ! -e "$HOME/.gitconfig.local" ]; then
+  cp "$DOTFILES/git/.gitconfig.local.example" "$HOME/.gitconfig.local"
+  success "Created $HOME/.gitconfig.local from template"
+fi
 
 # starship
 mkdir -p "$HOME/.config"
@@ -98,7 +102,4 @@ link_file "$DOTFILES/claude/hooks" "$HOME/.claude/hooks"
 echo ""
 success "Done! Open a new terminal to load the updated config."
 echo ""
-warn "Don't forget to create ~/.gitconfig.local with your git identity:"
-echo "  git config --file ~/.gitconfig.local user.name \"Your Name\""
-echo "  git config --file ~/.gitconfig.local user.email \"your@email.com\""
-echo "  git config --file ~/.gitconfig.local user.signingkey \"/path/to/.ssh/id_ed25519.pub\""
+warn "Edit ~/.gitconfig.local with your git identity and signing key."

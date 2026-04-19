@@ -1,0 +1,12 @@
+# Machine-specific git config — copy this to ~/.gitconfig.local and fill in.
+# This file is loaded via [include] at the bottom of ~/.gitconfig, so values
+# here OVERRIDE anything defined in the tracked gitconfig.
+
+[user]
+	name = Your Name
+	email = you@example.com
+	signingkey = /Users/you/.ssh/id_ed25519.pub
+
+# Uncomment and adjust if 1Password is installed outside /Applications:
+# [gpg "ssh"]
+# 	program = /Users/you/Applications/1Password.app/Contents/MacOS/op-ssh-sign
