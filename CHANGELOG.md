@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- `claude/settings.json`: deny rules for `.env*` files (Read, Edit, Write) to prevent accidental secret exposure
 - `claude/settings.json`: `$schema` property pointing to the official JSON Schema for editor validation and autocompletion
 - `git/.gitconfig.local.example` template copied to `~/.gitconfig.local` by `install.sh` on first run
 - `.editorconfig` documented in `docs/structure.md` (single-file root config convention)
