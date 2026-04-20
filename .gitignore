@@ -3,3 +3,4 @@
 .zcompdump*
 node_modules/
 *.log
+claude/skills/devstack-sync/

@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- `.gitignore`: exclude `claude/skills/devstack-sync/` (managed by DevStack, not version-controlled)
 - `claude/settings.json`: deny rules for `.env*` files (Read, Edit, Write) to prevent accidental secret exposure
 - `claude/settings.json`: `$schema` property pointing to the official JSON Schema for editor validation and autocompletion
 - `git/.gitconfig.local.example` template copied to `~/.gitconfig.local` by `install.sh` on first run
