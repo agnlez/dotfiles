@@ -56,7 +56,8 @@ _fzf_comprun() {
   esac
 }
 
-. "$HOME/.local/bin/env"
+# Local user binaries (e.g. Claude Code native installer)
+export PATH="$HOME/.local/bin:$PATH"
 
 # zoxide
 command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
