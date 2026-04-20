@@ -50,10 +50,10 @@ fi
 info "Installing Homebrew packages..."
 brew bundle --file="$DOTFILES/homebrew/Brewfile"
 
-# Claude Code (via npm for auto-updates)
+# Claude Code (native installer — self-contained, auto-updating)
 if ! command -v claude &>/dev/null; then
-  info "Installing Claude Code..."
-  npm install -g @anthropic-ai/claude-code
+  info "Installing Claude Code (native)..."
+  curl -fsSL https://claude.ai/install.sh | bash
 fi
 
 # Directories

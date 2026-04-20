@@ -27,7 +27,7 @@ The install script will:
 1. Install Xcode Command Line Tools (if missing)
 2. Install Homebrew (if missing)
 3. Install all packages from the Brewfile
-4. Install Claude Code via npm (for auto-updates)
+4. Install Claude Code via the native installer (self-contained, auto-updating)
 5. Symlink config files to their expected locations
 6. Back up any existing files to `~/.dotfiles-backup/`
 

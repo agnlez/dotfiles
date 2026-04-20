@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - `install.sh` creates `~/.gitconfig.local` from the template instead of echoing commands
+- `install.sh` installs Claude Code via the native installer (`curl … | bash`) instead of `npm install -g @anthropic-ai/claude-code`, avoiding Node.js/npm-related install issues
 
 ### Fixed
 - Starship `git_status.stashed` parse warning (escaped `$` as `\$` in a TOML literal string)
