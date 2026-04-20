@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `install.sh` installs Claude Code via the native installer (`curl … | bash`) instead of `npm install -g @anthropic-ai/claude-code`, avoiding Node.js/npm-related install issues
 - `zsh/.zshrc` puts `~/.local/bin` on `PATH` via an explicit `export` instead of sourcing the `~/.local/bin/env` shim left behind by `uv` (no longer used)
 
+### Removed
+- `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` env flag from `claude/settings.json` so the native installer's auto-updates are not blocked
+
 ### Fixed
 - Starship `git_status.stashed` parse warning (escaped `$` as `\$` in a TOML literal string)
 
