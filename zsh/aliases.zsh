@@ -9,7 +9,12 @@ alias sshconfig="webstorm ~/.ssh/config"
 alias gitconfig="webstorm ~/.gitconfig"
 alias gitignore="webstorm ~/.gitignore"
 
-# --- Navigation (zoxide) ---
+# --- Navigation ---
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+# zoxide
 alias zi='__zoxide_zi'         # Override zinit's zi alias
 alias zz='z -'                 # Quick back navigation
 alias zh='z ~'                 # Quick home

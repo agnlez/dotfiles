@@ -72,6 +72,7 @@
       "mcp__atlassian__createIssueLink"
     ]
   },
+  "model": "claude-opus-4-6",
   "hooks": {
     "PreToolUse": [
       {
@@ -96,7 +97,8 @@
     "code-simplifier@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
     "figma@claude-plugins-official": true,
-    "atlassian@claude-plugins-official": true
+    "atlassian@claude-plugins-official": true,
+    "vercel@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -115,7 +117,6 @@
       ]
     }
   },
-  "defaultMode": "acceptEdits",
-  "model": "claude-opus-4-6",
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "defaultMode": "acceptEdits"
 }

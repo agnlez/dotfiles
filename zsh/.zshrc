@@ -67,3 +67,11 @@ command -v atuin >/dev/null && eval "$(atuin init zsh)"
 
 # starship
 command -v starship >/dev/null && eval "$(starship init zsh)"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
