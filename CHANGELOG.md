@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- `zsh/.zshrc`: replace hardcoded user path with `$HOME` in `PNPM_HOME` for machine-agnostic portability
+
 ### Added
 - `claude/settings.json`: enable `vercel@claude-plugins-official` plugin
 - `claude/settings.json`: allow `Read(.env.test)` and `Read(.env.test.containers)` permissions for test environments
