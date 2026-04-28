@@ -4,6 +4,8 @@
   "permissions": {
     "allow": [
       "Read",
+      "Read(.env.test)",
+      "Read(.env.test.containers)",
       "Edit",
       "Write",
       "Glob",
@@ -108,15 +110,7 @@
       }
     }
   },
-  "sandbox": {
-    "enabled": true,
-    "network": {
-      "allowUnixSockets": [
-        "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock",
-        "/var/run/com.apple.launchd.*/Listeners"
-      ]
-    }
-  },
   "effortLevel": "high",
-  "defaultMode": "acceptEdits"
+  "defaultMode": "acceptEdits",
+  "theme": "dark-ansi"
 }

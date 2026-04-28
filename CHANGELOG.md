@@ -7,8 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - `claude/settings.json`: enable `vercel@claude-plugins-official` plugin
+- `claude/settings.json`: allow `Read(.env.test)` and `Read(.env.test.containers)` permissions for test environments
+- `claude/settings.json`: set `theme` to `dark-ansi`
+- `claude/skills/github-pull-request`: skill for clean PR workflow — branch hygiene, selective staging, rebasing, conventional commits, and `gh` CLI
+- `claude/skills/grill-me`: skill to stress-test plans and designs through relentless interviewing
 - `zsh/.zshrc`: add pnpm to `PATH` via `PNPM_HOME`
 - `zsh/aliases.zsh`: add `..`, `...`, `....` directory navigation aliases
+
+### Removed
+- `claude/settings.json`: remove `sandbox` configuration block
 
 ## [2.2.0] - 2026-04-20
 ### Added
