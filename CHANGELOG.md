@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - `zsh/.zshrc`: replace hardcoded user path with `$HOME` in `PNPM_HOME` for machine-agnostic portability
+- `git/.gitignore_global`: ignore `CLAUDE.md`, `AGENTS.md`, `skills-lock.json`, `.claude/`, `.agents/`, `.mcp.json`, `.playwright-mcp/`, and Copilot instruction paths; widen `.claude/*.local.json` to the whole `.claude/` directory
 - `claude/settings.json`: remove pinned `model` so the global default applies
 - `git/.gitconfig`: move `[gpg "ssh"]` and `[commit] gpgsign` to `.gitconfig.local` so machine-specific paths and 1Password's signer program stay out of the tracked config
 - `git/.gitconfig.local.example`: document SSH signing block (1Password program, `allowedSignersFile`, `gpgsign`) and switch `signingkey` to a `~`-relative path
