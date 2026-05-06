@@ -1,0 +1,5 @@
+{
+  "$schema": "https://oxc.rs/schema/oxfmtrc.json",
+  "proseWrap": "preserve",
+  "printWidth": 80
+}

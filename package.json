@@ -1,0 +1,12 @@
+{
+  "name": "dotfiles",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare": "prek install"
+  },
+  "devDependencies": {
+    "@j178/prek": "0.3.12"
+  },
+  "packageManager": "pnpm@11.0.6"
+}

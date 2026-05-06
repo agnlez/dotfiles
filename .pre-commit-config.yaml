@@ -1,0 +1,21 @@
+exclude: ^(claude/skills/devstack-sync/|pnpm-lock\.yaml$)
+
+repos:
+  - repo: https://github.com/oxc-project/mirrors-oxfmt
+    rev: v0.48.0
+    hooks:
+      - id: oxfmt
+        types_or: [javascript, jsx, ts, tsx, markdown, json, yaml, toml, css]
+
+  - repo: https://github.com/oxc-project/mirrors-oxlint
+    rev: v1.63.0
+    hooks:
+      - id: oxlint
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-merge-conflict

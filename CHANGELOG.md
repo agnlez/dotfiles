@@ -1,18 +1,24 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
 ### Changed
+
 - `zsh/.zshrc`: replace hardcoded user path with `$HOME` in `PNPM_HOME` for machine-agnostic portability
 - `git/.gitignore_global`: ignore `CLAUDE.md`, `AGENTS.md`, `skills-lock.json`, `.claude/`, `.agents/`, `.mcp.json`, `.playwright-mcp/`, and Copilot instruction paths; widen `.claude/*.local.json` to the whole `.claude/` directory
 - `claude/settings.json`: remove pinned `model` so the global default applies
 - `git/.gitconfig`: move `[gpg "ssh"]` and `[commit] gpgsign` to `.gitconfig.local` so machine-specific paths and 1Password's signer program stay out of the tracked config
 - `git/.gitconfig.local.example`: document SSH signing block (1Password program, `allowedSignersFile`, `gpgsign`) and switch `signingkey` to a `~`-relative path
+- `.editorconfig`: remove `[*.md]` block (no markdown file followed it; aspirational rule that would conflict with formatter behavior)
+- `README.md`: document per-repo bootstrap (`corepack enable`, `pnpm install`, `git config blame.ignoreRevsFile`)
 
 ### Added
+
 - `claude/rules/dependency-management.md`: rule requiring up-to-date docs (Context7) and official codemods/migration guides before bumping or migrating dependencies
 - `claude/settings.json`: enable `vizz-core@vizzuality` plugin and register the `vizzuality` marketplace (`Vizzuality/claude-code-standards`)
 - `claude/settings.json`: enable `vercel@claude-plugins-official` plugin
@@ -22,13 +28,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/skills/grill-me`: skill to stress-test plans and designs through relentless interviewing
 - `zsh/.zshrc`: add pnpm to `PATH` via `PNPM_HOME`
 - `zsh/aliases.zsh`: add `..`, `...`, `....` directory navigation aliases
+- `pnpm-workspace.yaml`, `package.json`, `.node-version`: pnpm 11 (Corepack) + Node 24 LTS pinned for repo-local tooling; `savePrefix: ""` for exact pinning
+- `.pre-commit-config.yaml`: prek-managed hooks — oxfmt (`v0.48.0`), oxlint (`v1.63.0`), pre-commit-hooks (`v6.0.0`: `trailing-whitespace --markdown-linebreak-ext=md`, `end-of-file-fixer`, `check-merge-conflict`); excludes `claude/skills/devstack-sync/` and `pnpm-lock.yaml`
+- `oxfmt.json`, `.oxlintrc.json`: oxfmt config (`proseWrap: preserve`, `printWidth: 80`); oxlint defaults
+- `@j178/prek` as the only npm dev dependency; `prepare: prek install` script auto-wires the git hook on `pnpm install`
+- `.git-blame-ignore-revs`: tracks the bulk-format commit so `git blame` skips it (requires `git config blame.ignoreRevsFile` per clone)
 
 ### Removed
+
 - `claude/settings.json`: disable `figma@claude-plugins-official` plugin
 - `claude/settings.json`: remove `sandbox` configuration block
 
 ## [2.2.0] - 2026-04-20
+
 ### Added
+
 - `.gitignore`: exclude `claude/skills/devstack-sync/` (managed by DevStack, not version-controlled)
 - `claude/settings.json`: deny rules for `.env*` files (Read, Edit, Write) to prevent accidental secret exposure
 - `claude/settings.json`: `$schema` property pointing to the official JSON Schema for editor validation and autocompletion
@@ -36,19 +50,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `.editorconfig` documented in `docs/structure.md` (single-file root config convention)
 
 ### Changed
+
 - `claude/settings.json`: set default `model` to `claude-opus-4-6` and raised `effortLevel` from `medium` to `high`
 - `install.sh` creates `~/.gitconfig.local` from the template instead of echoing commands
 - `install.sh` installs Claude Code via the native installer (`curl … | bash`) instead of `npm install -g @anthropic-ai/claude-code`, avoiding Node.js/npm-related install issues
 - `zsh/.zshrc` puts `~/.local/bin` on `PATH` via an explicit `export` instead of sourcing the `~/.local/bin/env` shim left behind by `uv` (no longer used)
 
 ### Removed
+
 - `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` env flag from `claude/settings.json` so the native installer's auto-updates are not blocked
 
 ### Fixed
+
 - Starship `git_status.stashed` parse warning (escaped `$` as `\$` in a TOML literal string)
 
 ## [2.1.0] - 2026-04-19
+
 ### Added
+
 - `atuin/config.toml` with compact style, host filter, directory-scoped up-arrow, workspace support, daemon, and stats
 - `atuin`, `jq`, `yq` formulas in Brewfile
 - Claude Code npm install to `install.sh` (auto-updates, replaces Homebrew cask)
@@ -60,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ll`, `lt`, `lta` eza aliases for long-listing (with git status and group column) and tree views
 
 ### Changed
+
 - Split git log aliases: `lg` (current branch) and `lga` (all branches). Added `gl` and `gla` shell aliases.
 - Deferred OMZ git plugin loading via `zinit wait lucid` for faster shell startup
 - `cat` alias now uses `bat --paging=never` to match `cat`'s non-paging behavior
@@ -71,13 +91,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rewrote `README.md` with current stack, install steps, and git identity setup
 
 ### Removed
+
 - Brewfile cask `claude-code` (replaced by npm install for auto-updates)
 - Bun configuration from `.zshrc` and `starship.toml` (unused)
 - `git log` shell wrapper in `.zshrc` (was silently rewriting flags; use `gl`/`gla` instead)
 - Ineffective `log` alias from `.gitconfig` (git refuses aliases that shadow built-ins)
 
 ## [2.0.0] - 2026-04-18
+
 ### Added
+
 - `.zshenv` setting `ZDOTDIR` to `~/.config/zsh`
 - `.zprofile` for Homebrew shell environment setup
 - `aliases.zsh` with personal aliases, zoxide shortcuts, and modern CLI replacements
@@ -109,6 +132,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ask-before-run rules for Atlassian write operations: create/edit/transition issues, worklogs, comments, Confluence pages
 
 ### Changed
+
 - Renamed `oh-my-zsh/` folder to `zsh/`
 - Replaced old oh-my-zsh `.zshrc` with current zinit-based configuration
 - Replaced `warp` cask with `ghostty`
@@ -116,6 +140,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rewrote `README.md` with install instructions and project overview
 
 ### Removed
+
 - Legacy oh-my-zsh configuration (NVM, steeef theme)
 - Brewfile casks: `1password-cli`, `notion-calendar`, `postman`, `proton-mail-bridge`, `protonvpn`, `warp`, `zoom`
 - Legacy scripts: `power-management.sh`, `update.sh`
@@ -129,10 +154,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Vizzhub MCP from permissions (unused)
 
 ## [1.0.0] - 2019-02-01
+
 ### Added
+
 - Changelog file 🎉
 - More logs during the process informing the user what is going on 💬
 
 ### Removed
+
 - `brew prune` command. Deprecated in [Homebrew 1.9](https://brew.sh/2019/01/09/homebrew-1.9.0/). Now it is included in `brew cleanup`
   [(https://github.com/Homebrew/brew/pull/5467)](https://github.com/Homebrew/brew/pull/5467).
