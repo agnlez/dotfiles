@@ -1,0 +1,6 @@
+# Commits listed here are ignored by `git blame`.
+# Activate per clone: `git config blame.ignoreRevsFile .git-blame-ignore-revs`
+# GitHub honors this file natively in its blame UI.
+
+# Bulk reformat: apply oxfmt to all files
+810344133251fe9f172443fa179fed1cb2b9bb07
