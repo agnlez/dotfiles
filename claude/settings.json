@@ -74,7 +74,6 @@
       "mcp__atlassian__createIssueLink"
     ]
   },
-  "model": "claude-opus-4-6",
   "hooks": {
     "PreToolUse": [
       {
@@ -98,9 +97,9 @@
     "superpowers@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
-    "figma@claude-plugins-official": true,
     "atlassian@claude-plugins-official": true,
-    "vercel@claude-plugins-official": true
+    "vercel@claude-plugins-official": true,
+    "vizz-core@vizzuality": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -108,9 +107,15 @@
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
       }
+    },
+    "vizzuality": {
+      "source": {
+        "source": "github",
+        "repo": "Vizzuality/claude-code-standards"
+      }
     }
   },
   "effortLevel": "high",
-  "defaultMode": "acceptEdits",
-  "theme": "dark-ansi"
+  "theme": "dark-ansi",
+  "defaultMode": "acceptEdits"
 }

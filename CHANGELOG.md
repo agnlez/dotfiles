@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - `zsh/.zshrc`: replace hardcoded user path with `$HOME` in `PNPM_HOME` for machine-agnostic portability
+- `claude/settings.json`: remove pinned `model` so the global default applies
 - `git/.gitconfig`: move `[gpg "ssh"]` and `[commit] gpgsign` to `.gitconfig.local` so machine-specific paths and 1Password's signer program stay out of the tracked config
 - `git/.gitconfig.local.example`: document SSH signing block (1Password program, `allowedSignersFile`, `gpgsign`) and switch `signingkey` to a `~`-relative path
 
 ### Added
+- `claude/settings.json`: enable `vizz-core@vizzuality` plugin and register the `vizzuality` marketplace (`Vizzuality/claude-code-standards`)
 - `claude/settings.json`: enable `vercel@claude-plugins-official` plugin
 - `claude/settings.json`: allow `Read(.env.test)` and `Read(.env.test.containers)` permissions for test environments
 - `claude/settings.json`: set `theme` to `dark-ansi`
@@ -20,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `zsh/aliases.zsh`: add `..`, `...`, `....` directory navigation aliases
 
 ### Removed
+- `claude/settings.json`: disable `figma@claude-plugins-official` plugin
 - `claude/settings.json`: remove `sandbox` configuration block
 
 ## [2.2.0] - 2026-04-20
