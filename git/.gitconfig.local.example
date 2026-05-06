@@ -5,8 +5,14 @@
 [user]
 	name = Your Name
 	email = you@example.com
-	signingkey = /Users/you/.ssh/id_ed25519.pub
+	signingkey = ~/.ssh/id_ed25519.pub
 
-# Uncomment and adjust if 1Password is installed outside /Applications:
-# [gpg "ssh"]
-# 	program = /Users/you/Applications/1Password.app/Contents/MacOS/op-ssh-sign
+# SSH commit signing via 1Password. Adjust the program path if 1Password is
+# installed outside /Applications. The allowedSignersFile must exist and list
+# the public keys you want to trust for verification.
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = ~/.config/git/allowed_signers
+
+[commit]
+	gpgsign = true
