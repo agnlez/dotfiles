@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `git/.gitconfig.local.example`: document SSH signing block (1Password program, `allowedSignersFile`, `gpgsign`) and switch `signingkey` to a `~`-relative path
 
 ### Added
+- `claude/rules/dependency-management.md`: rule requiring up-to-date docs (Context7) and official codemods/migration guides before bumping or migrating dependencies
 - `claude/settings.json`: enable `vizz-core@vizzuality` plugin and register the `vizzuality` marketplace (`Vizzuality/claude-code-standards`)
 - `claude/settings.json`: enable `vercel@claude-plugins-official` plugin
 - `claude/settings.json`: allow `Read(.env.test)` and `Read(.env.test.containers)` permissions for test environments
