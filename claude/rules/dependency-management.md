@@ -25,12 +25,12 @@ Before writing any custom migration steps:
 3. Run official codemods when available instead of manually rewriting code
 4. Only write custom migration steps for gaps not covered by official resources
 
-| Source to check | Examples |
-|---|---|
-| Migration guides | Next.js upgrade guide, React blog posts, library UPGRADING.md |
-| Codemods | `@next/codemod`, `react-codemod`, `jscodeshift` transforms |
-| Release notes | GitHub releases page, CHANGELOG.md |
-| Community resources | GitHub issues, discussions tagged with the target version |
+| Source to check     | Examples                                                      |
+| ------------------- | ------------------------------------------------------------- |
+| Migration guides    | Next.js upgrade guide, React blog posts, library UPGRADING.md |
+| Codemods            | `@next/codemod`, `react-codemod`, `jscodeshift` transforms    |
+| Release notes       | GitHub releases page, CHANGELOG.md                            |
+| Community resources | GitHub issues, discussions tagged with the target version     |
 
 ## After making changes
 

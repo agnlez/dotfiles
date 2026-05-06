@@ -8,13 +8,13 @@ Guidelines for triaging and fixing CVEs, security advisories (GHSA), and other d
 
 ### How vulnerabilities surface
 
-| Source | Command / Tool | Scope |
-|--------|---------------|-------|
-| npm/pnpm/yarn audit | `npm audit`, `pnpm audit`, `yarn audit` | JS/TS packages |
-| GitHub Dependabot alerts | GitHub Security tab | All languages |
-| uv-secure | `uvx uv-secure` | Python packages (reads `uv.lock` directly) |
-| pip-audit via uv export | `uv export --no-hashes \| pip-audit -r /dev/stdin --no-deps` | Python packages |
-| Manual advisory review | [GitHub Advisory Database](https://github.com/advisories) | Cross-language |
+| Source                   | Command / Tool                                               | Scope                                      |
+| ------------------------ | ------------------------------------------------------------ | ------------------------------------------ |
+| npm/pnpm/yarn audit      | `npm audit`, `pnpm audit`, `yarn audit`                      | JS/TS packages                             |
+| GitHub Dependabot alerts | GitHub Security tab                                          | All languages                              |
+| uv-secure                | `uvx uv-secure`                                              | Python packages (reads `uv.lock` directly) |
+| pip-audit via uv export  | `uv export --no-hashes \| pip-audit -r /dev/stdin --no-deps` | Python packages                            |
+| Manual advisory review   | [GitHub Advisory Database](https://github.com/advisories)    | Cross-language                             |
 
 ### Routine checks
 
@@ -44,12 +44,12 @@ Note: `pip-audit` cannot read `uv.lock` directly. The `uv export` step converts 
 
 Use the CVSS score and advisory severity as a starting point, then adjust based on **reachability** — whether the vulnerable code path is actually exercised in the application.
 
-| Severity | CVSS | Response Time |
-|----------|------|---------------|
-| **Critical** | 9.0–10.0 | Same day |
-| **High** | 7.0–8.9 | Within 2 business days |
-| **Medium** | 4.0–6.9 | Within 1 week |
-| **Low** | 0.1–3.9 | Next scheduled maintenance window |
+| Severity     | CVSS     | Response Time                     |
+| ------------ | -------- | --------------------------------- |
+| **Critical** | 9.0–10.0 | Same day                          |
+| **High**     | 7.0–8.9  | Within 2 business days            |
+| **Medium**   | 4.0–6.9  | Within 1 week                     |
+| **Low**      | 0.1–3.9  | Next scheduled maintenance window |
 
 ### Key triage questions
 
@@ -61,6 +61,7 @@ Use the CVSS score and advisory severity as a starting point, then adjust based 
 ### When to skip or defer
 
 It is acceptable to defer a fix when **all** of the following are true:
+
 - The vulnerability is Low or Medium severity
 - The package is a dev-only or build-time dependency
 - The vulnerable code path is not reachable in the project's usage
@@ -101,11 +102,11 @@ When the vulnerability is in a **transitive production dependency** and no direc
 
 **Where overrides are declared by package manager:**
 
-| Package Manager | Override Field | Location |
-|----------------|---------------|----------|
-| pnpm | `pnpm.overrides` | `pnpm-workspace.yaml` |
-| npm | `overrides` | `package.json` |
-| yarn | `resolutions` | `package.json` |
+| Package Manager | Override Field   | Location              |
+| --------------- | ---------------- | --------------------- |
+| pnpm            | `pnpm.overrides` | `pnpm-workspace.yaml` |
+| npm             | `overrides`      | `package.json`        |
+| yarn            | `resolutions`    | `package.json`        |
 
 **Do not add overrides for dev-only dependencies.** If the vulnerable package is only reachable through devDependencies (linters, test runners, build tools, bundler plugins), it does not ship to production. Prefer deferring or upgrading the parent when convenient — but do not add an override just to silence the audit for a dev-only path.
 
@@ -149,6 +150,7 @@ overrides:
 **Use when:** The transitive dependency is pinned by an outdated parent and a direct upgrade (Strategy A) of the parent isn't possible. Overrides bypass the parent's declared compatibility range, so they should be treated as **temporary**.
 
 **Override hygiene — always check if overrides can be removed:**
+
 - Every time you run the vulnerability workflow, review existing override entries **before** applying any new fixes
 - For each override, compare three things:
   1. **Parent's declared range** — what the installed parent's `package.json` says (e.g., `"flatted": "^3.2.9"`)
@@ -159,6 +161,7 @@ overrides:
 - Stale overrides add hidden complexity and can mask other issues
 
 **Lockfile interaction — removing overrides where the parent's range already allows the patched version:**
+
 - Most package managers are conservative with existing lockfile resolutions. Even if a parent declares a semver range (e.g., `^3.2.9`) that includes the patched version (e.g., `3.4.2`), running install will **not** automatically upgrade an already-resolved version in the lockfile. It preserves the existing resolution.
 - This means you **cannot** remove an override and expect the package manager to upgrade in a single step if the lockfile still has the old version pinned.
 - **Two-step approach:** First bump the override to the patched version and commit. Then, in a follow-up commit, remove the now-redundant override — the lockfile already has the correct version, so it will be preserved.
@@ -239,11 +242,13 @@ Every fix must be a **single, self-contained commit** that can be independently 
 All vulnerability fixes must be done on a **dedicated branch**, never directly on `main`. If the current branch is `main`, create a new branch before making any changes.
 
 **Branch naming convention:**
+
 ```
 fix/deps/<advisory-id>
 ```
 
 **Examples:**
+
 ```
 fix/deps/CVE-2026-26996
 fix/deps/GHSA-3ppc-4f35-3m26

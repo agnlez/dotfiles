@@ -49,7 +49,7 @@ The optimizer script can also be run standalone:
 node optimize-images.mjs [--quality N] [--keep] <image-paths...>
 ```
 
-| Flag | Description |
-|------|-------------|
-| `--quality N` | WEBP quality, 1-100 (default: 80) |
-| `--keep` | Keep original files after conversion |
+| Flag          | Description                          |
+| ------------- | ------------------------------------ |
+| `--quality N` | WEBP quality, 1-100 (default: 80)    |
+| `--keep`      | Keep original files after conversion |

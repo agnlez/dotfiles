@@ -81,16 +81,16 @@ git cherry-pick <commit-hash>
 
 **If on a named branch:** Validate the name matches convention:
 
-| Prefix | Commit type |
-|--------|------------|
-| `feature/` | `feat` |
-| `fix/` | `fix` |
-| `chore/` | `chore` |
-| `docs/` | `docs` |
-| `test/` | `test` |
-| `refactor/` | `refactor` |
-| `style/` | `style` |
-| `perf/` | `perf` |
+| Prefix      | Commit type |
+| ----------- | ----------- |
+| `feature/`  | `feat`      |
+| `fix/`      | `fix`       |
+| `chore/`    | `chore`     |
+| `docs/`     | `docs`      |
+| `test/`     | `test`      |
+| `refactor/` | `refactor`  |
+| `style/`    | `style`     |
+| `perf/`     | `perf`      |
 
 If the branch name doesn't match, rename it:
 
@@ -105,12 +105,14 @@ If the old name was already pushed, the old remote ref will be cleaned up after 
 Analyze the diff to decide what belongs. Stage files individually by path — never use `git add .` or `git add -A`.
 
 **Exclude:**
+
 - Auto-generated files not related to the change (lock files, import maps, compiled output)
 - `.env*`, credentials, secrets — never commit these
 - Untracked personal files (notes, scratch files)
 - Changes unrelated to the PR's purpose
 
 **Include:**
+
 - All files directly related to the change
 - Lock files ONLY if a dependency was intentionally added/removed as part of this work
 - Generated files ONLY if they result from the committed changes (e.g., updated types, migrations)
@@ -179,13 +181,13 @@ Return the PR URL when done.
 
 ## Common Mistakes
 
-| Mistake | Fix |
-|---------|-----|
-| Opening PR without rebasing | Always `git rebase origin/main` first |
-| Including unrelated files in the diff | Stage by explicit path after analyzing each change |
-| Asking user about every file | Analyze the diff yourself, only ask if truly ambiguous |
-| Refusing to rename a pushed branch | Rename locally, push new name, it's routine |
+| Mistake                                         | Fix                                                    |
+| ----------------------------------------------- | ------------------------------------------------------ |
+| Opening PR without rebasing                     | Always `git rebase origin/main` first                  |
+| Including unrelated files in the diff           | Stage by explicit path after analyzing each change     |
+| Asking user about every file                    | Analyze the diff yourself, only ask if truly ambiguous |
+| Refusing to rename a pushed branch              | Rename locally, push new name, it's routine            |
 | Using `--force` instead of `--force-with-lease` | Always `--force-with-lease` to protect shared branches |
-| Using `git add .` | Stage specific files by path |
-| Placeholder text in PR body | Derive everything from the actual diff and commits |
-| Skipping rebase because "main is far ahead" | That's exactly when rebasing matters most |
+| Using `git add .`                               | Stage specific files by path                           |
+| Placeholder text in PR body                     | Derive everything from the actual diff and commits     |
+| Skipping rebase because "main is far ahead"     | That's exactly when rebasing matters most              |

@@ -13,16 +13,7 @@ enter_accept = true
 secrets_filter = true
 
 [stats]
-common_subcommands = [
-  "cargo",
-  "docker",
-  "git",
-  "gh",
-  "kubectl",
-  "npm",
-  "npx",
-  "pnpm",
-]
+common_subcommands = ["cargo", "docker", "git", "gh", "kubectl", "npm", "npx", "pnpm"]
 common_prefix = ["sudo"]
 
 [sync]
