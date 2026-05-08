@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `git/.gitconfig`: enable GPG signing for commits (`commit.gpgsign = true`) and rebases (`rebase.gpgsign = true`)
 - `claude/settings.json`: enable `figma@claude-plugins-official` plugin
 - `claude/settings.json`: set `skipAutoPermissionPrompt: true` to suppress the auto-permission prompt at session start
+- `claude/skills/`: symlinks for `grill-me`, `grill-with-docs`, `improve-codebase-architecture`, `setup-matt-pocock-skills`, `triage`, and `write-a-skill` pointing into the gitignored `.agents/skills/` directory so the skills source remains AI-managed while still being discoverable from `~/.claude/skills/`
+
+### Removed
+
+- `claude/skills/grill-me/SKILL.md`: replaced by a symlink into `.agents/skills/grill-me`
 
 ## [2.3.0] - 2026-05-06
 
