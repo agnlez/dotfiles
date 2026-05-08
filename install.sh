@@ -89,6 +89,10 @@ link_file "$DOTFILES/ghostty/config" "$HOME/Library/Application Support/com.mitc
 mkdir -p "$HOME/.config/atuin"
 link_file "$DOTFILES/atuin/config.toml" "$HOME/.config/atuin/config.toml"
 
+# zellij
+mkdir -p "$HOME/.config/zellij"
+link_file "$DOTFILES/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
+
 # editorconfig
 link_file "$DOTFILES/.editorconfig" "$HOME/.editorconfig"
 
