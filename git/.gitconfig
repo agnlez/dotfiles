@@ -18,6 +18,7 @@
 	rebase = true
 [rebase]
 	autoStash = true
+	gpgsign = true
 [fetch]
 	prune = true
 	pruneTags = true
@@ -46,3 +47,5 @@
 	ui = auto
 [help]
 	autoCorrect = prompt
+[commit]
+	gpgsign = true
