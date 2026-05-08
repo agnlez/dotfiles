@@ -95,7 +95,8 @@
     "playwright@claude-plugins-official": true,
     "atlassian@claude-plugins-official": true,
     "vercel@claude-plugins-official": true,
-    "vizz-core@vizzuality": true
+    "vizz-core@vizzuality": true,
+    "figma@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -113,5 +114,6 @@
   },
   "effortLevel": "high",
   "theme": "dark-ansi",
+  "skipAutoPermissionPrompt": true,
   "defaultMode": "acceptEdits"
 }

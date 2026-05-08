@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `zsh/.zshrc`: zellij auto-attach block — exports `ZELLIJ_AUTO_ATTACH=true` and `ZELLIJ_AUTO_EXIT=true` and runs `zellij setup --generate-auto-start zsh`; guarded with `$ZELLIJ` (no nesting), `$CLAUDECODE` (no wrapping inside Claude Code agent shells), and `$+commands[zellij]` (no error if zellij is uninstalled)
 - `install.sh`: symlink `~/.config/zellij/config.kdl` → `zellij/config.kdl`
 - `git/.gitconfig`: enable GPG signing for commits (`commit.gpgsign = true`) and rebases (`rebase.gpgsign = true`)
+- `claude/settings.json`: enable `figma@claude-plugins-official` plugin
+- `claude/settings.json`: set `skipAutoPermissionPrompt: true` to suppress the auto-permission prompt at session start
 
 ## [2.3.0] - 2026-05-06
 
