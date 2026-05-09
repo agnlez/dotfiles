@@ -1,0 +1,29 @@
+# Personal Claude Code rules
+
+Files in this directory are auto-loaded as instructions for every Claude Code session. Claude Code discovers `~/.claude/rules/*.md` recursively at session start — no manual import needed.
+
+The only frontmatter Claude Code recognizes is `paths:`, which conditionally loads a rule when Claude is working with files matching the listed glob patterns. Rules without a `paths:` field load unconditionally.
+
+## Rules
+
+| Rule                                                                         | Covers                                                                                                                                                                                                | When it fires                 | Related                                                                                           |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ------------------------------------------------------------------------------------------------- |
+| [`barrel-files.md`](barrel-files.md)                                         | Prefer direct imports over `index.ts` re-exports; carve-outs for library entry points and deliberately curated facades                                                                                | JS/TS source files (`paths:`) | [`esm-exports.md`](esm-exports.md)                                                                |
+| [`commit-messages.md`](commit-messages.md)                                   | Conventional Commits format; body discipline (subject = _what_, body = _why_); breaking-change notation; strict skip clause that treats `git log` drift as drift to correct                           | Always loaded                 | `github-pull-request` skill                                                                       |
+| [`dependency-management.md`](dependency-management.md)                       | Prefer official codemods over manual rewrites; verify peer-dependency compatibility before bumping                                                                                                    | Always loaded                 | [`knowledge-freshness.md`](knowledge-freshness.md)                                                |
+| [`documentation-driven-development.md`](documentation-driven-development.md) | Read docs before changes; reconcile docs at completion (existing-docs `rg` + missing-docs reasoning); ADR creation; explicit acknowledgment in end-of-task summary                                    | Always loaded                 | `superpowers:verification-before-completion`, [`~/.claude/templates/adr.md`](../templates/adr.md) |
+| [`esm-exports.md`](esm-exports.md)                                           | Prefer named exports; `export default` only when a framework requires it; concrete ✅/❌ examples covering utilities, components, barrels, mixed default+named                                        | JS/TS source files (`paths:`) | [`barrel-files.md`](barrel-files.md)                                                              |
+| [`knowledge-freshness.md`](knowledge-freshness.md)                           | Verify current sources before stating facts about libraries / frameworks / tooling; how to verify (Context7, WebFetch, `gh`, `pnpm info`, source reading); skip conditions for stable fundamentals    | Always loaded                 | —                                                                                                 |
+| [`setup.md`](setup.md)                                                       | Greenfield JS/TS defaults — pnpm via Corepack, fnm + Node LTS, `pnpm-workspace.yaml` with `savePrefix: ""`, `.editorconfig`, oxlint + oxfmt + prek, Vitest; framework-specific oxlint plugin guidance | Always loaded                 | [`knowledge-freshness.md`](knowledge-freshness.md)                                                |
+
+## Maintenance
+
+- New rules follow the patterns in [`knowledge-freshness.md`](knowledge-freshness.md) (the canonical shape): bold imperative lead, explicit skip conditions, optional cross-references.
+- Add `paths:` frontmatter only when a rule applies to specific file types (see [`esm-exports.md`](esm-exports.md) and [`barrel-files.md`](barrel-files.md)). Otherwise leave frontmatter off.
+- Update this README when adding, removing, or significantly reshaping a rule.
+
+## Related directories
+
+- [`../skills/`](../skills/) — invokable workflows triggered on demand (e.g. `github-pull-request`).
+- [`../templates/`](../templates/) — reusable artifact templates (e.g. ADR template).
+- [`../CLAUDE.md`](../CLAUDE.md) — global instructions loaded for every session, lists the dotfiles symlink map.
