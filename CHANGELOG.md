@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `zsh/.zshenv`: default `TERM` to `xterm-256color` when unset so non-interactive shells (e.g. agent/tool invocations) get a sane terminal type
 - `claude/rules/knowledge-freshness.md`: rule consolidating verification of current sources before stating facts about libraries, frameworks, tools, or APIs — covers what to verify, how (Context7, WebFetch, `gh`, `pnpm info`/`why`, source reading, CLI `--help`, web search), conflict resolution when verified info disagrees with internal knowledge, and explicit carve-outs for stable fundamentals
 - `claude/rules/barrel-files.md`: rule preferring direct imports over barrel files (`index.ts` re-exports) for app code, with carve-outs for library entry points and deliberately curated facades; covers dev-server cost, test isolation, tree-shaking reliability, and refactor friction
+- `claude/rules/setup.md`: greenfield JS/TS defaults — pnpm via Corepack with `"packageManager"` pinning, fnm + `.node-version` for Node LTS, `pnpm-workspace.yaml` (with `savePrefix: ""` for exact pinning) even in single-package repos, `"type": "module"`, `.editorconfig` baseline, oxlint + oxfmt + prek with concrete config and hook wiring, framework-specific oxlint plugin guidance (Next.js example with overwrite-defaults caution and verification mandate), Vitest as the test runner; defers to higher-priority instructions and existing project tooling
 
 ### Changed
 
