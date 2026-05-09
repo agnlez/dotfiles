@@ -1,3 +1,8 @@
+---
+paths:
+  - "**/*.{js,jsx,ts,tsx,mjs,mts}"
+---
+
 # ESM Exports
 
 When writing or reviewing ESM modules, evaluate export style based on context:

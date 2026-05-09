@@ -17,10 +17,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/settings.json`: set `skipAutoPermissionPrompt: true` to suppress the auto-permission prompt at session start
 - `claude/skills/`: symlinks for `grill-me`, `grill-with-docs`, `improve-codebase-architecture`, `setup-matt-pocock-skills`, `triage`, and `write-a-skill` pointing into the gitignored `.agents/skills/` directory so the skills source remains AI-managed while still being discoverable from `~/.claude/skills/`
 - `zsh/.zshenv`: default `TERM` to `xterm-256color` when unset so non-interactive shells (e.g. agent/tool invocations) get a sane terminal type
+- `claude/rules/knowledge-freshness.md`: rule consolidating verification of current sources before stating facts about libraries, frameworks, tools, or APIs — covers what to verify, how (Context7, WebFetch, `gh`, `pnpm info`/`why`, source reading, CLI `--help`, web search), conflict resolution when verified info disagrees with internal knowledge, and explicit carve-outs for stable fundamentals
+
+### Changed
+
+- `claude/rules/dependency-management.md`: slim down to migrations (prefer official codemods) and peer dependency verification; general "fetch docs / read changelogs" guidance moved to `knowledge-freshness.md`, post-change verification deferred to `superpowers:verification-before-completion`
+- `claude/rules/`: strip Cursor-only `alwaysApply: true` frontmatter (no-op in Claude Code, which auto-loads every `.md` in `~/.claude/rules/`); add `paths:` scoping to `esm-exports.md` so it only loads when working with JS/TS source files
 
 ### Removed
 
 - `claude/skills/grill-me/SKILL.md`: replaced by a symlink into `.agents/skills/grill-me`
+- `claude/rules/context7.md`: superseded by `claude/rules/knowledge-freshness.md`, which covers Context7 alongside other verification sources
 
 ## [2.3.0] - 2026-05-06
 
