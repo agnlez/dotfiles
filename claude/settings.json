@@ -39,12 +39,11 @@
       "Bash(jq:*)",
       "Bash(bat:*)",
       "Bash(lsof:*)",
-      "mcp__context7",
       "mcp__plugin_context7_context7",
       "mcp__plugin_figma_figma",
       "mcp__plugin_playwright_playwright",
       "mcp__next-devtools",
-      "mcp__atlassian"
+      "mcp__plugin_atlassian_atlassian"
     ],
     "deny": ["Read(.env*)", "Edit(.env*)", "Write(.env*)"],
     "ask": [
@@ -60,14 +59,14 @@
       "Bash(gh issue close*)",
       "Bash(gh issue delete*)",
       "Bash(gh repo delete*)",
-      "mcp__atlassian__createJiraIssue",
-      "mcp__atlassian__editJiraIssue",
-      "mcp__atlassian__transitionJiraIssue",
-      "mcp__atlassian__addCommentToJiraIssue",
-      "mcp__atlassian__addWorklogToJiraIssue",
-      "mcp__atlassian__createConfluencePage",
-      "mcp__atlassian__updateConfluencePage",
-      "mcp__atlassian__createIssueLink"
+      "mcp__plugin_atlassian_atlassian__createJiraIssue",
+      "mcp__plugin_atlassian_atlassian__editJiraIssue",
+      "mcp__plugin_atlassian_atlassian__transitionJiraIssue",
+      "mcp__plugin_atlassian_atlassian__addCommentToJiraIssue",
+      "mcp__plugin_atlassian_atlassian__addWorklogToJiraIssue",
+      "mcp__plugin_atlassian_atlassian__createConfluencePage",
+      "mcp__plugin_atlassian_atlassian__updateConfluencePage",
+      "mcp__plugin_atlassian_atlassian__createIssueLink"
     ]
   },
   "hooks": {
@@ -115,5 +114,6 @@
   "effortLevel": "high",
   "theme": "dark-ansi",
   "skipAutoPermissionPrompt": true,
-  "defaultMode": "acceptEdits"
+  "defaultMode": "acceptEdits",
+  "skillListingBudgetFraction": 0.03
 }
