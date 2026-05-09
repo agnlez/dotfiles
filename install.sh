@@ -102,6 +102,7 @@ link_file "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
 link_file "$DOTFILES/claude/rules" "$HOME/.claude/rules"
 link_file "$DOTFILES/claude/skills" "$HOME/.claude/skills"
 link_file "$DOTFILES/claude/hooks" "$HOME/.claude/hooks"
+link_file "$DOTFILES/claude/templates" "$HOME/.claude/templates"
 
 echo ""
 success "Done! Open a new terminal to load the updated config."

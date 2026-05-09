@@ -7,6 +7,7 @@ All Claude Code global configuration is managed through `~/Developer/dotfiles` a
 - `~/Developer/dotfiles/claude/rules/` → `~/.claude/rules/`
 - `~/Developer/dotfiles/claude/skills/` → `~/.claude/skills/`
 - `~/Developer/dotfiles/claude/hooks/` → `~/.claude/hooks/`
+- `~/Developer/dotfiles/claude/templates/` → `~/.claude/templates/`
 
 ## Tool preferences
 
