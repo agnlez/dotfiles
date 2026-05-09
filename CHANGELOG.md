@@ -18,11 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/skills/`: symlinks for `grill-me`, `grill-with-docs`, `improve-codebase-architecture`, `setup-matt-pocock-skills`, `triage`, and `write-a-skill` pointing into the gitignored `.agents/skills/` directory so the skills source remains AI-managed while still being discoverable from `~/.claude/skills/`
 - `zsh/.zshenv`: default `TERM` to `xterm-256color` when unset so non-interactive shells (e.g. agent/tool invocations) get a sane terminal type
 - `claude/rules/knowledge-freshness.md`: rule consolidating verification of current sources before stating facts about libraries, frameworks, tools, or APIs — covers what to verify, how (Context7, WebFetch, `gh`, `pnpm info`/`why`, source reading, CLI `--help`, web search), conflict resolution when verified info disagrees with internal knowledge, and explicit carve-outs for stable fundamentals
+- `claude/rules/barrel-files.md`: rule preferring direct imports over barrel files (`index.ts` re-exports) for app code, with carve-outs for library entry points and deliberately curated facades; covers dev-server cost, test isolation, tree-shaking reliability, and refactor friction
 
 ### Changed
 
 - `claude/rules/dependency-management.md`: slim down to migrations (prefer official codemods) and peer dependency verification; general "fetch docs / read changelogs" guidance moved to `knowledge-freshness.md`, post-change verification deferred to `superpowers:verification-before-completion`
 - `claude/rules/`: strip Cursor-only `alwaysApply: true` frontmatter (no-op in Claude Code, which auto-loads every `.md` in `~/.claude/rules/`); add `paths:` scoping to `esm-exports.md` so it only loads when working with JS/TS source files
+- `claude/rules/esm-exports.md`: rewrite around a strong "prefer named exports" default with concrete ✅/❌ examples (multi-export utility, single React component, barrel re-export, default-exported component, mixed default+named); reasons now cover refactor safety, re-export chain reliability, `import type` / `export type` per-symbol elision, and DevTools naming; cross-references `barrel-files.md` for whether to create a barrel in the first place
 
 ### Removed
 
