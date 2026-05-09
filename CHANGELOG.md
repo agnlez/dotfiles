@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/rules/esm-exports.md`: rewrite around a strong "prefer named exports" default with concrete ✅/❌ examples (multi-export utility, single React component, barrel re-export, default-exported component, mixed default+named); reasons now cover refactor safety, re-export chain reliability, `import type` / `export type` per-symbol elision, and DevTools naming; cross-references `barrel-files.md` for whether to create a barrel in the first place
 - `claude/rules/documentation-driven-development.md`: rewrite around an explicit completion-time gate. Anchors to `superpowers:verification-before-completion` so the doc-update step runs at the same moment as test/lint verification. Splits into two checks (existing-docs via `rg` for changed identifiers, missing-docs for new concepts/conventions/architectural decisions). Requires explicit `Docs updated: <files>` or `No doc updates needed because <reason>` acknowledgment in the end-of-task summary — implicit skip is not acceptable. Adds an ADR section covering when to create one, where they live (`docs/adr/NNNN-kebab.md` with the bootstrap ADR-0001 convention), and a path reference to the shared template
 - `claude/CLAUDE.md`: list `claude/templates/` in the symlink map alongside rules, skills, and hooks
+- `claude/rules/setup.md`: cross-reference `knowledge-freshness.md` from the framework-specific oxlint plugin guidance, making the verification dependency explicit
 
 ### Removed
 
