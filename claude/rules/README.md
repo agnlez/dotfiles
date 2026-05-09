@@ -19,7 +19,7 @@ The only frontmatter Claude Code recognizes is `paths:`, which conditionally loa
 
 ## Maintenance
 
-- New rules follow the patterns in [`knowledge-freshness.md`](knowledge-freshness.md) (the canonical shape): bold imperative lead, explicit skip conditions, optional cross-references.
+- New rules: copy [`../templates/rule.md`](../templates/rule.md) and fill it in. The template captures the canonical shape (bold imperative lead, optional `## Hard rule` for reasoning-level guardrails, body sections, ✅/❌ examples, explicit skip clause, optional cross-references) — see [`knowledge-freshness.md`](knowledge-freshness.md) for a worked example.
 - Add `paths:` frontmatter only when a rule applies to specific file types (see [`esm-exports.md`](esm-exports.md) and [`barrel-files.md`](barrel-files.md)). Otherwise leave frontmatter off.
 - Update this README when adding, removing, or significantly reshaping a rule.
 
