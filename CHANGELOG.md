@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/settings.json`: enable `figma@claude-plugins-official` plugin
 - `claude/settings.json`: set `skipAutoPermissionPrompt: true` to suppress the auto-permission prompt at session start
 - `claude/skills/`: symlinks for `grill-me`, `grill-with-docs`, `improve-codebase-architecture`, `setup-matt-pocock-skills`, `triage`, and `write-a-skill` pointing into the gitignored `.agents/skills/` directory so the skills source remains AI-managed while still being discoverable from `~/.claude/skills/`
+- `zsh/.zshenv`: default `TERM` to `xterm-256color` when unset so non-interactive shells (e.g. agent/tool invocations) get a sane terminal type
 
 ### Removed
 
