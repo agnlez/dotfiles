@@ -10,6 +10,6 @@ window-padding-y = 4
 macos-titlebar-style = tabs
 mouse-hide-while-typing = true
 cursor-style = underline
-shell-integration-features = no-cursor
 clipboard-trim-trailing-spaces = true
 clipboard-paste-protection = true
+command = /bin/zsh

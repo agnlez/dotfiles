@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/CLAUDE.md`: `## User profile` section at the top — senior FE engineer (12y), React/Next App Router + RSC + TS, Tailwind + shadcn, dashboards/data-viz/GIS domain, with library defaults (Recharts or Visx/D3 for charts, Mapbox GL or MapLibre for maps, deck.gl for map data layers). Promoted from project-scoped auto-memory so it loads globally for every Claude Code session
 - `claude/settings.json`: allow `Bash(eza:*)`, `Bash(rg:*)`, and `Bash(fd:*)` so the preferred `ls`/`grep`/`find` replacements (already declared in `claude/CLAUDE.md`'s tool preferences) run without permission prompts
 - `zellij/config.kdl`: minimal zellij config — `theme "catppuccin-macchiato"` to match Ghostty, `default_shell "zsh"`; rest left at zellij defaults
-- `zsh/.zshrc`: zellij auto-attach block — exports `ZELLIJ_AUTO_ATTACH=true` and `ZELLIJ_AUTO_EXIT=true` and runs `zellij setup --generate-auto-start zsh`; guarded with `$ZELLIJ` (no nesting), `$CLAUDECODE` (no wrapping inside Claude Code agent shells), and `$+commands[zellij]` (no error if zellij is uninstalled)
+- `zsh/.zshrc`: zellij auto-start block — exports `ZELLIJ_AUTO_EXIT=true` and runs `zellij setup --generate-auto-start zsh`; guarded with `$ZELLIJ` (no nesting), `$CLAUDECODE` (no wrapping inside Claude Code agent shells), and `$+commands[zellij]` (no error if zellij is uninstalled)
 - `install.sh`: symlink `~/.config/zellij/config.kdl` → `zellij/config.kdl`
 - `git/.gitconfig`: enable GPG signing for commits (`commit.gpgsign = true`) and rebases (`rebase.gpgsign = true`)
 - `claude/settings.json`: enable `figma@claude-plugins-official` plugin
@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `zellij/config.kdl`: set `mouse_mode false` so the terminal (Ghostty) handles mouse events directly — restores clickable links and native text selection that zellij's mouse capture was intercepting
 - `zellij/config.kdl`: unbind `Ctrl+t` in the `shared_except "tab" "locked"` block so fzf's default `Ctrl+T` file picker (`FZF_CTRL_T_COMMAND` in `zsh/.zshrc`) reaches the shell instead of being intercepted by zellij's Tab mode. Tab mode is still reachable from the status bar, and `Alt+i` / `Alt+o` continue to move tabs
+- `ghostty/config`: pin `command = /bin/zsh` so Ghostty spawns zsh directly instead of inheriting the system login shell — keeps the shell consistent across machines regardless of `/etc/passwd`
+- `ghostty/config`: drop `no-cursor` from `shell-integration-features` so the shell integration can manage cursor style (e.g. beam in insert mode); `cursor-style = underline` still sets the baseline
+- `zsh/.zshrc`: stop exporting `ZELLIJ_AUTO_ATTACH=true` so each new shell gets a fresh zellij session instead of re-attaching to an existing one — keeps tabs and panes scoped per Ghostty tab. `ZELLIJ_AUTO_EXIT=true` still closes the session when the shell exits
 - `claude/settings.json`: set `skillListingBudgetFraction: 0.03` so the full set of plugin-supplied skills (vercel, superpowers, figma, atlassian, etc.) fits in the per-session skill listing instead of being truncated at the implicit 1% budget — costs ~15k extra tokens/session in exchange for keeping every skill description visible
 - `claude/settings.json`: drop the bare `mcp__atlassian` and `mcp__context7` permission entries (now stale after removing duplicate top-level MCP registrations from `~/.claude.json`); rename `mcp__atlassian__*` ask-list entries to `mcp__plugin_atlassian_atlassian__*` so the existing permission posture continues to apply to the plugin-supplied Atlassian MCP tools
 - `claude/rules/dependency-management.md`: slim down to migrations (prefer official codemods) and peer dependency verification; general "fetch docs / read changelogs" guidance moved to `knowledge-freshness.md`, post-change verification deferred to `superpowers:verification-before-completion`
@@ -50,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/skills/fix-vulnerabilities/`: superseded by the equivalent skill shipped via the Vizzuality `vizz-core` plugin — no need to maintain a local copy
 - `claude/skills/grill-me/SKILL.md`: replaced by a symlink into `.agents/skills/grill-me`
 - `claude/rules/context7.md`: superseded by `claude/rules/knowledge-freshness.md`, which covers Context7 alongside other verification sources
+- `~/.oh-my-zsh`: uninstalled the framework — `zsh/.zshrc` uses zinit as the plugin manager and never sourced `oh-my-zsh.sh`, so the install was unused weight. Zinit still pulls the single `OMZP::git` snippet directly from oh-my-zsh's repo without needing a local install
 
 ## [2.3.0] - 2026-05-06
 
