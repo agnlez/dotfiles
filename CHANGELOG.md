@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `claude/rules/transient-artifacts.md`: reasoning-level guardrail keeping plans, scratch notes, and MCP tool outputs (Playwright traces, Figma screenshots, exploration dumps) out of the project tree — directs ephemeral artifacts to `mktemp -d` under `$TMPDIR`, with explicit carve-outs for ADRs, READMEs, test fixtures, project-tracked plan documents, and artifacts that are themselves the deliverable; includes a `git status` check at completion time and forbids using `.gitignore` to paper over leaks
 - `zellij/config.kdl`: minimal zellij config — `theme "catppuccin-macchiato"` to match Ghostty, `default_shell "zsh"`; rest left at zellij defaults
 - `zsh/.zshrc`: zellij auto-attach block — exports `ZELLIJ_AUTO_ATTACH=true` and `ZELLIJ_AUTO_EXIT=true` and runs `zellij setup --generate-auto-start zsh`; guarded with `$ZELLIJ` (no nesting), `$CLAUDECODE` (no wrapping inside Claude Code agent shells), and `$+commands[zellij]` (no error if zellij is uninstalled)
 - `install.sh`: symlink `~/.config/zellij/config.kdl` → `zellij/config.kdl`
