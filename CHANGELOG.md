@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `zellij/config.kdl`: set `mouse_mode false` so the terminal (Ghostty) handles mouse events directly — restores clickable links and native text selection that zellij's mouse capture was intercepting
+- `zellij/config.kdl`: unbind `Ctrl+t` in the `shared_except "tab" "locked"` block so fzf's default `Ctrl+T` file picker (`FZF_CTRL_T_COMMAND` in `zsh/.zshrc`) reaches the shell instead of being intercepted by zellij's Tab mode. Tab mode is still reachable from the status bar, and `Alt+i` / `Alt+o` continue to move tabs
 - `claude/settings.json`: set `skillListingBudgetFraction: 0.03` so the full set of plugin-supplied skills (vercel, superpowers, figma, atlassian, etc.) fits in the per-session skill listing instead of being truncated at the implicit 1% budget — costs ~15k extra tokens/session in exchange for keeping every skill description visible
 - `claude/settings.json`: drop the bare `mcp__atlassian` and `mcp__context7` permission entries (now stale after removing duplicate top-level MCP registrations from `~/.claude.json`); rename `mcp__atlassian__*` ask-list entries to `mcp__plugin_atlassian_atlassian__*` so the existing permission posture continues to apply to the plugin-supplied Atlassian MCP tools
 - `claude/rules/dependency-management.md`: slim down to migrations (prefer official codemods) and peer dependency verification; general "fetch docs / read changelogs" guidance moved to `knowledge-freshness.md`, post-change verification deferred to `superpowers:verification-before-completion`
