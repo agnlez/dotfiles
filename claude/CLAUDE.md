@@ -1,3 +1,15 @@
+## User profile
+
+Senior frontend engineer, 12 years of experience. Primary stack: React + Next.js (App Router + RSC by default — server components first, client only when needed) + TypeScript, with Tailwind and shadcn for UI.
+
+Domain: dashboards and data-viz, sometimes maps/GIS.
+
+**Library defaults (use unless project says otherwise):**
+
+- Charts: Recharts, or Visx/D3 when more control is needed.
+- Maps: Mapbox GL or MapLibre.
+- Map data layers: deck.gl.
+
 ## Claude Code configuration
 
 All Claude Code global configuration is managed through `~/Developer/dotfiles` and symlinked to `~/.claude/`. When creating or modifying rules, skills, hooks, or settings, edit the source files in the dotfiles repo so changes are tracked in git:
