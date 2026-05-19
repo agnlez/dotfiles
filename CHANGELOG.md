@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- `claude/skills/fix-vulnerabilities/`: superseded by the equivalent skill shipped via the Vizzuality `vizz-core` plugin — no need to maintain a local copy
 - `claude/skills/grill-me/SKILL.md`: replaced by a symlink into `.agents/skills/grill-me`
 - `claude/rules/context7.md`: superseded by `claude/rules/knowledge-freshness.md`, which covers Context7 alongside other verification sources
 
