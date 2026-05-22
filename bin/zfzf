@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Floating fzf file picker for zellij. Bound to Alt+T in zellij/config.kdl.
+# Runs inside a floating pane, then writes the selection to the underlying
+# pane and dismisses the float.
+set -euo pipefail
+
+# Binds are passed explicitly: zellij's `Run` inherits the server's
+# environment (captured at zellij startup), so FZF_DEFAULT_OPTS from a
+# later `source ~/.zshrc` won't reach this process.
+sel=$(fd --hidden --follow --exclude .git --type f \
+       | fzf --reverse \
+             --preview 'bat -n --color=always {}' \
+             --bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-up,shift-down:preview-down')
+
+[[ -n "$sel" ]] || exit 0
+
+zellij action toggle-floating-panes
+zellij action write-chars "$sel"

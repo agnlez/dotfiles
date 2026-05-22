@@ -203,6 +203,13 @@ keybinds {
         bind "Alt ]" { NextSwapLayout; }
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
+        // Floating fzf file picker — see bin/zfzf
+        bind "Alt t" {
+            Run "zfzf" {
+                floating true
+                close_on_exit true
+            }
+        }
     }
     shared_except "normal" "locked" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }

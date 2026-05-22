@@ -93,6 +93,13 @@ link_file "$DOTFILES/atuin/config.toml" "$HOME/.config/atuin/config.toml"
 mkdir -p "$HOME/.config/zellij"
 link_file "$DOTFILES/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
 
+# user scripts (bin/)
+mkdir -p "$HOME/.local/bin"
+for script in "$DOTFILES"/bin/*; do
+  [ -f "$script" ] || continue
+  link_file "$script" "$HOME/.local/bin/$(basename "$script")"
+done
+
 # editorconfig
 link_file "$DOTFILES/.editorconfig" "$HOME/.editorconfig"
 
