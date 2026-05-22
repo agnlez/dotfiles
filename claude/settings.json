@@ -1,5 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "skillListingBudgetFraction": 0.03,
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -98,7 +99,8 @@
     "atlassian@claude-plugins-official": true,
     "vercel@claude-plugins-official": true,
     "vizz-core@vizzuality": true,
-    "figma@claude-plugins-official": true
+    "figma@claude-plugins-official": true,
+    "modern-web-guidance@googlechrome": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -111,12 +113,19 @@
       "source": {
         "source": "github",
         "repo": "Vizzuality/claude-code-standards"
-      }
+      },
+      "autoUpdate": true
+    },
+    "googlechrome": {
+      "source": {
+        "source": "github",
+        "repo": "GoogleChrome/modern-web-guidance"
+      },
+      "autoUpdate": true
     }
   },
   "effortLevel": "high",
   "theme": "dark-ansi",
   "skipAutoPermissionPrompt": true,
-  "defaultMode": "acceptEdits",
-  "skillListingBudgetFraction": 0.03
+  "defaultMode": "acceptEdits"
 }
