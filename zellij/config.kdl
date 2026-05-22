@@ -7,11 +7,6 @@ keybinds {
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
     }
-    // Free Ctrl+t for fzf's file picker (FZF_CTRL_T_COMMAND in zsh/.zshrc).
-    // Tab mode is still reachable from the status bar; Alt+i / Alt+o move tabs.
-    shared_except "tab" "locked" {
-        unbind "Ctrl t"
-    }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }
         bind "h" "Left" { Resize "Increase Left"; }

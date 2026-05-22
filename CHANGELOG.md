@@ -31,8 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `zsh/.zshrc` + `bin/zfzf`: extend `FZF_DEFAULT_OPTS --bind` with preview-scroll keys — `ctrl-u`/`ctrl-d` for half-page, `shift-up`/`shift-down` for line-by-line. Same binds are also passed explicitly inside `zfzf` because zellij's `Run` inherits the server's env (captured at startup), so the global var doesn't propagate to floating panes after a `source ~/.zshrc`
 - `zellij/config.kdl`: set `mouse_mode false` so the terminal (Ghostty) handles mouse events directly — restores clickable links and native text selection that zellij's mouse capture was intercepting
-- `zellij/config.kdl`: unbind `Ctrl+t` in the `shared_except "tab" "locked"` block so fzf's default `Ctrl+T` file picker (`FZF_CTRL_T_COMMAND` in `zsh/.zshrc`) reaches the shell instead of being intercepted by zellij's Tab mode. Tab mode is still reachable from the status bar, and `Alt+i` / `Alt+o` continue to move tabs
+- `zellij/config.kdl` + `zsh/.zshrc`: stop unbinding `Ctrl+t` in zellij and move fzf's file-picker widget to `Alt+T` instead. `Ctrl+t` is back as zellij's Tab-mode entry; the zshrc snippet rebinds `fzf-file-widget` to `^[t` across `emacs`/`viins`/`vicmd` after sourcing `fzf --zsh`. `Ctrl+Shift+T` was the original ask but is indistinguishable from `Ctrl+T` in zsh without enabling the Kitty Keyboard Protocol + CSI-u bindings, so `Alt+T` was chosen as the portable equivalent
 - `ghostty/config`: pin `command = /bin/zsh` so Ghostty spawns zsh directly instead of inheriting the system login shell — keeps the shell consistent across machines regardless of `/etc/passwd`
 - `ghostty/config`: drop `no-cursor` from `shell-integration-features` so the shell integration can manage cursor style (e.g. beam in insert mode); `cursor-style = underline` still sets the baseline
 - `zsh/.zshrc`: stop exporting `ZELLIJ_AUTO_ATTACH=true` so each new shell gets a fresh zellij session instead of re-attaching to an existing one — keeps tabs and panes scoped per Ghostty tab. `ZELLIJ_AUTO_EXIT=true` still closes the session when the shell exits

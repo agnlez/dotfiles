@@ -21,13 +21,22 @@ export ARCHFLAGS="-arch $(uname -m)"
 # fnm completions
 command -v fnm >/dev/null && eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 
-# Set up fzf key bindings and fuzzy completion
-command -v fzf >/dev/null && source <(fzf --zsh)
+# Set up fzf key bindings and fuzzy completion, then move the file picker
+# off ^T (claimed by zellij's Tab mode) to Alt+T.
+if command -v fzf >/dev/null; then
+  source <(fzf --zsh)
+  for keymap in emacs viins vicmd; do
+    bindkey -M $keymap -r '^T'
+    bindkey -M $keymap '^[t' fzf-file-widget
+  done
+  unset keymap
+fi
 
 # Global fzf defaults (UI + keybindings)
-export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border --bind 'ctrl-/:toggle-preview'"
+export FZF_DEFAULT_OPTS="--height 50% --layout=reverse --border \
+  --bind 'ctrl-/:toggle-preview,ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,shift-up:preview-up,shift-down:preview-down'"
 
-# Use fd for standalone fzf and Ctrl+T
+# Use fd for standalone fzf and the file-picker widget (Alt+T)
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
