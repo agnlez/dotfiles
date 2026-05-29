@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `claude/settings.json`: set `model: "claude-opus-4-8"` to pin Opus 4.8 as the default model for every session
+- `claude/settings.json`: enable `security-guidance@claude-plugins-official` plugin
 - `bin/zfzf` + `install.sh` + `zellij/config.kdl`: floating fzf file picker for zellij. New `bin/` directory in the repo (each entry is symlinked into `~/.local/bin/` by `install.sh`); `zfzf` runs `fd | fzf --preview 'bat'`, then `zellij action toggle-floating-panes` + `write-chars` to insert the selection at the underlying pane's cursor. Bound to `Alt+T` in zellij's `shared_except "locked"` block via `Run "zfzf" { floating true; close_on_exit true }`. The zsh-side `Alt+T → fzf-file-widget` binding stays for shells outside zellij (Ghostty without a session, SSH, etc.)
 - `claude/rules/transient-artifacts.md`: reasoning-level guardrail keeping plans, scratch notes, and MCP tool outputs (Playwright traces, Figma screenshots, exploration dumps) out of the project tree — directs ephemeral artifacts to `mktemp -d` under `$TMPDIR`, with explicit carve-outs for ADRs, READMEs, test fixtures, project-tracked plan documents, and artifacts that are themselves the deliverable; includes a `git status` check at completion time and forbids using `.gitignore` to paper over leaks
 - `claude/CLAUDE.md`: `## User profile` section at the top — senior FE engineer (12y), React/Next App Router + RSC + TS, Tailwind + shadcn, dashboards/data-viz/GIS domain, with library defaults (Recharts or Visx/D3 for charts, Mapbox GL or MapLibre for maps, deck.gl for map data layers). Promoted from project-scoped auto-memory so it loads globally for every Claude Code session
@@ -54,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- `claude/settings.json`: disable `vercel@claude-plugins-official` plugin
 - `claude/skills/fix-vulnerabilities/`: superseded by the equivalent skill shipped via the Vizzuality `vizz-core` plugin — no need to maintain a local copy
 - `claude/skills/grill-me/SKILL.md`: replaced by a symlink into `.agents/skills/grill-me`
 - `claude/rules/context7.md`: superseded by `claude/rules/knowledge-freshness.md`, which covers Context7 alongside other verification sources
