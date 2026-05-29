@@ -1,5 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "model": "claude-opus-4-8",
   "skillListingBudgetFraction": 0.03,
   "includeCoAuthoredBy": false,
   "permissions": {
