@@ -50,7 +50,7 @@
       "mcp__next-devtools",
       "mcp__plugin_atlassian_atlassian"
     ],
-    "deny": ["Read(.env*)", "Edit(.env*)", "Write(.env*)"],
+    "deny": ["Read(.env*)", "Edit(.env*)"],
     "ask": [
       "Bash(git push --force*)",
       "Bash(git push -f*)",

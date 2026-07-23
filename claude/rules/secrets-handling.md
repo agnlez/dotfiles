@@ -43,6 +43,6 @@ When you find one in a file the user is editing or asking about:
 
 ## Related
 
-- `settings.json` — `Read`/`Edit`/`Write(.env*)` deny rules block direct file access at the tool level.
+- `settings.json` — `Read(.env*)`/`Edit(.env*)` deny rules block direct file access at the tool level (`Edit` rules cover all file-editing tools, including `Write`).
 - `github-pull-request` skill — staging discipline excludes `.env*`, credentials, secrets from commits.
 - `superpowers:verification-before-completion` — the moment to confirm no secrets crept into staged changes before claiming work done.

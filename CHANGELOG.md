@@ -61,6 +61,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/rules/context7.md`: superseded by `claude/rules/knowledge-freshness.md`, which covers Context7 alongside other verification sources
 - `~/.oh-my-zsh`: uninstalled the framework — `zsh/.zshrc` uses zinit as the plugin manager and never sourced `oh-my-zsh.sh`, so the install was unused weight. Zinit still pulls the single `OMZP::git` snippet directly from oh-my-zsh's repo without needing a local install
 
+### Fixed
+
+- `claude/settings.json`: drop the dead `Write(.env*)` deny rule that Claude Code warned about at startup — permission checks for file-editing tools only match `Edit(path)` rules (which cover Write, NotebookEdit, etc.), so `Write(.env*)` never matched anything. The existing `Edit(.env*)` deny already provides the intended protection. `claude/rules/secrets-handling.md` updated to reference only the effective rules
+
 ## [2.3.0] - 2026-05-06
 
 ### Changed
