@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `claude/rules/agent-output-formats.md`: rule preferring machine/agent-oriented output formats when Claude invokes dev tools ad hoc (post-edit verification, confirming a fix) — preference order of purpose-built agent format > compact text > default, with verbose JSON reserved for post-processing; verified flag table (`oxlint --format agent`, `tsc --pretty false`, `vitest --reporter=agent`, `pytest -q --tb=short`, `playwright --reporter=line`); explicitly forbids injecting these flags into project scripts, pre-commit hooks, or CI, and carves out user-requested formats and output-as-deliverable
 - `claude/settings.json`: set `model: "claude-opus-4-8"` to pin Opus 4.8 as the default model for every session
 - `claude/settings.json`: enable `security-guidance@claude-plugins-official` plugin
 - `bin/zfzf` + `install.sh` + `zellij/config.kdl`: floating fzf file picker for zellij. New `bin/` directory in the repo (each entry is symlinked into `~/.local/bin/` by `install.sh`); `zfzf` runs `fd | fzf --preview 'bat'`, then `zellij action toggle-floating-panes` + `write-chars` to insert the selection at the underlying pane's cursor. Bound to `Alt+T` in zellij's `shared_except "locked"` block via `Run "zfzf" { floating true; close_on_exit true }`. The zsh-side `Alt+T → fzf-file-widget` binding stays for shells outside zellij (Ghostty without a session, SSH, etc.)
