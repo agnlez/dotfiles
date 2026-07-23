@@ -1,6 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "model": "claude-opus-4-8",
   "skillListingBudgetFraction": 0.03,
   "includeCoAuthoredBy": false,
   "permissions": {
@@ -74,6 +73,7 @@
       "mcp__plugin_atlassian_atlassian__createIssueLink"
     ]
   },
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -126,6 +126,7 @@
     }
   },
   "effortLevel": "high",
+  "tui": "fullscreen",
   "theme": "dark-ansi",
   "skipAutoPermissionPrompt": true,
   "defaultMode": "acceptEdits"

@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `claude/settings.json`: switch the default model from Opus 4.8 to Fable 5 with the 1M-token context window (`claude-fable-5[1m]`)
+- `claude/settings.json`: set `tui: "fullscreen"` to opt into the flicker-free alt-screen renderer with virtualized scrollback
 - `zsh/.zshrc` + `bin/zfzf`: extend `FZF_DEFAULT_OPTS --bind` with preview-scroll keys — `ctrl-u`/`ctrl-d` for half-page, `shift-up`/`shift-down` for line-by-line. Same binds are also passed explicitly inside `zfzf` because zellij's `Run` inherits the server's env (captured at startup), so the global var doesn't propagate to floating panes after a `source ~/.zshrc`
 - `zellij/config.kdl`: set `mouse_mode false` so the terminal (Ghostty) handles mouse events directly — restores clickable links and native text selection that zellij's mouse capture was intercepting
 - `zellij/config.kdl` + `zsh/.zshrc`: stop unbinding `Ctrl+t` in zellij and move fzf's file-picker widget to `Alt+T` instead. `Ctrl+t` is back as zellij's Tab-mode entry; the zshrc snippet rebinds `fzf-file-widget` to `^[t` across `emacs`/`viins`/`vicmd` after sourcing `fzf --zsh`. `Ctrl+Shift+T` was the original ask but is indistinguishable from `Ctrl+T` in zsh without enabling the Kitty Keyboard Protocol + CSI-u bindings, so `Alt+T` was chosen as the portable equivalent
