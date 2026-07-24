@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-07-24
+
 ### Added
 
+- `homebrew/Brewfile`: track `gh`, `gnupg`, and `zellij` — all three were installed but missing from the Brewfile even though the repo depends on them (`gh` for GitHub workflows and skills, `gnupg` for the `commit.gpgsign = true` gitconfig, `zellij` for the tracked `zellij/config.kdl` and zshrc auto-start)
 - `claude/rules/test-restraint.md`: rule against writing tests by default — a test must earn its place (bug-fix regression, meaningful logic, public contracts, real-risk edge cases) and never pad a minimal diff, restate the implementation, test the framework, or duplicate existing coverage; non-obvious test additions are proposed to the user (name + assertion, one line each) before being written; carve-outs for explicit user requests, active TDD workflows, and enforced project coverage conventions
 - `claude/rules/code-comments.md`: rule keeping comments to the minimum — only decision context the code can't show (escalating to ADR/docs when the reasoning is architectural), non-obvious invariants, required directives with reasons, and convention-mandated API docs; forbids narrating code, justifying changes in comments, commented-out code, and any tool/vendor (Jira, Figma, Slack, …) or ticket (`PROJECT-123`) references unless the user explicitly allows them
 - `claude/rules/agent-output-formats.md`: rule preferring machine/agent-oriented output formats when Claude invokes dev tools ad hoc (post-edit verification, confirming a fix) — preference order of purpose-built agent format > compact text > default, with verbose JSON reserved for post-processing; verified flag table (`oxlint --format agent`, `tsc --pretty false`, `vitest --reporter=agent`, `pytest -q --tb=short`, `playwright --reporter=line`); explicitly forbids injecting these flags into project scripts, pre-commit hooks, or CI, and carves out user-requested formats and output-as-deliverable
@@ -38,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `package.json`: bump the pinned package manager from `pnpm@11.0.6` to `pnpm@11.17.0` via `corepack use pnpm@latest`
 - `.node-version`: bump the pinned Node version from 24.15.0 to 24.18.0, the latest release in the 24.x (Krypton) LTS line
+- `docs/structure.md`: reconcile with the current repo layout — add `zellij/` to the tool-directory list, document the `bin/` → `~/.local/bin/` script symlinks, and list settings and templates among the symlinked `claude/` contents
 - `.pre-commit-config.yaml`: bump hook revs via `prek update` — oxfmt `v0.48.0` → `v0.60.0` (now formats CSS/LESS/SCSS and css-in-js natively via `oxc_formatter_css`, formats GraphQL without the prettier fallback, and aligns git-ignore handling with oxlint) and oxlint `v1.63.0` → `v1.75.0` (adds the `react-compiler` rule and a batch of new unicorn/vue rules); `pre-commit-hooks` stays at `v6.0.0` (already latest); `prek run --all-files` passes with zero reformatting at the new revs
 - `package.json`: bump `@j178/prek` from 0.3.12 to 0.4.10 — picks up large-repo `prek run` speedups (skipped diff checks for read-only/clean-worktree cases), live hook output streaming in the progress UI, hook `groups` run-time filters (`prek run --group ci`), full pre-commit language parity, and the `auto-update` → `update` command rename (nothing in this repo referenced the old name); 0.4.9 changed the cached-hook-env schema, so environments reinstalled automatically on first run
 - `claude/settings.json`: switch the default model from Opus 4.8 to Fable 5 with the 1M-token context window (`claude-fable-5[1m]`)

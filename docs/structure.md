@@ -1,13 +1,15 @@
 # Structure
 
-Each tool gets a top-level directory (`atuin/`, `claude/`, `ghostty/`, `git/`, `homebrew/`, `starship/`, `zsh/`).
+Each tool gets a top-level directory (`atuin/`, `claude/`, `ghostty/`, `git/`, `homebrew/`, `starship/`, `zellij/`, `zsh/`).
 Files are symlinked to their target locations by `install.sh`.
 
 Single-file root configs live at the repo root (e.g. `.editorconfig` → `~/.editorconfig`).
 
+User scripts live in `bin/`; `install.sh` symlinks each entry into `~/.local/bin/`.
+
 The `zsh/.zshenv` file is special: it symlinks to `~/.zshenv` (not `~/.config/zsh/`), because it's the bootstrap file that sets `ZDOTDIR`.
 
-The `claude/` directory contains Claude Code configuration (global CLAUDE.md, rules, skills, hooks) symlinked to `~/.claude/`.
+The `claude/` directory contains Claude Code configuration (global CLAUDE.md, settings, rules, skills, hooks, templates) symlinked to `~/.claude/`.
 
 ## Adding a new config
 
