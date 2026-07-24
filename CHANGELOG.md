@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `homebrew/Brewfile`: track the `todoist-app` and `font-jetbrains-mono-nerd-font` casks, previously installed but untracked; the remaining untracked apps found in the 2.4.0 drift audit stay intentionally unmanaged
+
 ## [2.4.0] - 2026-07-24
 
 ### Added

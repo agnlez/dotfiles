@@ -30,11 +30,13 @@ cask "signal"
 cask "slack"
 cask "spotify"
 cask "telegram"
+cask "todoist-app"
 cask "ghostty"
 cask "webstorm"
 cask "whatsapp"
 
 # fonts
 cask "font-intel-one-mono"
+cask "font-jetbrains-mono-nerd-font"
 cask "font-monaspace"
 cask "font-monaspice-nerd-font"
