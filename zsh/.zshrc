@@ -86,7 +86,8 @@ esac
 # pnpm end
 
 # zellij — auto-attach in normal terminals; skip inside Claude Code agent shells
-if [[ -z "$ZELLIJ" && -z "$CLAUDECODE" ]] && (( $+commands[zellij] )); then
-  export ZELLIJ_AUTO_EXIT=true
-  eval "$(zellij setup --generate-auto-start zsh)"
-fi
+# Temporarily disabled; uncomment to restore auto-start.
+# if [[ -z "$ZELLIJ" && -z "$CLAUDECODE" ]] && (( $+commands[zellij] )); then
+#   export ZELLIJ_AUTO_EXIT=true
+#   eval "$(zellij setup --generate-auto-start zsh)"
+# fi

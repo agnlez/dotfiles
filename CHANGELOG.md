@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `zsh/.zshrc`: temporarily disable the zellij auto-start block (commented out, not removed, so restoring is an uncomment) — new terminals open a plain zsh; the `Alt+T` fzf file-picker binding keeps working through the zsh-side fallback
+
 ### Added
 
 - `homebrew/Brewfile`: track the `todoist-app` and `font-jetbrains-mono-nerd-font` casks, previously installed but untracked; the remaining untracked apps found in the 2.4.0 drift audit stay intentionally unmanaged
