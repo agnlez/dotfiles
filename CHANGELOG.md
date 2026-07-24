@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `package.json`: bump the pinned package manager from `pnpm@11.0.6` to `pnpm@11.17.0` via `corepack use pnpm@latest`
+- `package.json`: bump `@j178/prek` from 0.3.12 to 0.4.10 — picks up large-repo `prek run` speedups (skipped diff checks for read-only/clean-worktree cases), live hook output streaming in the progress UI, hook `groups` run-time filters (`prek run --group ci`), full pre-commit language parity, and the `auto-update` → `update` command rename (nothing in this repo referenced the old name); 0.4.9 changed the cached-hook-env schema, so environments reinstalled automatically on first run
 - `claude/settings.json`: switch the default model from Opus 4.8 to Fable 5 with the 1M-token context window (`claude-fable-5[1m]`)
 - `claude/settings.json`: set `tui: "fullscreen"` to opt into the flicker-free alt-screen renderer with virtualized scrollback
 - `zsh/.zshrc` + `bin/zfzf`: extend `FZF_DEFAULT_OPTS --bind` with preview-scroll keys — `ctrl-u`/`ctrl-d` for half-page, `shift-up`/`shift-down` for line-by-line. Same binds are also passed explicitly inside `zfzf` because zellij's `Run` inherits the server's env (captured at startup), so the global var doesn't propagate to floating panes after a `source ~/.zshrc`
