@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `package.json`: bump the pinned package manager from `pnpm@11.0.6` to `pnpm@11.17.0` via `corepack use pnpm@latest`
 - `claude/settings.json`: switch the default model from Opus 4.8 to Fable 5 with the 1M-token context window (`claude-fable-5[1m]`)
 - `claude/settings.json`: set `tui: "fullscreen"` to opt into the flicker-free alt-screen renderer with virtualized scrollback
 - `zsh/.zshrc` + `bin/zfzf`: extend `FZF_DEFAULT_OPTS --bind` with preview-scroll keys — `ctrl-u`/`ctrl-d` for half-page, `shift-up`/`shift-down` for line-by-line. Same binds are also passed explicitly inside `zfzf` because zellij's `Run` inherits the server's env (captured at startup), so the global var doesn't propagate to floating panes after a `source ~/.zshrc`
@@ -60,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- `pnpm-workspace.yaml`: drop the `packages: [.]` entry — pnpm docs state that when `packages` is omitted only the root package is included (and the root is always included), so the entry restated the default; the file stays as the canonical home for pnpm settings (`savePrefix: ""`)
 - `claude/settings.json`: disable `vercel@claude-plugins-official` plugin
 - `claude/skills/fix-vulnerabilities/`: superseded by the equivalent skill shipped via the Vizzuality `vizz-core` plugin — no need to maintain a local copy
 - `claude/skills/grill-me/SKILL.md`: replaced by a symlink into `.agents/skills/grill-me`
