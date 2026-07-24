@@ -2,13 +2,13 @@ exclude: ^(claude/skills/devstack-sync/|pnpm-lock\.yaml$)
 
 repos:
   - repo: https://github.com/oxc-project/mirrors-oxfmt
-    rev: v0.48.0
+    rev: v0.60.0
     hooks:
       - id: oxfmt
         types_or: [javascript, jsx, ts, tsx, markdown, json, yaml, toml, css]
 
   - repo: https://github.com/oxc-project/mirrors-oxlint
-    rev: v1.63.0
+    rev: v1.75.0
     hooks:
       - id: oxlint
 
