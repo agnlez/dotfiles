@@ -4,16 +4,16 @@ Personal dotfiles for macOS (Apple Silicon).
 
 ## What's included
 
-| Directory   | Contents                                                                           |
-| ----------- | ---------------------------------------------------------------------------------- |
-| `zsh/`      | Zsh config with zinit, fzf (with `fd`), zoxide, atuin history                      |
-| `git/`      | Git config with SSH signing (1Password), delta pager, trunk-based defaults         |
-| `starship/` | Custom two-line prompt (directory, git, nodejs, docker, duration)                  |
-| `ghostty/`  | Ghostty terminal config (Catppuccin Macchiato, Monaspice Nerd Font)                |
-| `atuin/`    | Atuin shell history config (daemon, directory-scoped up-arrow)                     |
-| `claude/`   | Claude Code global settings, rules, skills, and hooks                              |
-| `homebrew/` | Brewfile with formulas, casks, and fonts                                           |
-| `bin/`      | User scripts symlinked into `~/.local/bin` (e.g. `zfzf` — floating fzf for zellij) |
+| Directory   | Contents                                                                   |
+| ----------- | -------------------------------------------------------------------------- |
+| `zsh/`      | Zsh config with zinit, fzf (with `fd`), zoxide, atuin history              |
+| `git/`      | Git config with SSH signing (1Password), delta pager, trunk-based defaults |
+| `starship/` | Custom two-line prompt (directory, git, nodejs, docker, duration)          |
+| `ghostty/`  | Ghostty terminal config (Catppuccin Macchiato, Monaspice Nerd Font)        |
+| `atuin/`    | Atuin shell history config (daemon, directory-scoped up-arrow)             |
+| `claude/`   | Claude Code global settings, rules, skills, and hooks                      |
+| `homebrew/` | Brewfile with formulas, casks, and fonts                                   |
+| `bin/`      | User scripts symlinked into `~/.local/bin`                                 |
 
 ## Install
 

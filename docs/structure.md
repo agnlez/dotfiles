@@ -1,6 +1,6 @@
 # Structure
 
-Each tool gets a top-level directory (`atuin/`, `claude/`, `ghostty/`, `git/`, `homebrew/`, `starship/`, `zellij/`, `zsh/`).
+Each tool gets a top-level directory (`atuin/`, `claude/`, `ghostty/`, `git/`, `homebrew/`, `starship/`, `zsh/`).
 Files are symlinked to their target locations by `install.sh`.
 
 Single-file root configs live at the repo root (e.g. `.editorconfig` → `~/.editorconfig`).
