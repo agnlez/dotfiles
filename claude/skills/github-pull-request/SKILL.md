@@ -172,8 +172,21 @@ ls .github/PULL_REQUEST_TEMPLATE.md \
 
 If a template exists, use it as the body skeleton — preserve its section headings, fill in real content from the diff and commit history. If none exists, use the default Summary + Test plan template.
 
+**Decide whether the PR is frontend work.** Judge from the diff content, not just paths: UI components, client-side JS/TS, styles/Tailwind, markup, frontend routing, client state, assets, frontend tooling config. Backend-only, infra, docs-only, or mixed-with-no-frontend changes don't qualify — when in doubt, skip the label rather than mislabel.
+
+**If (and only if) the changes are frontend-related, ensure the `frontend` label exists before creating the PR** (labels live in the base repo — check there, not the fork):
+
+```bash
+gh label list --json name --jq '.[].name' | grep -qx "frontend" \
+  || gh label create frontend --color "1D76DB" --description "Frontend work"
+```
+
+If label creation fails (no triage/push permission on the base repo), create the PR without the label and tell the user.
+
 ```bash
 gh pr create --base "$DEFAULT_BRANCH" \
+  --assignee @me \
+  --label frontend \
   --title "<type>(<scope>): <concise description>" \
   --body "$(cat <<'EOF'
 ## Summary
@@ -184,6 +197,11 @@ gh pr create --base "$DEFAULT_BRANCH" \
 EOF
 )"
 ```
+
+**Default flags:**
+
+- `--assignee @me` — always assign the PR to the author, unless the user explicitly asks otherwise.
+- `--label frontend` — only when the diff is frontend work (created above if missing); omit for non-frontend PRs.
 
 **Flags to add when applicable:**
 
@@ -218,6 +236,8 @@ Return the PR URL.
 | Using `--force` instead of `--force-with-lease` | Always `--force-with-lease`                                                    |
 | Using `git add .`                               | Stage specific files by path                                                   |
 | Placeholder text in PR body                     | Derive from actual diff and commits                                            |
+| PR created without assignee                     | `--assignee @me` is the default unless the user says otherwise                 |
+| Labeling a non-frontend PR `frontend`           | Verify the diff is frontend work first; skip the label when in doubt           |
 | Skipping rebase because "main is far ahead"     | That's exactly when reconciling matters most — unless project policy says skip |
 
 ## Related

@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `claude/skills/github-pull-request/SKILL.md`: PR creation now assigns the PR to the author (`--assignee @me`, unless the user explicitly asks otherwise) and, when the diff is verified to be frontend work (judged from content — UI components, client-side code, styles, markup — skipping the label when in doubt), applies a `frontend` label, creating it in the base repo first if it doesn't exist (with a graceful fallback when the user lacks label-creation permission)
 - `zsh/.zshrc`: temporarily disable the zellij auto-start block (commented out, not removed, so restoring is an uncomment) — new terminals open a plain zsh; the `Alt+T` fzf file-picker binding keeps working through the zsh-side fallback
 
 ### Added
