@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `zsh/.zshrc`: generate podman zsh completions into `$XDG_CACHE_HOME/zsh/completions` and prepend that dir to `fpath` — Podman Desktop ships no completions, so `podman` (and the `docker` alias, which zsh resolves before completion lookup) had no tab completion; the file regenerates only when the podman binary is newer than the cache, keeping shell startup fast
+- `README.md`: `### Logitech mouse` manual-install step — use [Mouser](https://github.com/TomBadash/Mouser) (local, open-source Logitech Options+ alternative) instead of the official Logitech app; installed from GitHub releases since no official Homebrew cask exists
 - `zsh/aliases.zsh`: `docker` → `podman` alias, following the Docker Desktop removal — existing muscle memory and scripts typed interactively keep working against podman's Docker-compatible CLI
 - `homebrew/Brewfile`: track the `todoist-app` and `font-jetbrains-mono-nerd-font` casks, previously installed but untracked; the remaining untracked apps found in the 2.4.0 drift audit stay intentionally unmanaged
 

@@ -49,6 +49,10 @@ The install script will:
 
 Sign into the rest (Slack, Discord, Spotify, etc.)
 
+### Logitech mouse
+
+When using a Logitech mouse, manage it with [Mouser](https://github.com/TomBadash/Mouser) — a lightweight, fully local, open-source alternative to Logitech Options+ — instead of the official Logitech app. There is no official Homebrew cask; download `Mouser-macOS.zip` (Apple Silicon) from the [releases page](https://github.com/TomBadash/Mouser/releases), extract, and move `Mouser.app` to `/Applications`.
+
 ### Project tooling (prek + oxfmt + oxlint)
 
 Pre-commit formatting and linting are managed by [prek](https://github.com/j178/prek) (a Rust-based, drop-in pre-commit alternative) with [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html), [oxlint](https://oxc.rs/docs/guide/usage/linter), and the standard [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks). pnpm 11 manages prek itself; oxc and pre-commit-hooks are pinned in `.pre-commit-config.yaml`.
