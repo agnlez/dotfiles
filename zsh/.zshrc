@@ -21,6 +21,18 @@ export ARCHFLAGS="-arch $(uname -m)"
 # fnm completions
 command -v fnm >/dev/null && eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 
+# podman (Podman Desktop) ships no zsh completions — generate into a cache,
+# refreshed only when the binary is newer, so startup stays fast.
+if command -v podman >/dev/null; then
+  _podman_comp="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/completions/_podman"
+  if [[ ! -f "$_podman_comp" || "$(command -v podman)" -nt "$_podman_comp" ]]; then
+    mkdir -p "${_podman_comp:h}"
+    podman completion zsh -f "$_podman_comp" 2>/dev/null
+  fi
+  fpath=("${_podman_comp:h}" $fpath)
+  unset _podman_comp
+fi
+
 # Set up fzf key bindings and fuzzy completion, then move the file picker
 # off ^T (claimed by zellij's Tab mode) to Alt+T.
 if command -v fzf >/dev/null; then

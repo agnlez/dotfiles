@@ -29,6 +29,7 @@ alias gla="git lga"
 # Bypass with `\grep`, `command grep`, or `/usr/bin/grep` when you need the original (e.g. `grep -P`, `find -maxdepth`).
 alias grep="rg"
 alias find="fd"
+alias docker="podman"
 alias cat="bat --paging=never"
 alias ls="eza --icons --group-directories-first"
 alias ll="eza --icons --group-directories-first -la --git --group"
