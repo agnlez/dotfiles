@@ -14,10 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Migrate pnpm from Corepack to the standalone Homebrew binary — pnpm is dropping Corepack distribution ahead of its Rust rewrite (v12), and the Node-run shim adds startup overhead: `package.json` replaces the `packageManager` field with `devEngines.packageManager` (the standalone binary reads it and auto-switches to the pinned version), root `README.md` drops the `corepack enable` bootstrap step, `claude/rules/setup.md` scaffolds new projects with a `devEngines.packageManager` pin instead of `corepack use`, and `claude/rules/README.md` updates the setup.md summary; the Corepack `pnpm`/`pnpx` shims were removed from all fnm Node installs on the machine
 - `claude/skills/github-pull-request/SKILL.md`: PR creation now assigns the PR to the author (`--assignee @me`, unless the user explicitly asks otherwise) and, when the diff is verified to be frontend work (judged from content — UI components, client-side code, styles, markup — skipping the label when in doubt), applies a `frontend` label, creating it in the base repo first if it doesn't exist (with a graceful fallback when the user lacks label-creation permission)
 
 ### Added
 
+- `homebrew/Brewfile`: track the `pnpm` formula — brew is now the canonical install mechanism for the standalone pnpm binary
 - `zsh/.zshrc`: generate podman zsh completions into `$XDG_CACHE_HOME/zsh/completions` and prepend that dir to `fpath` — Podman Desktop ships no completions, so `podman` (and the `docker` alias, which zsh resolves before completion lookup) had no tab completion; the file regenerates only when the podman binary is newer than the cache, keeping shell startup fast
 - `README.md`: `### Logitech mouse` manual-install step — use [Mouser](https://github.com/TomBadash/Mouser) (local, open-source Logitech Options+ alternative) instead of the official Logitech app; installed from GitHub releases since no official Homebrew cask exists
 - `zsh/aliases.zsh`: `docker` → `podman` alias, following the Docker Desktop removal — existing muscle memory and scripts typed interactively keep working against podman's Docker-compatible CLI

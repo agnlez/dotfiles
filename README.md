@@ -60,9 +60,8 @@ Pre-commit formatting and linting are managed by [prek](https://github.com/j178/
 After cloning, in `~/Developer/dotfiles`:
 
 ```sh
-corepack enable                                            # one-time per Node install
 pnpm install                                               # installs prek; prepare hook wires .git/hooks/pre-commit
 git config blame.ignoreRevsFile .git-blame-ignore-revs     # skip the bulk-format commit in git blame
 ```
 
-`fnm` reads `.node-version` (Node 24) and Corepack reads `packageManager` in `package.json` (pnpm 11).
+`fnm` reads `.node-version` (Node 24); the standalone pnpm binary (Homebrew) reads `devEngines.packageManager` in `package.json` (pnpm 11) and auto-switches to the pinned version.

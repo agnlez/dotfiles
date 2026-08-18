@@ -6,7 +6,16 @@ If a higher-priority instruction (managed CLAUDE.md, project conventions, explic
 
 ## Package manager and Node
 
-- **Package manager**: pnpm via Corepack. Run `corepack enable && corepack use pnpm@latest` — this writes a `"packageManager"` field (e.g. `"packageManager": "pnpm@11.0.6"`) to `package.json` that pins the package manager version for every clone. Commit `pnpm-lock.yaml`.
+- **Package manager**: pnpm as a standalone binary (Homebrew-managed). Do **not** use Corepack — pnpm is dropping Corepack distribution ahead of its Rust rewrite (v12), and the Node-run shim adds startup overhead. Pin the version per project via `devEngines.packageManager` in `package.json`:
+
+  ```json
+  "devEngines": {
+    "packageManager": { "name": "pnpm", "version": "11.21.0", "onFail": "download" }
+  }
+  ```
+
+  Set `version` from `pnpm -v` at scaffold time. The standalone binary detects the pin and auto-switches to (downloading if needed) that exact version for every clone. Commit `pnpm-lock.yaml`. In existing projects that still pin via the top-level `"packageManager"` field, the standalone binary honors it too — no urgent migration needed.
+
 - **Node version**: latest LTS, pinned in `.node-version` (portable across fnm, volta, asdf — preferred over `.nvmrc`).
 - **Version manager**: fnm — install/switch with `fnm install --lts` and `fnm use`. With `--use-on-cd` set, `.node-version` is honored automatically on directory entry.
 - **`pnpm-workspace.yaml` for every project** (including single-package repos): canonical home for pnpm settings. Set `savePrefix: ""` so `pnpm add` writes exact versions to `package.json`. Exact pinning across the board — no caret or tilde ranges.
