@@ -29,8 +29,8 @@ digraph pr_flow {
   reconcile [label="5. Reconcile with\nintegration branch"];
   push [label="6. Push"];
   create_pr [label="7. Create PR\n(template + draft + fork)"];
-  watch_ci [label="8. Watch initial CI"];
-  done [label="Return PR URL" shape=doublecircle];
+  watch_ci [label="8. Dispatch background\nCI watch (agent)"];
+  done [label="Return PR URL,\ncontinue other work\n(CI result arrives async)" shape=doublecircle];
 
   start -> gather;
   gather -> on_default;
@@ -212,15 +212,22 @@ EOF
 **Summary:** Bullet points covering the actual changes, not restating the title.
 **Test plan:** Concrete verification steps.
 
-### 8. Watch the initial CI run
+### 8. Watch the initial CI run — in the background, never blocking
 
-```bash
-gh pr checks --watch
-```
+CI runs take minutes; the session must not sit idle waiting on them. Dispatch the watch as a background task and return the PR URL immediately.
 
-If any check fails, surface the failure to the user and resolve before declaring the task done. A green CI run is part of "PR ready for review" — see `superpowers:verification-before-completion`.
+**How:** dispatch a background agent (the Agent tool) whose task is:
 
-Return the PR URL.
+> Run `gh pr checks <PR-URL> --watch` and wait for it to finish. Report the final status of every check. For any failed check, include the failing job's name and the relevant log excerpt (`gh run view <run-id> --log-failed`).
+
+The main session then returns the PR URL and moves on to whatever work is next. The agent's completion notification arrives asynchronously.
+
+**When the background watch reports:**
+
+- All checks green → note it to the user at the next natural moment.
+- Any check failed → surface the failure and resolve it. Backgrounding the watch defers the verification; it does not waive it — a green CI run is still part of "PR ready for review" (`superpowers:verification-before-completion`). The task the PR belongs to is not done while its CI is red or unreported.
+
+If the runtime has no background-agent facility, fall back to `run_in_background` on the `gh pr checks --watch` command itself; only as a last resort run it in the foreground.
 
 ## Common Mistakes
 
@@ -229,7 +236,8 @@ Return the PR URL.
 | Hardcoding `main`                               | Detect via `git symbolic-ref refs/remotes/origin/HEAD` or `gh repo view`       |
 | Rebasing in a squash-merge or no-rebase repo    | Check `gh repo view --json *MergeAllowed` and `CONTRIBUTING.md` first          |
 | Ignoring `.github/PULL_REQUEST_TEMPLATE.md`     | Check for one before composing a body; preserve its structure                  |
-| Returning PR URL with red CI                    | `gh pr checks --watch` and surface failures before claiming done               |
+| Blocking the session on `gh pr checks --watch`  | Dispatch the watch to a background agent; return the PR URL and keep working   |
+| Ignoring the background watch's result          | Surface failures when it reports; the task isn't done while CI is red          |
 | Including unrelated files in the diff           | Stage by explicit path after analyzing each change                             |
 | Asking user about every file                    | Analyze the diff yourself; only ask if truly ambiguous                         |
 | Refusing to rename a pushed branch              | Rename locally, push the new name; routine, not destructive                    |
