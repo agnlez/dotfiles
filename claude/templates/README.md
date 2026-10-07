@@ -7,7 +7,7 @@ Reusable artifact templates copied or referenced when scaffolding work in any pr
 | Template             | Purpose                                                                                                                                                                           | Referenced by                                                                                  |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | [`adr.md`](adr.md)   | Architectural Decision Record — Status/Date frontmatter, Context, Decision, Alternatives Considered, Consequences                                                                 | [`../rules/documentation-driven-development.md`](../rules/documentation-driven-development.md) |
-| [`rule.md`](rule.md) | Scaffold for new entries in `claude/rules/` — optional `paths:` frontmatter, bold imperative lead, body sections, ✅/❌ examples, explicit skip clause, optional cross-references | [`../rules/README.md`](../rules/README.md) maintenance section                                 |
+| [`rule.md`](rule.md) | Scaffold for new entries in `claude/rules/` — optional `paths:` frontmatter, bold imperative lead, body sections, ✅/❌ examples, explicit skip clause, optional cross-references | [`../README.md`](../README.md) maintenance section                                             |
 
 ## Maintenance
 
