@@ -28,9 +28,9 @@ These live outside the repo, and nothing recreates them. Copy them somewhere saf
 On a fresh Mac, the first `git` call prompts to install the Xcode Command Line Tools. Accept, and run the command again once they're installed.
 
 ```sh
-mkdir -p ~/Developer
-git clone https://github.com/agnlez/dotfiles.git ~/Developer/dotfiles
-cd ~/Developer/dotfiles
+mkdir -p ~/dev
+git clone https://github.com/agnlez/dotfiles.git ~/dev/dotfiles
+cd ~/dev/dotfiles
 ./install.sh
 ```
 
@@ -43,8 +43,9 @@ The install script will:
 3. Install all packages from the Brewfile (a failure doesn't stop the linking; rerun the script once it's fixed)
 4. Install the Node version pinned in `.node-version` via fnm and make it the default
 5. Install Claude Code via the native installer (self-contained, auto-updating)
-6. Symlink config files to their expected locations
-7. Back up any existing files to `~/.dotfiles-backup/`
+6. Create `~/dev`, where all projects live
+7. Symlink config files to their expected locations
+8. Back up any existing files to `~/.dotfiles-backup/`
 
 ## Manual steps after install
 
@@ -56,7 +57,7 @@ The install script will:
 
 - Sign into 1Password and enable the SSH agent
 - Add your SSH key to 1Password and register the public key on GitHub as **both** an authentication key _and_ a signing key
-- Switch the dotfiles remote to SSH: `git -C ~/Developer/dotfiles remote set-url origin git@github.com:agnlez/dotfiles.git`
+- Switch the dotfiles remote to SSH: `git -C ~/dev/dotfiles remote set-url origin git@github.com:agnlez/dotfiles.git`
 - The gitconfig uses `op-ssh-sign` at the default macOS path (`/Applications/1Password.app/...`) — override in `~/.gitconfig.local` under `[gpg "ssh"]` if installed elsewhere
 
 ### Apps
@@ -84,7 +85,7 @@ When using a Logitech mouse, manage it with [Mouser](https://github.com/TomBadas
 
 Pre-commit formatting and linting are managed by [prek](https://github.com/j178/prek) (a Rust-based, drop-in pre-commit alternative) with [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html), [oxlint](https://oxc.rs/docs/guide/usage/linter), and the standard [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks). pnpm manages prek itself; oxc and pre-commit-hooks are pinned in `.pre-commit-config.yaml`.
 
-After cloning, in `~/Developer/dotfiles`:
+After cloning, in `~/dev/dotfiles`:
 
 ```sh
 pnpm install                                               # installs prek; prepare hook wires .git/hooks/pre-commit

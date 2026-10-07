@@ -1,4 +1,4 @@
-working-directory = ~/Developer
+working-directory = ~/dev
 window-inherit-working-directory = false
 tab-inherit-working-directory = false
 theme = light:Catppuccin Latte,dark:Gruvbox Material Dark

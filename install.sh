@@ -67,7 +67,7 @@ if ! command -v claude &>/dev/null; then
 fi
 
 # Directories
-mkdir -p "$HOME/Developer"
+mkdir -p "$HOME/dev"
 
 # Symlinks
 info "Linking config files..."

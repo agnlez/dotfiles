@@ -12,14 +12,14 @@ Domain: dashboards and data-viz, sometimes maps/GIS.
 
 ## Claude Code configuration
 
-All Claude Code global configuration is managed through `~/Developer/dotfiles` and symlinked to `~/.claude/`. When creating or modifying rules, skills, or settings, edit the source files in the dotfiles repo so changes are tracked in git:
+All Claude Code global configuration is managed through `~/dev/dotfiles` and symlinked to `~/.claude/`. When creating or modifying rules, skills, or settings, edit the source files in the dotfiles repo so changes are tracked in git:
 
-- `~/Developer/dotfiles/claude/settings.json` → `~/.claude/settings.json`
-- `~/Developer/dotfiles/claude/statusline.sh` → `~/.claude/statusline.sh`
-- `~/Developer/dotfiles/claude/CLAUDE.md` → `~/.claude/CLAUDE.md`
-- `~/Developer/dotfiles/claude/rules/` → `~/.claude/rules/`
-- `~/Developer/dotfiles/claude/skills/` → `~/.claude/skills/`
-- `~/Developer/dotfiles/claude/templates/` → `~/.claude/templates/`
+- `~/dev/dotfiles/claude/settings.json` → `~/.claude/settings.json`
+- `~/dev/dotfiles/claude/statusline.sh` → `~/.claude/statusline.sh`
+- `~/dev/dotfiles/claude/CLAUDE.md` → `~/.claude/CLAUDE.md`
+- `~/dev/dotfiles/claude/rules/` → `~/.claude/rules/`
+- `~/dev/dotfiles/claude/skills/` → `~/.claude/skills/`
+- `~/dev/dotfiles/claude/templates/` → `~/.claude/templates/`
 
 ## Tool preferences
 
