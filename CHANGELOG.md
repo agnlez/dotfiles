@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `claude/skills/github-pull-request/SKILL.md`: find an existing `frontend` label with `gh label list --search`, since the plain listing returns only the first 30 labels and missed it in larger repos, which made the follow-up `gh label create` fail. The CI watch now waits up to two minutes for checks to register, since `gh pr checks --watch` exits with "no checks reported" right after `gh pr create`, and it runs as a background command instead of a subagent, which cost tokens for the whole wait
 - `README.md`: clone over HTTPS, since the SSH key lives in 1Password, which a fresh machine doesn't have set up yet; the 1Password steps now include switching the remote back to SSH
 - `install.sh`: a failed `brew bundle` no longer stops the script before any config is linked — Node is skipped if fnm is missing, and a closing warning asks for a rerun. The closing warnings also point out that signed commits need the 1Password SSH agent and `~/.config/git/allowed_signers`
 - `git/.gitconfig`: include `~/.gitconfig.local` last, so machine-specific values override the tracked config as the README and template describe — at the top of the file, any tracked key defined later won. The 1Password `op-ssh-sign` path moves into the tracked config as the default; the template keeps `allowedSignersFile` and a commented `program` override

@@ -29,7 +29,7 @@ digraph pr_flow {
   reconcile [label="5. Reconcile with\nintegration branch"];
   push [label="6. Push"];
   create_pr [label="7. Create PR\n(template + draft + fork)"];
-  watch_ci [label="8. Dispatch background\nCI watch (agent)"];
+  watch_ci [label="8. Watch CI as a\nbackground command"];
   done [label="Return PR URL,\ncontinue other work\n(CI result arrives async)" shape=doublecircle];
 
   start -> gather;
@@ -177,7 +177,7 @@ If a template exists, use it as the body skeleton — preserve its section headi
 **If (and only if) the changes are frontend-related, ensure the `frontend` label exists before creating the PR** (labels live in the base repo — check there, not the fork):
 
 ```bash
-gh label list --json name --jq '.[].name' | grep -qx "frontend" \
+gh label list --search frontend --json name --jq '.[].name' | grep -qx "frontend" \
   || gh label create frontend --color "1D76DB" --description "Frontend work"
 ```
 
@@ -214,20 +214,27 @@ EOF
 
 ### 8. Watch the initial CI run — in the background, never blocking
 
-CI runs take minutes; the session must not sit idle waiting on them. Dispatch the watch as a background task and return the PR URL immediately.
+CI runs take minutes; the session must not sit idle waiting on them. Start the watch in the background and return the PR URL immediately.
 
-**How:** dispatch a background agent (the Agent tool) whose task is:
+**How:** run this with the Bash tool's `run_in_background`. The session is notified when it exits, and nothing is spent while it waits:
 
-> Run `gh pr checks <PR-URL> --watch` and wait for it to finish. Report the final status of every check. For any failed check, include the failing job's name and the relevant log excerpt (`gh run view <run-id> --log-failed`).
+```bash
+# Checks take a moment to register after `gh pr create`; until then
+# `gh pr checks` fails with "no checks reported".
+for _ in $(seq 24); do
+  gh pr checks "$PR_URL" 2>&1 | grep -q "no checks reported" || break
+  sleep 5
+done
+gh pr checks "$PR_URL" --watch
+```
 
-The main session then returns the PR URL and moves on to whatever work is next. The agent's completion notification arrives asynchronously.
-
-**When the background watch reports:**
+**When the background watch exits:**
 
 - All checks green → note it to the user at the next natural moment.
-- Any check failed → surface the failure and resolve it. Backgrounding the watch defers the verification; it does not waive it — a green CI run is still part of "PR ready for review" (`superpowers:verification-before-completion`). The task the PR belongs to is not done while its CI is red or unreported.
+- Any check failed → fetch the failing job's log (`gh run view <run-id> --log-failed`), surface the failure, and resolve it. For long logs, hand the reading to a subagent and keep only its summary. Backgrounding the watch defers the verification; it does not waive it — a green CI run is still part of "PR ready for review" (`superpowers:verification-before-completion`). The task the PR belongs to is not done while its CI is red or unreported.
+- Still "no checks reported" after the two-minute wait → the repo runs no CI for this PR; tell the user and treat the watch as done.
 
-If the runtime has no background-agent facility, fall back to `run_in_background` on the `gh pr checks --watch` command itself; only as a last resort run it in the foreground.
+If the runtime can't run commands in the background, run the watch in the foreground as a last resort.
 
 ## Common Mistakes
 
@@ -236,8 +243,8 @@ If the runtime has no background-agent facility, fall back to `run_in_background
 | Hardcoding `main`                               | Detect via `git symbolic-ref refs/remotes/origin/HEAD` or `gh repo view`       |
 | Rebasing in a squash-merge or no-rebase repo    | Check `gh repo view --json *MergeAllowed` and `CONTRIBUTING.md` first          |
 | Ignoring `.github/PULL_REQUEST_TEMPLATE.md`     | Check for one before composing a body; preserve its structure                  |
-| Blocking the session on `gh pr checks --watch`  | Dispatch the watch to a background agent; return the PR URL and keep working   |
-| Ignoring the background watch's result          | Surface failures when it reports; the task isn't done while CI is red          |
+| Blocking the session on `gh pr checks --watch`  | Run the watch as a background command; return the PR URL and keep working      |
+| Ignoring the background watch's result          | Surface failures when it exits; the task isn't done while CI is red            |
 | Including unrelated files in the diff           | Stage by explicit path after analyzing each change                             |
 | Asking user about every file                    | Analyze the diff yourself; only ask if truly ambiguous                         |
 | Refusing to rename a pushed branch              | Rename locally, push the new name; routine, not destructive                    |
