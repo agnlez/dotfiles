@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `claude/statusline.sh`: show the context's `total_input_tokens` instead of summing the last call's usage (which included output tokens, and showed 0 when the per-call breakdown was absent); round the usage percentage to an integer; abbreviate million-token windows as `1M` rather than `1000k`; read all fields in a single `jq` call instead of ten; and drop stale comments
 - Bump `@j178/prek` from 0.4.10 to 0.5.5, and the oxfmt (v0.60.0 → v0.71.0) and oxlint (v1.75.0 → v1.86.0) hook revisions in `.pre-commit-config.yaml`; running all hooks on the repo produced no changes. The README's prek note no longer names a pnpm major version
 - `ghostty/config` is now maintained as cmux's terminal config: cmux reads the Ghostty config files, so the font, padding, and cursor settings still apply (cmux's own theme setting overrides the dark-mode theme). Fold in `term = xterm-256color` from the untracked `~/.config/ghostty/config` so it survives a reinstall; the README describes the directory accordingly and no longer lists Discord
 - `claude/settings.json`: stop auto-allowing `node` and `npx` Bash commands, drop the pinned `model`, and set high effort for Opus 5.5 via `modelSettings`
