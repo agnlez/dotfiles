@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- codebase-memory-mcp integration, unused since it was added (no CLI or MCP calls across ~110 sessions): delete the `cbm-*` hooks in `claude/hooks/` and their `PreToolUse` (Grep/Glob), `SessionStart`, and `SubagentStart` entries in `claude/settings.json`, the `claude/skills/codebase-memory/` skill, and the "Code Graph" section of `claude/CLAUDE.md` — the hooks also told Claude to prefer the MCP server, contradicting the CLI-only guidance
+- Unused skills `grill-me`, `grill-with-docs`, `improve-codebase-architecture`, `setup-matt-pocock-skills`, and `triage` (no invocations in the retained session history): delete their symlinks in `claude/skills/` — their content lived in a globally gitignored `.agents/skills/`, so a fresh clone would have left them dangling anyway
+- `claude/hooks/optimize-images/` pre-commit WEBP hook, rarely used: delete the directory and its `PreToolUse` (Bash) entry in `claude/settings.json`. With no hooks left, drop the `claude/hooks` → `~/.claude/hooks` symlink from `install.sh` and its mentions in `claude/CLAUDE.md`, `README.md`, and `docs/structure.md`
+- `claude/settings.json`: disable the `frontend-design`, `code-simplifier`, and `modern-web-guidance` plugins (never invoked) and drop the `googlechrome` marketplace that only served the latter
 - `homebrew/Brewfile`: drop `gnupg` (git signing uses SSH via 1Password; nothing depends on it), the `ghostty` cask (replaced by cmux), the `discord` and `firefox` casks (unused), and `font-jetbrains-mono-nerd-font` (no editor or terminal config references it)
 - `zsh/aliases.zsh`: drop `alias gl="git lg"` — the turbo-loaded OMZ git plugin overrode it with `git pull`, which is the behavior actually in use
 - zellij, uninstalled from the machine: drop the `zellij` formula from `homebrew/Brewfile`, delete `zellij/config.kdl` and its symlink block in `install.sh`, delete `bin/zfzf` (the floating fzf picker only worked inside zellij; the zsh-side `Alt+T` fzf binding remains), remove the zellij auto-start block from `zsh/.zshrc`, and drop the `zellij/` and `zfzf` mentions from `README.md` and `docs/structure.md` — the generic `bin/` symlink mechanism in `install.sh` stays for future scripts
@@ -225,6 +229,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/CLAUDE.md` global Claude instructions (symlinked to `~/.claude/CLAUDE.md`)
 - `claude/rules/` with `context7.md`, `documentation-driven-development.md`, `esm-exports.md`
 - `claude/skills/fix-vulnerabilities/` vulnerability audit and fix skill
+- `claude/hooks/optimize-images/` pre-commit image optimization hook
 - `claude/settings.json` with sandbox, plugins, hooks, and `acceptEdits` default mode
 - `gpg.ssh.program` pointing to 1Password's `op-ssh-sign` for commit signing inside sandbox
 - 1Password SSH agent socket to sandbox `allowUnixSockets` for git SSH access inside sandbox

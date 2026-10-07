@@ -71,92 +71,17 @@
       "mcp__plugin_atlassian_atlassian__createIssueLink"
     ]
   },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash ~/.claude/hooks/optimize-images/check-committed-images.sh"
-          }
-        ]
-      },
-      {
-        "matcher": "Grep|Glob",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/cbm-code-discovery-gate",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "matcher": "startup",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/cbm-session-reminder"
-          }
-        ]
-      },
-      {
-        "matcher": "resume",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/cbm-session-reminder"
-          }
-        ]
-      },
-      {
-        "matcher": "clear",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/cbm-session-reminder"
-          }
-        ]
-      },
-      {
-        "matcher": "compact",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/cbm-session-reminder"
-          }
-        ]
-      }
-    ],
-    "SubagentStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/cbm-subagent-reminder"
-          }
-        ]
-      }
-    ]
-  },
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
-    "code-simplifier@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
     "atlassian@claude-plugins-official": true,
     "vizz-core@vizzuality": true,
     "figma@claude-plugins-official": true,
-    "modern-web-guidance@googlechrome": true,
     "security-guidance@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
@@ -170,13 +95,6 @@
       "source": {
         "source": "github",
         "repo": "Vizzuality/claude-code-standards"
-      },
-      "autoUpdate": true
-    },
-    "googlechrome": {
-      "source": {
-        "source": "github",
-        "repo": "GoogleChrome/modern-web-guidance"
       },
       "autoUpdate": true
     }

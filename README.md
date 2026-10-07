@@ -11,7 +11,7 @@ Personal dotfiles for macOS (Apple Silicon).
 | `starship/` | Custom two-line prompt (directory, git, nodejs, docker, duration)          |
 | `ghostty/`  | Terminal config in Ghostty format, read by cmux (Monaspice Nerd Font)      |
 | `atuin/`    | Atuin shell history config (daemon, directory-scoped up-arrow)             |
-| `claude/`   | Claude Code global settings, rules, skills, and hooks                      |
+| `claude/`   | Claude Code global settings, rules, skills, and templates                  |
 | `homebrew/` | Brewfile with formulas, casks, and fonts                                   |
 | `bin/`      | User scripts symlinked into `~/.local/bin`                                 |
 

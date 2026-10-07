@@ -9,7 +9,7 @@ User scripts live in `bin/`; `install.sh` symlinks each entry into `~/.local/bin
 
 The `zsh/.zshenv` file is special: it symlinks to `~/.zshenv` (not `~/.config/zsh/`), because it's the bootstrap file that sets `ZDOTDIR`.
 
-The `claude/` directory contains Claude Code configuration (global CLAUDE.md, settings, rules, skills, hooks, templates) symlinked to `~/.claude/`.
+The `claude/` directory contains Claude Code configuration (global CLAUDE.md, settings, rules, skills, templates) symlinked to `~/.claude/`.
 
 ## Adding a new config
 
