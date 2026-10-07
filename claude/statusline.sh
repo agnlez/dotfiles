@@ -31,19 +31,22 @@ used_int=$(awk -v u="$used" 'BEGIN { printf "%.0f", u }')
 filled=$(( used_int * bar_width / 100 ))
 (( filled > bar_width )) && filled=$bar_width
 
-hint=""
-if (( used_int < 20 )); then
-  color="\033[0;32m"
-elif (( used_int < 40 )); then
-  color="\033[0;33m"
-  hint=" 💡 /clear if switching tasks"
-elif (( used_int < 60 )); then
-  color="\033[38;5;208m"
-  hint=" ⚠️ /compact recommended"
-else
-  color="\033[0;31m"
-  hint=" 🔴 /compact or /clear NOW"
-fi
+# Level by absolute tokens, since slowdown and cost track tokens in context
+# (a 1M window shouldn't stay green five times longer), escalated by window
+# fill so a small window still warns before auto-compact.
+if (( total_tokens >= 400000 )); then level=3
+elif (( total_tokens >= 200000 )); then level=2
+elif (( total_tokens >= 100000 )); then level=1
+else level=0; fi
+if (( used_int >= 80 )); then (( level < 3 )) && level=3
+elif (( used_int >= 60 )); then (( level < 2 )) && level=2; fi
+
+case $level in
+  0) color="\033[0;32m";    hint="" ;;
+  1) color="\033[0;33m";    hint=" 💡 /clear if switching tasks" ;;
+  2) color="\033[38;5;208m"; hint=" ⚠️ /compact recommended" ;;
+  3) color="\033[0;31m";    hint=" 🔴 /compact or /clear NOW" ;;
+esac
 reset="\033[0m"
 
 bar=""
