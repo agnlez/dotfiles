@@ -7,13 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `homebrew/Brewfile`: declare tools that were installed but missing from the Brewfile, so a fresh install restores them — `mole`, `portless`, and `railway` formulae; `cmux` (now the daily terminal) and `podman-desktop` casks (the zsh `docker` alias and podman completions depend on it)
+
 ### Removed
 
+- `homebrew/Brewfile`: drop `gnupg` (git signing uses SSH via 1Password; nothing depends on it), the `ghostty` cask (replaced by cmux), the `discord` and `firefox` casks (unused), and `font-jetbrains-mono-nerd-font` (no editor or terminal config references it)
 - zellij, uninstalled from the machine: drop the `zellij` formula from `homebrew/Brewfile`, delete `zellij/config.kdl` and its symlink block in `install.sh`, delete `bin/zfzf` (the floating fzf picker only worked inside zellij; the zsh-side `Alt+T` fzf binding remains), remove the zellij auto-start block from `zsh/.zshrc`, and drop the `zellij/` and `zfzf` mentions from `README.md` and `docs/structure.md` — the generic `bin/` symlink mechanism in `install.sh` stays for future scripts
 - `homebrew/Brewfile`: drop the `docker-desktop` cask — Docker Desktop is being uninstalled from the machine, so `brew bundle` should no longer reinstall it
 
 ### Changed
 
+- `ghostty/config` is now maintained as cmux's terminal config: cmux reads the Ghostty config files, so the font, padding, and cursor settings still apply (cmux's own theme setting overrides the dark-mode theme). Fold in `term = xterm-256color` from the untracked `~/.config/ghostty/config` so it survives a reinstall; the README describes the directory accordingly and no longer lists Discord
 - `claude/settings.json`: stop auto-allowing `node` and `npx` Bash commands, drop the pinned `model`, and set high effort for Opus 5.5 via `modelSettings`
 - `git/.gitignore_global`: ignore `docs/superpowers/`, where the superpowers plugin writes its specs and plans
 - Upgrade pnpm from 11.21.0 to 12.5.1 (the Rust rewrite): bump the `devEngines.packageManager` pin in `package.json` and regenerate `pnpm-lock.yaml`, upgrade the Homebrew `pnpm` formula, update the scaffold example in `claude/rules/setup.md` (and reword its Corepack rationale now that v12 has shipped) and the pinned-version note in `README.md`

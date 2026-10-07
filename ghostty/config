@@ -13,3 +13,4 @@ cursor-style = underline
 clipboard-trim-trailing-spaces = true
 clipboard-paste-protection = true
 command = /bin/zsh
+term = xterm-256color

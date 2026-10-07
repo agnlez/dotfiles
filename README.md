@@ -9,7 +9,7 @@ Personal dotfiles for macOS (Apple Silicon).
 | `zsh/`      | Zsh config with zinit, fzf (with `fd`), zoxide, atuin history              |
 | `git/`      | Git config with SSH signing (1Password), delta pager, trunk-based defaults |
 | `starship/` | Custom two-line prompt (directory, git, nodejs, docker, duration)          |
-| `ghostty/`  | Ghostty terminal config (Catppuccin Macchiato, Monaspice Nerd Font)        |
+| `ghostty/`  | Terminal config in Ghostty format, read by cmux (Monaspice Nerd Font)      |
 | `atuin/`    | Atuin shell history config (daemon, directory-scoped up-arrow)             |
 | `claude/`   | Claude Code global settings, rules, skills, and hooks                      |
 | `homebrew/` | Brewfile with formulas, casks, and fonts                                   |
@@ -47,7 +47,7 @@ The install script will:
 
 ### Apps
 
-Sign into the rest (Slack, Discord, Spotify, etc.)
+Sign into the rest (Slack, Spotify, etc.)
 
 ### Logitech mouse
 
