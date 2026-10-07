@@ -16,12 +16,6 @@ secrets_filter = true
 common_subcommands = ["cargo", "docker", "git", "gh", "kubectl", "npm", "npx", "pnpm"]
 common_prefix = ["sudo"]
 
-[sync]
-records = true
-
 [daemon]
 enabled = true
 autostart = true
-
-[ai]
-enabled = true

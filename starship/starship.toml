@@ -49,9 +49,6 @@ format = '\[[⏱ $duration]($style)\]'
 [jobs]
 format = '\[[$symbol$number]($style)\]'
 
-[hostname]
-format = '\[[$ssh_symbol($hostname)]($style)\] '
-
 [character]
 success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"

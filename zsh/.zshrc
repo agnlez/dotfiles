@@ -18,7 +18,7 @@ source "$ZDOTDIR/aliases.zsh"
 
 export ARCHFLAGS="-arch $(uname -m)"
 
-# fnm completions
+# fnm: switch Node on cd per .node-version
 command -v fnm >/dev/null && eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 
 # podman (Podman Desktop) ships no zsh completions — generate into a cache,

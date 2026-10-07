@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- `git/.gitconfig`: drop `rebase.gpgsign`, which isn't a git setting (rebased commits are already signed through `commit.gpgsign`)
+- `atuin/config.toml`: drop `[sync] records`, which atuin 18.23 no longer reads
+- `atuin/config.toml`: disable atuin AI (`[ai] enabled`), never used — no AI sessions, no `atuin ai` invocations, no atuin account
+- `git/.gitignore_global`: drop `WARP.md`, left over from the Warp terminal
+- `starship/starship.toml`: drop the `[hostname]` block, which never rendered because `$hostname` isn't in the prompt format
 - `zsh/.zshrc`: delete the commented-out zellij auto-start block and the zellij rationale in the fzf comment (the `Alt+T` file-picker binding stays)
 - codebase-memory-mcp integration, unused since it was added (no CLI or MCP calls across ~110 sessions): delete the `cbm-*` hooks in `claude/hooks/` and their `PreToolUse` (Grep/Glob), `SessionStart`, and `SubagentStart` entries in `claude/settings.json`, the `claude/skills/codebase-memory/` skill, and the "Code Graph" section of `claude/CLAUDE.md` — the hooks also told Claude to prefer the MCP server, contradicting the CLI-only guidance
 - Unused skills `grill-me`, `grill-with-docs`, `improve-codebase-architecture`, `setup-matt-pocock-skills`, and `triage` (no invocations in the retained session history): delete their symlinks in `claude/skills/` — their content lived in a globally gitignored `.agents/skills/`, so a fresh clone would have left them dangling anyway
@@ -32,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `git/.gitconfig`: include `~/.gitconfig.local` last, so machine-specific values override the tracked config as the README and template describe — at the top of the file, any tracked key defined later won. The 1Password `op-ssh-sign` path moves into the tracked config as the default; the template keeps `allowedSignersFile` and a commented `program` override
+- `zsh/.zshrc`: correct the fnm comment — `fnm env --use-on-cd` switches Node per `.node-version`, it doesn't set up completions
 
 ### Changed
 
