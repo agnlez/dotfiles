@@ -1,7 +1,7 @@
 working-directory = ~/Developer
 window-inherit-working-directory = false
 tab-inherit-working-directory = false
-theme = Catppuccin Macchiato
+theme = light:Catppuccin Latte,dark:Gruvbox Material Dark
 font-family = MonaspiceNe Nerd Font
 font-size = 13
 font-thicken = true

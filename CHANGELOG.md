@@ -58,6 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `ghostty/config`: set the theme to `light:Catppuccin Latte,dark:Gruvbox Material Dark`. The dark theme had been picked in cmux's theme UI, which stores it in an untracked file under Application Support that also overrode the tracked `Catppuccin Macchiato`; clear that override with `cmux themes clear` so the tracked config applies
 - `claude/settings.json`: auto-allow `yq` Bash commands, like the other read-only CLI tools (`jq`, `bat`, `eza`, `rg`, `fd`)
 - `claude/rules/README.md` → `claude/README.md`: Claude Code loads every `.md` under `~/.claude/rules/`, so the 9 KB rules index was injected into every session as if it were a rule; its links and the templates README now point to the new location
 - `claude/statusline.sh`: base the `/clear`/`/compact` hint levels on tokens in context (100k, 200k, 400k) instead of window percentage, so 1M-token windows warn as early as 200k ones; window fill still escalates the level at 60% and 80% so a small window warns before auto-compact
