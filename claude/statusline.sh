@@ -3,9 +3,10 @@ input=$(cat)
 
 # \x1f rather than a tab: bash collapses runs of whitespace IFS characters,
 # which would shift fields left whenever an optional value is empty.
-IFS=$'\x1f' read -r model used context_size total_tokens dir wt_name wt_original < <(
+IFS=$'\x1f' read -r model effort used context_size total_tokens dir wt_name wt_original < <(
   echo "$input" | jq -r '[
     .model.display_name // "Unknown",
+    .effort.level // "",
     .context_window.used_percentage // 0,
     .context_window.context_window_size // 200000,
     .context_window.total_input_tokens // 0,
@@ -49,7 +50,9 @@ bar=""
 for ((i = 0; i < filled; i++)); do bar+="█"; done
 for ((i = filled; i < bar_width; i++)); do bar+="░"; done
 
-printf "%s | ${color}[%s] %s%%%s${reset} | %s/%s tokens\n" \
+[ -n "$effort" ] && model+=" \033[2m· ${effort}${reset}"
+
+printf "%b | ${color}[%s] %s%%%s${reset} | %s/%s tokens\n" \
   "$model" "$bar" "$used_int" "$hint" "$(abbrev "$total_tokens")" "$(abbrev "$context_size")"
 
 branch=$(git -C "${dir:-.}" --no-optional-locks branch --show-current 2>/dev/null)

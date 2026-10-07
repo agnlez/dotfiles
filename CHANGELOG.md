@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `claude/statusline.sh`: show the session's reasoning effort, dimmed, after the model name (e.g. `Opus 5.5 · high`); omitted for models without effort support
 - `claude/statusline.sh`: track the Claude Code status line script that `claude/settings.json` already referenced, and symlink it to `~/.claude/statusline.sh` from `install.sh`
 - `bin/docker`: track the shim that forwards `docker` to podman for child processes, where the zsh alias doesn't apply; the README documents installing the podman CLI through Podman Desktop's onboarding
 - `install.sh`: install the Node version pinned in `.node-version` with fnm and make it the default, so `pnpm install` and Node-based tools work on a fresh machine
