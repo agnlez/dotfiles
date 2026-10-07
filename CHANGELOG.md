@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Upgrade pnpm from 11.21.0 to 12.5.1 (the Rust rewrite): bump the `devEngines.packageManager` pin in `package.json` and regenerate `pnpm-lock.yaml`, upgrade the Homebrew `pnpm` formula, update the scaffold example in `claude/rules/setup.md` (and reword its Corepack rationale now that v12 has shipped) and the pinned-version note in `README.md`
 - Migrate pnpm from Corepack to the standalone Homebrew binary — pnpm is dropping Corepack distribution ahead of its Rust rewrite (v12), and the Node-run shim adds startup overhead: `package.json` replaces the `packageManager` field with `devEngines.packageManager` (the standalone binary reads it and auto-switches to the pinned version), root `README.md` drops the `corepack enable` bootstrap step, `claude/rules/setup.md` scaffolds new projects with a `devEngines.packageManager` pin instead of `corepack use`, and `claude/rules/README.md` updates the setup.md summary; the Corepack `pnpm`/`pnpx` shims were removed from all fnm Node installs on the machine
 - `claude/skills/github-pull-request/SKILL.md`: PR creation now assigns the PR to the author (`--assignee @me`, unless the user explicitly asks otherwise) and, when the diff is verified to be frontend work (judged from content — UI components, client-side code, styles, markup — skipping the label when in doubt), applies a `frontend` label, creating it in the base repo first if it doesn't exist (with a graceful fallback when the user lacks label-creation permission)
 
@@ -215,7 +216,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/CLAUDE.md` global Claude instructions (symlinked to `~/.claude/CLAUDE.md`)
 - `claude/rules/` with `context7.md`, `documentation-driven-development.md`, `esm-exports.md`
 - `claude/skills/fix-vulnerabilities/` vulnerability audit and fix skill
-- `claude/hooks/optimize-images/` pre-commit image optimization hook
 - `claude/settings.json` with sandbox, plugins, hooks, and `acceptEdits` default mode
 - `gpg.ssh.program` pointing to 1Password's `op-ssh-sign` for commit signing inside sandbox
 - 1Password SSH agent socket to sandbox `allowUnixSockets` for git SSH access inside sandbox

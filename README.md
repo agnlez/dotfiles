@@ -64,4 +64,4 @@ pnpm install                                               # installs prek; prep
 git config blame.ignoreRevsFile .git-blame-ignore-revs     # skip the bulk-format commit in git blame
 ```
 
-`fnm` reads `.node-version` (Node 24); the standalone pnpm binary (Homebrew) reads `devEngines.packageManager` in `package.json` (pnpm 11) and auto-switches to the pinned version.
+`fnm` reads `.node-version` (Node 24); the standalone pnpm binary (Homebrew) reads `devEngines.packageManager` in `package.json` (pnpm 12) and auto-switches to the pinned version.

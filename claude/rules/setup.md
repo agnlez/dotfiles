@@ -6,11 +6,11 @@ If a higher-priority instruction (managed CLAUDE.md, project conventions, explic
 
 ## Package manager and Node
 
-- **Package manager**: pnpm as a standalone binary (Homebrew-managed). Do **not** use Corepack — pnpm is dropping Corepack distribution ahead of its Rust rewrite (v12), and the Node-run shim adds startup overhead. Pin the version per project via `devEngines.packageManager` in `package.json`:
+- **Package manager**: pnpm as a standalone binary (Homebrew-managed). Do **not** use Corepack — pnpm v12 (the Rust rewrite) is no longer distributed through Corepack, and the Node-run shim adds startup overhead. Pin the version per project via `devEngines.packageManager` in `package.json`:
 
   ```json
   "devEngines": {
-    "packageManager": { "name": "pnpm", "version": "11.21.0", "onFail": "download" }
+    "packageManager": { "name": "pnpm", "version": "12.5.1", "onFail": "download" }
   }
   ```
 
