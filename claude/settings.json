@@ -33,8 +33,6 @@
       "Bash(git revert:*)",
       "Bash(pnpm:*)",
       "Bash(npm:*)",
-      "Bash(npx:*)",
-      "Bash(node:*)",
       "Bash(curl:*)",
       "Bash(gh:*)",
       "Bash(jq:*)",
@@ -73,7 +71,6 @@
       "mcp__plugin_atlassian_atlassian__createIssueLink"
     ]
   },
-  "model": "claude-fable-5[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -188,5 +185,10 @@
   "tui": "fullscreen",
   "theme": "dark-ansi",
   "skipAutoPermissionPrompt": true,
-  "defaultMode": "acceptEdits"
+  "defaultMode": "acceptEdits",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  }
 }

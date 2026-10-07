@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `claude/settings.json`: stop auto-allowing `node` and `npx` Bash commands, drop the pinned `model`, and set high effort for Opus 5.5 via `modelSettings`
 - `git/.gitignore_global`: ignore `docs/superpowers/`, where the superpowers plugin writes its specs and plans
 - Upgrade pnpm from 11.21.0 to 12.5.1 (the Rust rewrite): bump the `devEngines.packageManager` pin in `package.json` and regenerate `pnpm-lock.yaml`, upgrade the Homebrew `pnpm` formula, update the scaffold example in `claude/rules/setup.md` (and reword its Corepack rationale now that v12 has shipped) and the pinned-version note in `README.md`
 - Migrate pnpm from Corepack to the standalone Homebrew binary — pnpm is dropping Corepack distribution ahead of its Rust rewrite (v12), and the Node-run shim adds startup overhead: `package.json` replaces the `packageManager` field with `devEngines.packageManager` (the standalone binary reads it and auto-switches to the pinned version), root `README.md` drops the `corepack enable` bootstrap step, `claude/rules/setup.md` scaffolds new projects with a `devEngines.packageManager` pin instead of `corepack use`, and `claude/rules/README.md` updates the setup.md summary; the Corepack `pnpm`/`pnpx` shims were removed from all fnm Node installs on the machine
