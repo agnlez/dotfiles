@@ -49,6 +49,10 @@ The install script will:
 
 Sign into the rest (Slack, Spotify, etc.)
 
+### Podman
+
+The `podman-desktop` cask installs only the app. Open Podman Desktop and complete its onboarding to install the `podman` CLI (into `/opt/podman`) and start a machine. The zsh `docker` alias and the `bin/docker` shim both forward to it.
+
 ### Logitech mouse
 
 When using a Logitech mouse, manage it with [Mouser](https://github.com/TomBadash/Mouser) — a lightweight, fully local, open-source alternative to Logitech Options+ — instead of the official Logitech app. There is no official Homebrew cask; download `Mouser-macOS.zip` (Apple Silicon) from the [releases page](https://github.com/TomBadash/Mouser/releases), extract, and move `Mouser.app` to `/Applications`.

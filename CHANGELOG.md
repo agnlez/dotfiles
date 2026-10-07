@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `claude/statusline.sh`: track the Claude Code status line script that `claude/settings.json` already referenced, and symlink it to `~/.claude/statusline.sh` from `install.sh`
+- `bin/docker`: track the shim that forwards `docker` to podman for child processes, where the zsh alias doesn't apply; the README documents installing the podman CLI through Podman Desktop's onboarding
 - `homebrew/Brewfile`: declare tools that were installed but missing from the Brewfile, so a fresh install restores them — `mole`, `portless`, and `railway` formulae; `cmux` (now the daily terminal) and `podman-desktop` casks (the zsh `docker` alias and podman completions depend on it)
 
 ### Removed

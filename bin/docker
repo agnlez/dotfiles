@@ -1,0 +1,4 @@
+#!/bin/sh
+# Non-interactive counterpart of the `alias docker=podman` in dotfiles zsh/aliases.zsh:
+# child processes (execFile/spawn) resolve `docker` via PATH, where aliases don't apply.
+exec /opt/podman/bin/podman "$@"
