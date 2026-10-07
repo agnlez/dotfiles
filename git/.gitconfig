@@ -1,7 +1,7 @@
 [gpg]
-    format = ssh
-[include]
-	path = ~/.gitconfig.local
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 [core]
 	excludesFile = ~/.gitignore
 	pager = delta
@@ -18,7 +18,6 @@
 	rebase = true
 [rebase]
 	autoStash = true
-	gpgsign = true
 [fetch]
 	prune = true
 	pruneTags = true
@@ -49,3 +48,6 @@
 	autoCorrect = prompt
 [commit]
 	gpgsign = true
+# Last, so machine-specific values override everything above.
+[include]
+	path = ~/.gitconfig.local

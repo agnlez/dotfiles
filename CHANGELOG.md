@@ -29,6 +29,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - zellij, uninstalled from the machine: drop the `zellij` formula from `homebrew/Brewfile`, delete `zellij/config.kdl` and its symlink block in `install.sh`, delete `bin/zfzf` (the floating fzf picker only worked inside zellij; the zsh-side `Alt+T` fzf binding remains), remove the zellij auto-start block from `zsh/.zshrc`, and drop the `zellij/` and `zfzf` mentions from `README.md` and `docs/structure.md` — the generic `bin/` symlink mechanism in `install.sh` stays for future scripts
 - `homebrew/Brewfile`: drop the `docker-desktop` cask — Docker Desktop is being uninstalled from the machine, so `brew bundle` should no longer reinstall it
 
+### Fixed
+
+- `git/.gitconfig`: include `~/.gitconfig.local` last, so machine-specific values override the tracked config as the README and template describe — at the top of the file, any tracked key defined later won. The 1Password `op-ssh-sign` path moves into the tracked config as the default; the template keeps `allowedSignersFile` and a commented `program` override
+
 ### Changed
 
 - `claude/statusline.sh`: base the `/clear`/`/compact` hint levels on tokens in context (100k, 200k, 400k) instead of window percentage, so 1M-token windows warn as early as 200k ones; window fill still escalates the level at 60% and 80% so a small window warns before auto-compact
