@@ -54,6 +54,15 @@ Sign into the rest (Slack, Spotify, etc.)
 
 The `podman-desktop` cask installs only the app. Open Podman Desktop and complete its onboarding to install the `podman` CLI (into `/opt/podman`) and start a machine. The zsh `docker` alias and the `bin/docker` shim both forward to it.
 
+### Claude Code MCP servers
+
+User-scope MCP servers live in `~/.claude.json`, which isn't tracked. Re-add them after install:
+
+```sh
+claude mcp add -s user chrome-devtools -- npx chrome-devtools-mcp@latest
+claude mcp add -s user next-devtools -- npx next-devtools-mcp@latest
+```
+
 ### Logitech mouse
 
 When using a Logitech mouse, manage it with [Mouser](https://github.com/TomBadash/Mouser) — a lightweight, fully local, open-source alternative to Logitech Options+ — instead of the official Logitech app. There is no official Homebrew cask; download `Mouser-macOS.zip` (Apple Silicon) from the [releases page](https://github.com/TomBadash/Mouser/releases), extract, and move `Mouser.app` to `/Applications`.
