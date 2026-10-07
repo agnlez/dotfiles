@@ -102,6 +102,7 @@ link_file "$DOTFILES/.editorconfig" "$HOME/.editorconfig"
 # claude code
 link_file "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 link_file "$DOTFILES/claude/settings.json" "$HOME/.claude/settings.json"
+link_file "$DOTFILES/claude/statusline.sh" "$HOME/.claude/statusline.sh"
 link_file "$DOTFILES/claude/rules" "$HOME/.claude/rules"
 link_file "$DOTFILES/claude/skills" "$HOME/.claude/skills"
 link_file "$DOTFILES/claude/templates" "$HOME/.claude/templates"
