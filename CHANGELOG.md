@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `claude/settings.json`: auto-allow `yq` Bash commands, like the other read-only CLI tools (`jq`, `bat`, `eza`, `rg`, `fd`)
 - `claude/rules/README.md` → `claude/README.md`: Claude Code loads every `.md` under `~/.claude/rules/`, so the 9 KB rules index was injected into every session as if it were a rule; its links and the templates README now point to the new location
 - `claude/statusline.sh`: base the `/clear`/`/compact` hint levels on tokens in context (100k, 200k, 400k) instead of window percentage, so 1M-token windows warn as early as 200k ones; window fill still escalates the level at 60% and 80% so a small window warns before auto-compact
 - `claude/statusline.sh`: show the context's `total_input_tokens` instead of summing the last call's usage (which included output tokens, and showed 0 when the per-call breakdown was absent); round the usage percentage to an integer; abbreviate million-token windows as `1M` rather than `1000k`; read all fields in a single `jq` call instead of ten; and drop stale comments
