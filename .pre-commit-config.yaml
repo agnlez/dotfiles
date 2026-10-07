@@ -1,4 +1,4 @@
-exclude: ^(claude/skills/devstack-sync/|pnpm-lock\.yaml$)
+exclude: ^pnpm-lock\.yaml$
 
 repos:
   - repo: https://github.com/oxc-project/mirrors-oxfmt

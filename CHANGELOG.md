@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- `.pre-commit-config.yaml`: drop the `claude/skills/devstack-sync/` exclude, which never applied because the directory is gitignored
 - `git/.gitconfig`: drop `rebase.gpgsign`, which isn't a git setting (rebased commits are already signed through `commit.gpgsign`)
 - `atuin/config.toml`: drop `[sync] records`, which atuin 18.23 no longer reads
 - `atuin/config.toml`: disable atuin AI (`[ai] enabled`), never used — no AI sessions, no `atuin ai` invocations, no atuin account
