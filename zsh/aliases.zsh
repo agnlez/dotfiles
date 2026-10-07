@@ -21,7 +21,6 @@ alias zh='z ~'                 # Quick home
 alias zl='zoxide query -l -s'  # List with scores
 
 # --- Git ---
-alias gl="git lg"
 alias gla="git lga"
 
 # --- Modern CLI replacements ---

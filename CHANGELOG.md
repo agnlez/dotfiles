@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - `homebrew/Brewfile`: drop `gnupg` (git signing uses SSH via 1Password; nothing depends on it), the `ghostty` cask (replaced by cmux), the `discord` and `firefox` casks (unused), and `font-jetbrains-mono-nerd-font` (no editor or terminal config references it)
+- `zsh/aliases.zsh`: drop `alias gl="git lg"` — the turbo-loaded OMZ git plugin overrode it with `git pull`, which is the behavior actually in use
 - zellij, uninstalled from the machine: drop the `zellij` formula from `homebrew/Brewfile`, delete `zellij/config.kdl` and its symlink block in `install.sh`, delete `bin/zfzf` (the floating fzf picker only worked inside zellij; the zsh-side `Alt+T` fzf binding remains), remove the zellij auto-start block from `zsh/.zshrc`, and drop the `zellij/` and `zfzf` mentions from `README.md` and `docs/structure.md` — the generic `bin/` symlink mechanism in `install.sh` stays for future scripts
 - `homebrew/Brewfile`: drop the `docker-desktop` cask — Docker Desktop is being uninstalled from the machine, so `brew bundle` should no longer reinstall it
 
