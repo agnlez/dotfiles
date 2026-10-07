@@ -15,6 +15,7 @@ Domain: dashboards and data-viz, sometimes maps/GIS.
 All Claude Code global configuration is managed through `~/Developer/dotfiles` and symlinked to `~/.claude/`. When creating or modifying rules, skills, or settings, edit the source files in the dotfiles repo so changes are tracked in git:
 
 - `~/Developer/dotfiles/claude/settings.json` → `~/.claude/settings.json`
+- `~/Developer/dotfiles/claude/statusline.sh` → `~/.claude/statusline.sh`
 - `~/Developer/dotfiles/claude/CLAUDE.md` → `~/.claude/CLAUDE.md`
 - `~/Developer/dotfiles/claude/rules/` → `~/.claude/rules/`
 - `~/Developer/dotfiles/claude/skills/` → `~/.claude/skills/`

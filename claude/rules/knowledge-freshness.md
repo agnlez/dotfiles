@@ -15,16 +15,16 @@ Never claim a library, framework, tool, or API does or does not behave a certain
 
 ## How to verify
 
-| Source                     | Use for                                                                                      |
-| -------------------------- | -------------------------------------------------------------------------------------------- |
-| Context7 (`mcp__context7`) | Library / framework / SDK / API docs — version-specific                                      |
-| `WebFetch`                 | A known URL (release notes, RFCs, migration guides) — skips the search                       |
-| `gh` CLI                   | GitHub artifacts — releases, issues, PRs, source; `gh api` for raw REST                      |
-| `pnpm info <pkg>`          | Package metadata — versions, peer deps, exports, deprecation status                          |
-| `pnpm why <pkg>`           | Lockfile inspection — where a transitive dep comes from and at what version                  |
-| Reading source             | Undocumented behavior, exact type signatures — `rg` in `node_modules/<pkg>/dist` or `gh api` |
-| CLI `--help`               | Tooling / CLI questions — the binary is often the most current source                        |
-| Web search                 | Blog posts, comparisons, "is X still maintained", time-sensitive content                     |
+| Source                                        | Use for                                                                                      |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Context7 (`mcp__plugin_context7_context7__*`) | Library / framework / SDK / API docs — version-specific                                      |
+| `WebFetch`                                    | A known URL (release notes, RFCs, migration guides) — skips the search                       |
+| `gh` CLI                                      | GitHub artifacts — releases, issues, PRs, source; `gh api` for raw REST                      |
+| `pnpm info <pkg>`                             | Package metadata — versions, peer deps, exports, deprecation status                          |
+| `pnpm why <pkg>`                              | Lockfile inspection — where a transitive dep comes from and at what version                  |
+| Reading source                                | Undocumented behavior, exact type signatures — `rg` in `node_modules/<pkg>/dist` or `gh api` |
+| CLI `--help`                                  | Tooling / CLI questions — the binary is often the most current source                        |
+| Web search                                    | Blog posts, comparisons, "is X still maintained", time-sensitive content                     |
 
 State the version or source you checked when it matters ("Next.js 16 docs say…", not "Next.js says…").
 

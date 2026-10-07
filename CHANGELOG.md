@@ -46,6 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `claude/rules/knowledge-freshness.md`: name the Context7 tools by their actual prefix, `mcp__plugin_context7_context7__*`, instead of `mcp__context7`
+- `claude/CLAUDE.md`: list `statusline.sh` in the symlink map
 - `claude/skills/github-pull-request/SKILL.md`: find an existing `frontend` label with `gh label list --search`, since the plain listing returns only the first 30 labels and missed it in larger repos, which made the follow-up `gh label create` fail. The CI watch now waits up to two minutes for checks to register, since `gh pr checks --watch` exits with "no checks reported" right after `gh pr create`, and it runs as a background command instead of a subagent, which cost tokens for the whole wait
 - `README.md`: clone over HTTPS, since the SSH key lives in 1Password, which a fresh machine doesn't have set up yet; the 1Password steps now include switching the remote back to SSH
 - `install.sh`: a failed `brew bundle` no longer stops the script before any config is linked — Node is skipped if fnm is missing, and a closing warning asks for a rerun. The closing warnings also point out that signed commits need the 1Password SSH agent and `~/.config/git/allowed_signers`
