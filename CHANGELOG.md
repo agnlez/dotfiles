@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `bin/docker`: track the shim that forwards `docker` to podman for child processes, where the zsh alias doesn't apply; the README documents installing the podman CLI through Podman Desktop's onboarding
 - `install.sh`: install the Node version pinned in `.node-version` with fnm and make it the default, so `pnpm install` and Node-based tools work on a fresh machine
 - `README.md`: document re-adding the user-scope Claude Code MCP servers, which live in the untracked `~/.claude.json`
+- `.gitignore`: ignore `claude/skills/synced/` and `claude/skills/.trash/`, which Claude Code writes into the symlinked skills directory
 - `homebrew/Brewfile`: declare tools that were installed but missing from the Brewfile, so a fresh install restores them — `mole`, `portless`, and `railway` formulae; `cmux` (now the daily terminal) and `podman-desktop` casks (the zsh `docker` alias and podman completions depend on it)
 
 ### Removed

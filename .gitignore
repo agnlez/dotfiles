@@ -4,3 +4,5 @@
 node_modules/
 *.log
 claude/skills/devstack-sync/
+claude/skills/synced/
+claude/skills/.trash/
