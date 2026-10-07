@@ -15,14 +15,26 @@ Personal dotfiles for macOS (Apple Silicon).
 | `homebrew/` | Brewfile with formulas, casks, and fonts                                   |
 | `bin/`      | User scripts symlinked into `~/.local/bin`                                 |
 
+## Before wiping a machine
+
+These live outside the repo, and nothing recreates them. Copy them somewhere safe, then put them back at the same paths after `install.sh`:
+
+- `~/.gitconfig.local` and `~/.config/git/allowed_signers`: git identity and signature verification
+- `~/.ssh/config`: SSH host aliases
+- Uncommitted changes in this repo (`git status`)
+
 ## Install
+
+On a fresh Mac, the first `git` call prompts to install the Xcode Command Line Tools. Accept, and run the command again once they're installed.
 
 ```sh
 mkdir -p ~/Developer
-git clone git@github.com:agnlez/dotfiles.git ~/Developer/dotfiles
+git clone https://github.com/agnlez/dotfiles.git ~/Developer/dotfiles
 cd ~/Developer/dotfiles
 ./install.sh
 ```
+
+Clone over HTTPS: the SSH key lives in 1Password, which isn't set up yet. Switch the remote to SSH once it is (see [1Password](#1password)).
 
 The install script will:
 
@@ -38,12 +50,13 @@ The install script will:
 
 ### Git identity
 
-`install.sh` creates `~/.gitconfig.local` from `git/.gitconfig.local.example` on first run. Edit it with your name, email, and SSH signing key path. It's loaded via `[include]` and **overrides** the tracked gitconfig, so machine-specific values (e.g. a non-default 1Password path) belong here too.
+`install.sh` creates `~/.gitconfig.local` from `git/.gitconfig.local.example` on first run. Edit it with your name, email, and SSH signing key path, and create `~/.config/git/allowed_signers` with a `you@example.com ssh-ed25519 AAAA…` line per key you trust, so git can verify signatures. It's loaded via `[include]` and **overrides** the tracked gitconfig, so machine-specific values (e.g. a non-default 1Password path) belong here too.
 
 ### 1Password
 
 - Sign into 1Password and enable the SSH agent
 - Add your SSH key to 1Password and register the public key on GitHub as **both** an authentication key _and_ a signing key
+- Switch the dotfiles remote to SSH: `git -C ~/Developer/dotfiles remote set-url origin git@github.com:agnlez/dotfiles.git`
 - The gitconfig uses `op-ssh-sign` at the default macOS path (`/Applications/1Password.app/...`) — override in `~/.gitconfig.local` under `[gpg "ssh"]` if installed elsewhere
 
 ### Apps
