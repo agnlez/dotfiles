@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `install.sh`: a failed `brew bundle` no longer stops the script before any config is linked — Node is skipped if fnm is missing, and a closing warning asks for a rerun. The closing warnings also point out that signed commits need the 1Password SSH agent and `~/.config/git/allowed_signers`
 - `git/.gitconfig`: include `~/.gitconfig.local` last, so machine-specific values override the tracked config as the README and template describe — at the top of the file, any tracked key defined later won. The 1Password `op-ssh-sign` path moves into the tracked config as the default; the template keeps `allowedSignersFile` and a commented `program` override
 - `zsh/.zshrc`: correct the fnm comment — `fnm env --use-on-cd` switches Node per `.node-version`, it doesn't set up completions
 

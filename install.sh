@@ -47,12 +47,18 @@ if ! command -v brew &>/dev/null; then
 fi
 
 # Packages
+# A failed package shouldn't leave the machine without its shell and git config.
 info "Installing Homebrew packages..."
-brew bundle --file="$DOTFILES/homebrew/Brewfile"
+brew_ok=true
+brew bundle --file="$DOTFILES/homebrew/Brewfile" || brew_ok=false
 
 # Node (version pinned in .node-version)
-info "Installing Node via fnm..."
-(cd "$DOTFILES" && fnm install && fnm default "$(cat .node-version)")
+if command -v fnm &>/dev/null; then
+  info "Installing Node via fnm..."
+  (cd "$DOTFILES" && fnm install && fnm default "$(cat .node-version)")
+else
+  warn "fnm not installed, skipping Node."
+fi
 
 # Claude Code (native installer — self-contained, auto-updating)
 if ! command -v claude &>/dev/null; then
@@ -114,4 +120,6 @@ link_file "$DOTFILES/claude/templates" "$HOME/.claude/templates"
 echo ""
 success "Done! Open a new terminal to load the updated config."
 echo ""
+$brew_ok || warn "brew bundle failed: fix the errors above and rerun ./install.sh."
 warn "Edit ~/.gitconfig.local with your git identity and signing key."
+warn "Commits are signed: set up the 1Password SSH agent and ~/.config/git/allowed_signers before committing."

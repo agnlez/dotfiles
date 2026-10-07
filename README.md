@@ -28,7 +28,7 @@ The install script will:
 
 1. Install Xcode Command Line Tools (if missing)
 2. Install Homebrew (if missing)
-3. Install all packages from the Brewfile
+3. Install all packages from the Brewfile (a failure doesn't stop the linking; rerun the script once it's fixed)
 4. Install the Node version pinned in `.node-version` via fnm and make it the default
 5. Install Claude Code via the native installer (self-contained, auto-updating)
 6. Symlink config files to their expected locations
