@@ -55,7 +55,7 @@ When using a Logitech mouse, manage it with [Mouser](https://github.com/TomBadas
 
 ### Project tooling (prek + oxfmt + oxlint)
 
-Pre-commit formatting and linting are managed by [prek](https://github.com/j178/prek) (a Rust-based, drop-in pre-commit alternative) with [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html), [oxlint](https://oxc.rs/docs/guide/usage/linter), and the standard [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks). pnpm 11 manages prek itself; oxc and pre-commit-hooks are pinned in `.pre-commit-config.yaml`.
+Pre-commit formatting and linting are managed by [prek](https://github.com/j178/prek) (a Rust-based, drop-in pre-commit alternative) with [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html), [oxlint](https://oxc.rs/docs/guide/usage/linter), and the standard [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks). pnpm manages prek itself; oxc and pre-commit-hooks are pinned in `.pre-commit-config.yaml`.
 
 After cloning, in `~/Developer/dotfiles`:
 

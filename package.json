@@ -6,7 +6,7 @@
     "prepare": "prek install"
   },
   "devDependencies": {
-    "@j178/prek": "0.4.10"
+    "@j178/prek": "0.5.5"
   },
   "devEngines": {
     "packageManager": {
