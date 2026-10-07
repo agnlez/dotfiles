@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- `zsh/.zshrc`: delete the commented-out zellij auto-start block and the zellij rationale in the fzf comment (the `Alt+T` file-picker binding stays)
 - codebase-memory-mcp integration, unused since it was added (no CLI or MCP calls across ~110 sessions): delete the `cbm-*` hooks in `claude/hooks/` and their `PreToolUse` (Grep/Glob), `SessionStart`, and `SubagentStart` entries in `claude/settings.json`, the `claude/skills/codebase-memory/` skill, and the "Code Graph" section of `claude/CLAUDE.md` — the hooks also told Claude to prefer the MCP server, contradicting the CLI-only guidance
 - Unused skills `grill-me`, `grill-with-docs`, `improve-codebase-architecture`, `setup-matt-pocock-skills`, and `triage` (no invocations in the retained session history): delete their symlinks in `claude/skills/` — their content lived in a globally gitignored `.agents/skills/`, so a fresh clone would have left them dangling anyway
 - `claude/hooks/optimize-images/` pre-commit WEBP hook, rarely used: delete the directory and its `PreToolUse` (Bash) entry in `claude/settings.json`. With no hooks left, drop the `claude/hooks` → `~/.claude/hooks` symlink from `install.sh` and its mentions in `claude/CLAUDE.md`, `README.md`, and `docs/structure.md`

@@ -33,8 +33,8 @@ if command -v podman >/dev/null; then
   unset _podman_comp
 fi
 
-# Set up fzf key bindings and fuzzy completion, then move the file picker
-# off ^T (claimed by zellij's Tab mode) to Alt+T.
+# Set up fzf key bindings and fuzzy completion, with the file picker on Alt+T
+# instead of ^T.
 if command -v fzf >/dev/null; then
   source <(fzf --zsh)
   for keymap in emacs viins vicmd; do
@@ -96,10 +96,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
-
-# zellij — auto-attach in normal terminals; skip inside Claude Code agent shells
-# Temporarily disabled; uncomment to restore auto-start.
-# if [[ -z "$ZELLIJ" && -z "$CLAUDECODE" ]] && (( $+commands[zellij] )); then
-#   export ZELLIJ_AUTO_EXIT=true
-#   eval "$(zellij setup --generate-auto-start zsh)"
-# fi
