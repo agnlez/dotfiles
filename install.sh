@@ -50,6 +50,10 @@ fi
 info "Installing Homebrew packages..."
 brew bundle --file="$DOTFILES/homebrew/Brewfile"
 
+# Node (version pinned in .node-version)
+info "Installing Node via fnm..."
+(cd "$DOTFILES" && fnm install && fnm default "$(cat .node-version)")
+
 # Claude Code (native installer — self-contained, auto-updating)
 if ! command -v claude &>/dev/null; then
   info "Installing Claude Code (native)..."
