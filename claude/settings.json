@@ -3,6 +3,7 @@
   "skillListingBudgetFraction": 0.03,
   "includeCoAuthoredBy": false,
   "permissions": {
+    "defaultMode": "auto",
     "allow": [
       "Read",
       "Edit",
@@ -121,13 +122,12 @@
     }
   },
   "effortLevel": "high",
-  "tui": "fullscreen",
-  "theme": "dark-ansi",
-  "skipAutoPermissionPrompt": true,
-  "defaultMode": "acceptEdits",
   "modelSettings": {
     "claude-opus-5-5": {
       "effortLevel": "high"
     }
-  }
+  },
+  "tui": "fullscreen",
+  "theme": "dark",
+  "skipAutoPermissionPrompt": true
 }
