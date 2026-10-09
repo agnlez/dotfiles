@@ -58,6 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `git/.gitconfig`: include `~/.gitconfig.local` last, so machine-specific values override the tracked config as the README and template describe — at the top of the file, any tracked key defined later won. The 1Password `op-ssh-sign` path moves into the tracked config as the default; the template keeps `allowedSignersFile` and a commented `program` override
 - `zsh/.zshrc`: correct the fnm comment — `fnm env --use-on-cd` switches Node per `.node-version`, it doesn't set up completions
 - `claude/settings.json`: set the default permission mode under `permissions.defaultMode` (now `auto`), replacing a top-level `defaultMode: "acceptEdits"` that Claude Code doesn't read
+- `git/.gitconfig.local.example`, `README.md`: set `signingkey` to the public key itself (`key::ssh-ed25519 …`) instead of `~/.ssh/id_ed25519.pub`, a file that doesn't exist when the key lives in 1Password; the README explains where to copy the key from and moves the 1Password steps before the git identity ones, since the key has to be in 1Password first
 
 ### Changed
 

@@ -2,10 +2,13 @@
 # This file is loaded via [include] at the bottom of ~/.gitconfig, so values
 # here OVERRIDE anything defined in the tracked gitconfig.
 
+# The signing key lives in 1Password, not on disk, so `signingkey` holds the
+# public key itself (copy it from the key's 1Password item), prefixed with
+# `key::`.
 [user]
 	name = Your Name
 	email = you@example.com
-	signingkey = ~/.ssh/id_ed25519.pub
+	signingkey = key::ssh-ed25519 AAAA…
 
 # The allowedSignersFile must exist and list the public keys you want to
 # trust for verification. Uncomment `program` only if 1Password is installed
