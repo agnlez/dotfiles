@@ -1,9 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "skillListingBudgetFraction": 0.03,
-  "includeCoAuthoredBy": false,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
       "Read",
       "Edit",
@@ -91,7 +93,8 @@
       "mcp__plugin_atlassian_atlassian__updateConfluenceContent",
       "mcp__plugin_atlassian_atlassian__executeWrite",
       "mcp__plugin_atlassian_atlassian__executeDestructive"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "statusLine": {
     "type": "command",
@@ -131,6 +134,7 @@
   "tui": "fullscreen",
   "theme": "dark",
   "skipAutoPermissionPrompt": true,
+  "feedbackDrafts": "off",
   "hooks": {
     "SessionStart": [
       {
