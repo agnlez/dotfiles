@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `claude/settings.json`: enable the `vizz-maps@vizzuality` plugin, which adds Vizzuality's react-map-gl patterns (LayerManager, controls, legends, camera state) for map work
 - `claude/skills/use-railway/`: Railway's skill for operating Railway projects (deploys, services, variables, databases, tracing), with reference docs and helper scripts; pairs with the `railway` formula in `homebrew/Brewfile`
 - `claude/skills/rex/` and a `SessionStart` hook in `claude/settings.json`, both written by `rex skill setup`: the skill documents the `rex` CLI for driving Rex terminal sessions, tabs, and panes, and the hook runs `rex __internal session-start` so a Claude session inside Rex learns its session and pane IDs. The hook fails silently outside Rex or when `rex` isn't installed
 - `README.md`: a "Before wiping a machine" checklist of data that lives outside the repo (git identity files, SSH config, uncommitted changes), and install notes on the Xcode Command Line Tools prompt and the `allowed_signers` file

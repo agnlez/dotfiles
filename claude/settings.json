@@ -104,7 +104,8 @@
     "atlassian@claude-plugins-official": true,
     "vizz-core@vizzuality": true,
     "figma@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": true
+    "security-guidance@claude-plugins-official": true,
+    "vizz-maps@vizzuality": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
