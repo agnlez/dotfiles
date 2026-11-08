@@ -4,11 +4,11 @@ The dotfiles support macOS and Windows (see [ADR-0002](adr/0002-support-macos-an
 
 Each tool gets a top-level directory. Files are symlinked to their target locations by the installer for the current OS: `install.sh` on macOS, `install.ps1` on Windows. Each directory belongs to one scope:
 
-| Scope   | Directories                                               | Linked by                     |
-| ------- | --------------------------------------------------------- | ----------------------------- |
-| Shared  | `atuin/`, `claude/`, `git/`, `starship/`, `.editorconfig` | both installers               |
-| macOS   | `ghostty/`, `homebrew/`, `zsh/`                           | `install.sh`                  |
-| Windows | `powershell/`, `scoop/`, `windows-terminal/`, `winget/`   | `install.ps1` (not yet added) |
+| Scope   | Directories                                               | Linked by       |
+| ------- | --------------------------------------------------------- | --------------- |
+| Shared  | `atuin/`, `claude/`, `git/`, `starship/`, `.editorconfig` | both installers |
+| macOS   | `ghostty/`, `homebrew/`, `zsh/`                           | `install.sh`    |
+| Windows | `powershell/`, `scoop/`, `windows-terminal/`, `winget/`   | `install.ps1`   |
 
 When a shared config needs a value that differs per OS (an install path, a binary name), that value goes in a per-OS file next to it, named `<file>.macos` or `<file>.windows`, and each installer links only its own. The shared file stays free of OS-specific values. For example, `git/.gitconfig` includes `~/.gitconfig.os`, which `install.sh` links to `git/.gitconfig.macos` and `install.ps1` to `git/.gitconfig.windows`.
 

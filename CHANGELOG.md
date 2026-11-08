@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `install.ps1`: the Windows installer, the counterpart of `install.sh`, for PowerShell 7.
+  - It checks that symlinks can be created (Developer Mode) and that winget is present.
+  - It installs the winget and scoop lists (`--no-upgrade`, so reruns skip installed packages), the PSFzf module, Node via fnm and Claude Code.
+  - It sets `PNPM_HOME` and prepends `~/.local/bin` and pnpm's bin directory to the user `PATH`, writing the raw registry value so existing `%VAR%` entries stay unexpanded and broadcasting the change to running apps.
+  - It symlinks every shared and Windows config, backing up what's already there, and creates `~/.gitconfig.local` from the template.
+  - It ends by warning when Windows Terminal's `profiles.defaults` sets `colorScheme` or `font`, which would hide the fragment's.
+  - `-WhatIf` previews everything without changing anything.
+- `README.md`: Windows install steps, the 1Password note about disabling the "OpenSSH Authentication Agent" service, and a Windows Terminal section
+
 - `powershell/profile.ps1` and `powershell/aliases.ps1`: the Windows counterpart of the zsh config, for PowerShell 7.
   - PSReadLine gets inline history suggestions and a menu on Tab.
   - fzf uses the same defaults as zsh, with PSFzf's Alt+T file picker and Alt+C directory jump.

@@ -1,6 +1,6 @@
 # Dotfiles
 
-Personal dotfiles for macOS (Apple Silicon) and Windows. Windows support is being added in phases: the configs below are in place, `install.ps1` is not yet.
+Personal dotfiles for macOS (Apple Silicon) and Windows 11. `install.sh` sets up macOS and `install.ps1` sets up Windows; see [docs/structure.md](docs/structure.md) for which files each one links.
 
 ## What's included
 
@@ -21,13 +21,15 @@ Personal dotfiles for macOS (Apple Silicon) and Windows. Windows support is bein
 
 ## Before wiping a machine
 
-These live outside the repo, and nothing recreates them. Copy them somewhere safe, then put them back at the same paths after `install.sh`:
+These live outside the repo, and nothing recreates them. Copy them somewhere safe, then put them back at the same paths after running the installer:
 
 - `~/.gitconfig.local` and `~/.config/git/allowed_signers`: git identity and signature verification
 - `~/.ssh/config`: SSH host aliases
 - Uncommitted changes in this repo (`git status`)
 
 ## Install
+
+### macOS
 
 On a fresh Mac, the first `git` call prompts to install the Xcode Command Line Tools. Accept, and run the command again once they're installed.
 
@@ -51,6 +53,38 @@ The install script will:
 7. Symlink config files to their expected locations
 8. Back up any existing files to `~/.dotfiles-backup/`
 
+### Windows
+
+Turn on Developer Mode first (Settings → System → For developers), so symlinks can be created without admin rights. Then install git and PowerShell 7, which the installer itself needs:
+
+```powershell
+winget install -e --id Git.Git
+winget install -e --id Microsoft.PowerShell
+```
+
+In a new PowerShell 7 (`pwsh`) window:
+
+```powershell
+git clone https://github.com/agnlez/dotfiles.git $HOME/dev/dotfiles
+cd $HOME/dev/dotfiles
+./install.ps1
+```
+
+Run `./install.ps1 -WhatIf` first to see what it would install, set and link without changing anything. Clone over HTTPS for the same reason as on macOS.
+
+The install script will:
+
+1. Check that symlinks can be created (Developer Mode) and that winget is present
+2. Install the packages in `winget/packages.json`, with `--no-upgrade` so reruns skip installed ones (upgrade with `winget upgrade --all`)
+3. Install scoop (if missing) and the packages in `scoop/scoopfile.json`
+4. Install the PSFzf module from the PowerShell Gallery
+5. Install the Node version pinned in `.node-version` via fnm and make it the default
+6. Install Claude Code via the native installer
+7. Add `~/.local/bin` and pnpm's bin directory to the user `PATH` and set `PNPM_HOME`, since Windows keeps these as persistent per-user variables rather than in the shell profile
+8. Create `~/dev`, symlink config files to their expected locations, and back up any existing files to `~/.dotfiles-backup/`
+
+As on macOS, a failed package doesn't stop the linking.
+
 ## Manual steps after install
 
 ### 1Password
@@ -58,6 +92,7 @@ The install script will:
 - Sign into 1Password and enable the SSH agent
 - Add your SSH key to 1Password and register the public key on GitHub as **both** an authentication key _and_ a signing key
 - Switch the dotfiles remote to SSH: `git -C ~/dev/dotfiles remote set-url origin git@github.com:agnlez/dotfiles.git`
+- On Windows, also stop and disable the "OpenSSH Authentication Agent" service (Services → Startup type: Disabled): it serves the same named pipe as 1Password's agent. `git/.gitconfig.windows` points git at Windows' OpenSSH, the only ssh that can reach that pipe
 - `git/.gitconfig.macos` (linked to `~/.gitconfig.os`) uses `op-ssh-sign` at the default macOS path (`/Applications/1Password.app/...`). Override it in `~/.gitconfig.local` under `[gpg "ssh"]` if 1Password is installed elsewhere
 
 ### Git identity
@@ -68,6 +103,10 @@ The install script will:
 - `signingkey`: the private key stays in 1Password, so there's no key file to point at. Use the public key itself, prefixed with `key::` (`key::ssh-ed25519 AAAA…`). Copy it from the key's item in 1Password, or list the agent's keys with `SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ssh-add -L`. A plain `ssh-add -L` asks the macOS agent, which doesn't have it.
 
 Then create `~/.config/git/allowed_signers` with a `you@example.com ssh-ed25519 AAAA…` line per key you trust, so git can verify signatures. Check with a commit and `git log --show-signature -1`.
+
+### Windows Terminal
+
+The dotfiles fragment styles the PowerShell profile, but `profiles.defaults` in Windows Terminal's `settings.json` overrides it. Remove `colorScheme` and `font` from the defaults if they're there; `install.ps1` warns when they are. Set PowerShell (not Windows PowerShell) as the default profile, which a fragment can't do.
 
 ### Apps
 
