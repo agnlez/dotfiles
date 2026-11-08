@@ -1,7 +1,8 @@
 [gpg]
 	format = ssh
+# The signing program (op-ssh-sign) differs per OS: see ~/.gitconfig.os.
 [gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+	allowedSignersFile = ~/.config/git/allowed_signers
 [core]
 	excludesFile = ~/.gitignore
 	pager = delta
@@ -48,6 +49,10 @@
 	autoCorrect = prompt
 [commit]
 	gpgsign = true
-# Last, so machine-specific values override everything above.
+# Last, so they override everything above, in this order:
+# - ~/.gitconfig.os: the installer links git/.gitconfig.macos or
+#   git/.gitconfig.windows here, for values that differ per OS.
+# - ~/.gitconfig.local: untracked, per-machine values (identity, overrides).
 [include]
+	path = ~/.gitconfig.os
 	path = ~/.gitconfig.local

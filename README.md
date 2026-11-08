@@ -54,11 +54,11 @@ The install script will:
 - Sign into 1Password and enable the SSH agent
 - Add your SSH key to 1Password and register the public key on GitHub as **both** an authentication key _and_ a signing key
 - Switch the dotfiles remote to SSH: `git -C ~/dev/dotfiles remote set-url origin git@github.com:agnlez/dotfiles.git`
-- The gitconfig uses `op-ssh-sign` at the default macOS path (`/Applications/1Password.app/...`) — override in `~/.gitconfig.local` under `[gpg "ssh"]` if installed elsewhere
+- `git/.gitconfig.macos` (linked to `~/.gitconfig.os`) uses `op-ssh-sign` at the default macOS path (`/Applications/1Password.app/...`). Override it in `~/.gitconfig.local` under `[gpg "ssh"]` if 1Password is installed elsewhere
 
 ### Git identity
 
-`install.sh` creates `~/.gitconfig.local` from `git/.gitconfig.local.example` on first run. It's loaded via `[include]` and **overrides** the tracked gitconfig, so machine-specific values (e.g. a non-default 1Password path) belong here too. Fill in:
+`install.sh` creates `~/.gitconfig.local` from `git/.gitconfig.local.example` on first run. It's loaded via `[include]` after `~/.gitconfig.os` (the per-OS file the installer links) and **overrides** both, so machine-specific values (e.g. a non-default 1Password path) belong here too. Fill in:
 
 - `name` and `email`
 - `signingkey`: the private key stays in 1Password, so there's no key file to point at. Use the public key itself, prefixed with `key::` (`key::ssh-ed25519 AAAA…`). Copy it from the key's item in 1Password, or list the agent's keys with `SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ssh-add -L`. A plain `ssh-add -L` asks the macOS agent, which doesn't have it.

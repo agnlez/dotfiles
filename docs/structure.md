@@ -10,7 +10,7 @@ Each tool gets a top-level directory. Files are symlinked to their target locati
 | macOS   | `ghostty/`, `homebrew/`, `zsh/`                               | `install.sh`                  |
 | Windows | `powershell/`, `windows-terminal/`, `winget/` (not yet added) | `install.ps1` (not yet added) |
 
-When a shared config needs a value that differs per OS (an install path, a binary name), that value goes in a per-OS file next to it, named `<file>.macos` or `<file>.windows`, and each installer links only its own. The shared file stays free of OS-specific values.
+When a shared config needs a value that differs per OS (an install path, a binary name), that value goes in a per-OS file next to it, named `<file>.macos` or `<file>.windows`, and each installer links only its own. The shared file stays free of OS-specific values. For example, `git/.gitconfig` includes `~/.gitconfig.os`, which `install.sh` links to `git/.gitconfig.macos` and `install.ps1` to `git/.gitconfig.windows`.
 
 Single-file root configs live at the repo root (e.g. `.editorconfig` → `~/.editorconfig`).
 

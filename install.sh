@@ -86,6 +86,7 @@ link_file "$DOTFILES/zsh/aliases.zsh" "$HOME/.config/zsh/aliases.zsh"
 
 # git
 link_file "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
+link_file "$DOTFILES/git/.gitconfig.macos" "$HOME/.gitconfig.os"
 link_file "$DOTFILES/git/.gitignore_global" "$HOME/.gitignore"
 if [ ! -e "$HOME/.gitconfig.local" ]; then
   cp "$DOTFILES/git/.gitconfig.local.example" "$HOME/.gitconfig.local"

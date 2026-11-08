@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `git/.gitconfig.macos` and `git/.gitconfig.windows`: per-OS git config, linked to `~/.gitconfig.os` and included before `~/.gitconfig.local`. macOS holds 1Password's `op-ssh-sign` path. Windows calls `op-ssh-sign.exe` by name (on `PATH` through its app execution alias) and uses Windows' OpenSSH (`core.sshCommand`) so git reaches 1Password's agent pipe. It also sets `core.autocrlf=input`, `core.symlinks` and `core.longpaths`. `install.sh` links the macOS file. **On the Mac, rerun `./install.sh` after pulling**: without `~/.gitconfig.os`, git has no signing program and signed commits fail
+- `git/.gitignore_global`: ignore `Thumbs.db` and `desktop.ini`, Windows Explorer's metadata files
 - `.gitattributes`: check out every file with LF on all OSes (CRLF for `.cmd`/`.bat`), overriding Git for Windows' system-wide `core.autocrlf=true`, which left shell scripts like `claude/statusline.sh` with CRLF endings that bash can't run
 - `docs/adr/`: adopt ADRs (`0001`) and record the decision to support macOS and Windows from one repo with one directory per tool and one installer per OS (`0002`)
 - `docs/structure.md`: a scope table (shared, macOS, Windows) for each tool directory, the `<file>.macos` / `<file>.windows` convention for per-OS values in shared configs, which `bin/` scripts each OS links, and the line-ending policy
@@ -37,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `git/.gitconfig`: move `gpg.ssh.program` out to the per-OS files and include `~/.gitconfig.os` before `~/.gitconfig.local`. Set `gpg.ssh.allowedSignersFile` to `~/.config/git/allowed_signers` here, since it's the same path on every machine; `git/.gitconfig.local.example` now only shows it as an optional override
 - `install.sh`: exit early with a pointer to `install.ps1` when not run on macOS, instead of failing midway on `xcode-select`
 - `.editorconfig`: use CRLF for `.cmd` and `.bat` files, matching `.gitattributes`
 - `.claude/rules/machine-agnostic.md`: cover Windows, with its home-directory paths to avoid, the PowerShell environment variables to use instead, a preference for binaries on `PATH` over install paths, and keeping per-OS values out of shared files

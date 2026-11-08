@@ -1,0 +1,21 @@
+# Windows-only git config. install.ps1 links this to ~/.gitconfig.os, which
+# ~/.gitconfig includes before ~/.gitconfig.local.
+
+# 1Password's signer, on PATH through its app execution alias, so no
+# per-user install path is needed.
+[gpg "ssh"]
+	program = op-ssh-sign.exe
+
+[core]
+	# Use Windows' OpenSSH: 1Password serves its SSH agent on the Windows
+	# named pipe, which the ssh bundled with Git for Windows can't reach.
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
+	# Git for Windows sets autocrlf=true system-wide, checking files out with
+	# CRLF. `input` keeps files as committed (LF) and still turns CRLF into LF
+	# on commit. Repos with a .gitattributes take precedence either way.
+	autocrlf = input
+	# Check out symlinks as real symlinks (needs Developer Mode) instead of
+	# plain text files holding the target path.
+	symlinks = true
+	# Allow paths over 260 characters, which deep node_modules trees hit.
+	longpaths = true
