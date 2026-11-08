@@ -47,10 +47,7 @@
         "Name": "msstore",
         "Type": "Microsoft.Rest"
       },
-      "Packages": [
-        { "PackageIdentifier": "9PFXXSHC64H3" },
-        { "PackageIdentifier": "9NKSQGP7F2NH" }
-      ]
+      "Packages": [{ "PackageIdentifier": "9PFXXSHC64H3" }, { "PackageIdentifier": "9NKSQGP7F2NH" }]
     }
   ],
   "WinGetVersion": "1.29.380"
