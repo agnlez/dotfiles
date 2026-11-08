@@ -296,5 +296,6 @@ if ($wtSettings) {
     }
   } catch {
     # An unreadable settings.json only costs the hint.
+    Write-Verbose "Skipped the Windows Terminal check: $_"
   }
 }
