@@ -1,0 +1,32 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prek:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Run the prek version package.json pins, so CI and the local hook agree
+      # without installing Node and pnpm here.
+      - name: Read pinned prek version
+        id: prek-version
+        run: echo "version=$(jq -r '.devDependencies["@j178/prek"]' package.json)" >> "$GITHUB_OUTPUT"
+
+      # Runs `prek run --all-files` against .pre-commit-config.yaml.
+      - uses: j178/prek-action@44924fe9ef4a6f88253c4b6b1bf11c689d3ce53d # v3.1.0
+        with:
+          prek-version: ${{ steps.prek-version.outputs.version }}

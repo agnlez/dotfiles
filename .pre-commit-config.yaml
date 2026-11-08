@@ -19,3 +19,12 @@ repos:
         args: [--markdown-linebreak-ext=md]
       - id: end-of-file-fixer
       - id: check-merge-conflict
+
+  - repo: builtin
+    hooks:
+      # Enforces .claude/rules/machine-agnostic.md: no home directory with a
+      # real username, on macOS, Linux or Windows. Placeholders such as
+      # /Users/<name>/ don't match.
+      - id: deny-pattern
+        name: no hardcoded user home paths
+        args: [--ignore-case, '(/Users/|/home/|\b[a-z]:[\\/]+Users[\\/]+)[\w.-]']

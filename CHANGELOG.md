@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `.github/workflows/lint.yml`: run the prek hooks on every push to `main` and every PR, with the prek version pinned in `package.json`, so formatting and lint problems surface even when a machine has no local hook installed
+- `.pre-commit-config.yaml`: a `deny-pattern` hook that fails on home-directory paths with a real username (`/Users/…`, `/home/…`, `C:\Users\…`), enforcing the machine-agnostic rule locally and in CI
 - `claude/settings.json`: enable the `vizz-maps@vizzuality` plugin, which adds Vizzuality's react-map-gl patterns (LayerManager, controls, legends, camera state) for map work
 - `claude/skills/use-railway/`: Railway's skill for operating Railway projects (deploys, services, variables, databases, tracing), with reference docs and helper scripts; pairs with the `railway` formula in `homebrew/Brewfile`
 - `claude/skills/rex/` and a `SessionStart` hook in `claude/settings.json`, both written by `rex skill setup`: the skill documents the `rex` CLI for driving Rex terminal sessions, tabs, and panes, and the hook runs `rex __internal session-start` so a Claude session inside Rex learns its session and pane IDs. The hook fails silently outside Rex or when `rex` isn't installed
