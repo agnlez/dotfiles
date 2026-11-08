@@ -1,6 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
+if [ "$(uname -s)" != "Darwin" ]; then
+  printf "\033[1;31m✗\033[0m install.sh is macOS-only. On Windows, run install.ps1 from PowerShell.\n" >&2
+  exit 1
+fi
+
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d_%H%M%S)"
 

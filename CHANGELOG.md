@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `.gitattributes`: check out every file with LF on all OSes (CRLF for `.cmd`/`.bat`), overriding Git for Windows' system-wide `core.autocrlf=true`, which left shell scripts like `claude/statusline.sh` with CRLF endings that bash can't run
+- `docs/adr/`: adopt ADRs (`0001`) and record the decision to support macOS and Windows from one repo with one directory per tool and one installer per OS (`0002`)
+- `docs/structure.md`: a scope table (shared, macOS, Windows) for each tool directory, the `<file>.macos` / `<file>.windows` convention for per-OS values in shared configs, which `bin/` scripts each OS links, and the line-ending policy
 - `.github/workflows/lint.yml`: run the prek hooks on every push to `main` and every PR, with the prek version pinned in `package.json`, so formatting and lint problems surface even when a machine has no local hook installed
 - `.pre-commit-config.yaml`: a `deny-pattern` hook that fails on home-directory paths with a real username (`/Users/…`, `/home/…`, `C:\Users\…`), enforcing the machine-agnostic rule locally and in CI
 - `claude/settings.json`: enable the `vizz-maps@vizzuality` plugin, which adds Vizzuality's react-map-gl patterns (LayerManager, controls, legends, camera state) for map work
@@ -31,6 +34,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `claude/skills/codebase-memory/SKILL.md`: skill documenting the knowledge-graph tools — decision matrix mapping questions to tool calls, exploration/tracing workflows, and quality-analysis recipes (dead code, fan-in/fan-out)
 - `claude/settings.json`: wire the three cbm hooks into `PreToolUse` (`Grep|Glob`), `SessionStart` (startup/resume/clear/compact), and `SubagentStart`
 - `homebrew/Brewfile`: track the `todoist-app` and `font-jetbrains-mono-nerd-font` casks, previously installed but untracked; the remaining untracked apps found in the 2.4.0 drift audit stay intentionally unmanaged
+
+### Changed
+
+- `install.sh`: exit early with a pointer to `install.ps1` when not run on macOS, instead of failing midway on `xcode-select`
+- `.editorconfig`: use CRLF for `.cmd` and `.bat` files, matching `.gitattributes`
+- `.claude/rules/machine-agnostic.md`: cover Windows, with its home-directory paths to avoid, the PowerShell environment variables to use instead, a preference for binaries on `PATH` over install paths, and keeping per-OS values out of shared files
 
 ### Removed
 

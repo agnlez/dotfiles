@@ -1,19 +1,33 @@
 # Structure
 
-Each tool gets a top-level directory (`atuin/`, `claude/`, `ghostty/`, `git/`, `homebrew/`, `starship/`, `zsh/`).
-Files are symlinked to their target locations by `install.sh`.
+The dotfiles support macOS and Windows (see [ADR-0002](adr/0002-support-macos-and-windows.md)).
+
+Each tool gets a top-level directory. Files are symlinked to their target locations by the installer for the current OS: `install.sh` on macOS, `install.ps1` on Windows. Each directory belongs to one scope:
+
+| Scope   | Directories                                                   | Linked by                     |
+| ------- | ------------------------------------------------------------- | ----------------------------- |
+| Shared  | `atuin/`, `claude/`, `git/`, `starship/`, `.editorconfig`     | both installers               |
+| macOS   | `ghostty/`, `homebrew/`, `zsh/`                               | `install.sh`                  |
+| Windows | `powershell/`, `windows-terminal/`, `winget/` (not yet added) | `install.ps1` (not yet added) |
+
+When a shared config needs a value that differs per OS (an install path, a binary name), that value goes in a per-OS file next to it, named `<file>.macos` or `<file>.windows`, and each installer links only its own. The shared file stays free of OS-specific values.
 
 Single-file root configs live at the repo root (e.g. `.editorconfig` → `~/.editorconfig`).
 
-User scripts live in `bin/`; `install.sh` symlinks each entry into `~/.local/bin/`.
+User scripts live in `bin/`; the installer symlinks each entry into `~/.local/bin/`. POSIX scripts (no extension) are macOS-only; `.cmd` and `.ps1` scripts are Windows-only.
 
 The `zsh/.zshenv` file is special: it symlinks to `~/.zshenv` (not `~/.config/zsh/`), because it's the bootstrap file that sets `ZDOTDIR`.
 
 The `claude/` directory contains Claude Code configuration (global CLAUDE.md, settings, rules, skills, templates) symlinked to `~/.claude/`.
 
+## Line endings
+
+`.gitattributes` checks every file out with LF on both OSes, overriding Git for Windows' system-wide `core.autocrlf=true`: the files are symlinked into place and read by bash, zsh and git, which break on CRLF. `.cmd` and `.bat` files are the exception and use CRLF, which `cmd.exe` needs.
+
 ## Adding a new config
 
 1. Create a directory: `tool-name/`
 2. Add the config file(s)
-3. Add symlink entries to `install.sh`
-4. Update `CHANGELOG.md`
+3. Decide its scope (shared, macOS or Windows) and add it to the table above
+4. Add symlink entries to the installer of each OS it applies to
+5. Update `CHANGELOG.md`

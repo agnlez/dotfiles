@@ -1,0 +1,8 @@
+# Check out with LF on every OS: these files are symlinked into place and read
+# by bash, zsh and git, which choke on CRLF. Overrides core.autocrlf, which
+# Git for Windows sets to true system-wide.
+* text=auto eol=lf
+
+# cmd.exe misparses batch files with LF endings.
+*.cmd text eol=crlf
+*.bat text eol=crlf
