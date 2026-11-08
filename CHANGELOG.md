@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `powershell/profile.ps1` and `powershell/aliases.ps1`: the Windows counterpart of the zsh config, for PowerShell 7.
+  - PSReadLine gets inline history suggestions and a menu on Tab.
+  - fzf uses the same defaults as zsh, with PSFzf's Alt+T file picker and Alt+C directory jump.
+  - fnm with cd switching, zoxide, atuin (Ctrl+R and up arrow) and starship.
+  - The aliases are functions, since PowerShell aliases can't take arguments.
+  - The profile returns early in non-interactive sessions (`-Command`, `-File`, `-NonInteractive`), so aliases such as `ls` and `cat` never shadow built-ins in scripts or tools.
+  - A `webstorm` fallback finds the launcher under Program Files, which the installer leaves off `PATH`.
+  - Not ported: oh-my-zsh's git aliases, the per-command fzf previews, podman completions and the `docker` alias.
 - `git/.gitconfig.macos` and `git/.gitconfig.windows`: per-OS git config, linked to `~/.gitconfig.os` and included before `~/.gitconfig.local`. macOS holds 1Password's `op-ssh-sign` path. Windows calls `op-ssh-sign.exe` by name (on `PATH` through its app execution alias) and uses Windows' OpenSSH (`core.sshCommand`) so git reaches 1Password's agent pipe. It also sets `core.autocrlf=input`, `core.symlinks` and `core.longpaths`. `install.sh` links the macOS file. **On the Mac, rerun `./install.sh` after pulling**: without `~/.gitconfig.os`, git has no signing program and signed commits fail
 - `claude/settings.json`: `PowerShell(...)` counterparts of every `Bash(...)` allow and ask rule (except `lsof`), since Bash rules don't apply to the PowerShell tool on Windows. Without them, the `ask` guardrails (force push, `reset --hard`, `gh api` writes) didn't cover PowerShell commands
 - `git/.gitignore_global`: ignore `Thumbs.db` and `desktop.ini`, Windows Explorer's metadata files
