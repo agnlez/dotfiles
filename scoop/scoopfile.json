@@ -1,0 +1,13 @@
+{
+  "buckets": [
+    { "Name": "main", "Source": "https://github.com/ScoopInstaller/Main.git" },
+    {
+      "Name": "nerd-fonts",
+      "Source": "https://github.com/matthewjberger/scoop-nerd-fonts"
+    }
+  ],
+  "apps": [
+    { "Name": "Monaspace-NF", "Source": "nerd-fonts" },
+    { "Name": "railway", "Source": "main" }
+  ]
+}
