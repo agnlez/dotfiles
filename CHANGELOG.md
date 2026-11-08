@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - It symlinks every shared and Windows config, backing up what's already there, and creates `~/.gitconfig.local` from the template.
   - It ends by warning when Windows Terminal's `profiles.defaults` sets `colorScheme` or `font`, which would hide the fragment's.
   - `-WhatIf` previews everything without changing anything.
+- `.github/workflows/lint.yml`: `psscriptanalyzer` and `shellcheck` jobs for the PowerShell scripts and for `install.sh`, `claude/statusline.sh` and `bin/docker`, which no test runs. `PSScriptAnalyzerSettings.psd1` excludes `Write-Host` and `Invoke-Expression` warnings (the scripts are interactive, and the tools' shell integration is designed to be piped into it) and the BOM rule (everything requires PowerShell 7)
 - `README.md`: Windows install steps, the 1Password note about disabling the "OpenSSH Authentication Agent" service, and a Windows Terminal section
 
 - `powershell/profile.ps1` and `powershell/aliases.ps1`: the Windows counterpart of the zsh config, for PowerShell 7.

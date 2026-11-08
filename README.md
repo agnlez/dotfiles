@@ -140,6 +140,6 @@ pnpm install                                               # installs prek; prep
 git config blame.ignoreRevsFile .git-blame-ignore-revs     # skip the bulk-format commit in git blame
 ```
 
-The same hooks run in CI on every push to `main` and every PR (`.github/workflows/lint.yml`), using the prek version pinned in `package.json`. Since commits go straight to `main`, CI flags a problem after the push rather than blocking it; the local hook is still the first line of defence.
+The same hooks run in CI on every push to `main` and every PR (`.github/workflows/lint.yml`), using the prek version pinned in `package.json`. Two more CI jobs lint the scripts that no test runs: PSScriptAnalyzer for the PowerShell (settings in `PSScriptAnalyzerSettings.psd1`) and shellcheck for `install.sh`, `claude/statusline.sh` and `bin/docker`. Since commits go straight to `main`, CI flags a problem after the push rather than blocking it; the local hook is still the first line of defence.
 
 `fnm` reads `.node-version` (Node 24); the standalone pnpm binary (Homebrew) reads `devEngines.packageManager` in `package.json` (pnpm 12) and auto-switches to the pinned version.

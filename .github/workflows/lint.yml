@@ -30,3 +30,33 @@ jobs:
       - uses: j178/prek-action@44924fe9ef4a6f88253c4b6b1bf11c689d3ce53d # v3.1.0
         with:
           prek-version: ${{ steps.prek-version.outputs.version }}
+
+  # The installers and Claude Code's status line run outside any test, so
+  # static analysis is the only check they get before running on a machine.
+  # Ubuntu runners ship both pwsh and shellcheck.
+  psscriptanalyzer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Install-PSResource PSScriptAnalyzer -Version 1.25.0 -TrustRepository -Quiet
+          $results = Invoke-ScriptAnalyzer -Path . -Recurse -Settings ./PSScriptAnalyzerSettings.psd1
+          $results | Format-Table -AutoSize -Wrap RuleName, Severity, ScriptName, Line, Message
+          if ($results) { exit 1 }
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Our own scripts only: the vendored skill scripts under claude/skills/
+      # are kept as upstream ships them.
+      - name: Run shellcheck
+        run: shellcheck install.sh claude/statusline.sh bin/docker
