@@ -65,6 +65,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `README.md`: reorganize by OS.
+  - Install has macOS and Windows subsections, plus a note that both installers are safe to rerun and should be rerun after pulling.
+  - After install covers both OSes first (1Password, git identity with a per-OS way to list the agent's keys, MCP servers, apps), then macOS-only steps (Podman, Logitech mouse) and Windows-only ones (Windows Terminal).
+- `claude/rules/setup.md`: the standalone pnpm comes from Homebrew on macOS and winget on Windows
 - `git/.gitconfig`: move `gpg.ssh.program` out to the per-OS files and include `~/.gitconfig.os` before `~/.gitconfig.local`. Set `gpg.ssh.allowedSignersFile` to `~/.config/git/allowed_signers` here, since it's the same path on every machine; `git/.gitconfig.local.example` now only shows it as an optional override
 - `install.sh`: exit early with a pointer to `install.ps1` when not run on macOS, instead of failing midway on `xcode-select`
 - `.editorconfig`: use CRLF for `.cmd` and `.bat` files, matching `.gitattributes`

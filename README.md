@@ -29,6 +29,8 @@ These live outside the repo, and nothing recreates them. Copy them somewhere saf
 
 ## Install
 
+Both installers can be rerun safely: installed packages are skipped and correct links are left alone. Rerun yours after pulling changes too, since new links (such as `~/.gitconfig.os`) only appear when the installer runs.
+
 ### macOS
 
 On a fresh Mac, the first `git` call prompts to install the Xcode Command Line Tools. Accept, and run the command again once they're installed.
@@ -70,7 +72,7 @@ cd $HOME/dev/dotfiles
 ./install.ps1
 ```
 
-Run `./install.ps1 -WhatIf` first to see what it would install, set and link without changing anything. Clone over HTTPS for the same reason as on macOS.
+Run `./install.ps1 -WhatIf` first to see what it would install, set and link without changing anything. Clone over HTTPS, as on macOS.
 
 The install script will:
 
@@ -85,36 +87,29 @@ The install script will:
 
 As on macOS, a failed package doesn't stop the linking.
 
-## Manual steps after install
+## After install
+
+The steps for both OSes come first, then the ones specific to each.
 
 ### 1Password
 
 - Sign into 1Password and enable the SSH agent
 - Add your SSH key to 1Password and register the public key on GitHub as **both** an authentication key _and_ a signing key
+- On Windows, stop and disable the "OpenSSH Authentication Agent" service (Services → Startup type: Disabled). It serves the same named pipe as 1Password's agent
 - Switch the dotfiles remote to SSH: `git -C ~/dev/dotfiles remote set-url origin git@github.com:agnlez/dotfiles.git`
-- On Windows, also stop and disable the "OpenSSH Authentication Agent" service (Services → Startup type: Disabled): it serves the same named pipe as 1Password's agent. `git/.gitconfig.windows` points git at Windows' OpenSSH, the only ssh that can reach that pipe
-- `git/.gitconfig.macos` (linked to `~/.gitconfig.os`) uses `op-ssh-sign` at the default macOS path (`/Applications/1Password.app/...`). Override it in `~/.gitconfig.local` under `[gpg "ssh"]` if 1Password is installed elsewhere
+
+The signing program comes from the per-OS file linked to `~/.gitconfig.os`. On macOS, `git/.gitconfig.macos` uses `op-ssh-sign` at 1Password's default path (`/Applications/1Password.app/...`). On Windows, `git/.gitconfig.windows` calls `op-ssh-sign.exe` from `PATH`, and points git at Windows' OpenSSH, the only ssh that can reach 1Password's pipe. If 1Password is installed elsewhere, override `program` in `~/.gitconfig.local` under `[gpg "ssh"]`.
 
 ### Git identity
 
-`install.sh` creates `~/.gitconfig.local` from `git/.gitconfig.local.example` on first run. It's loaded via `[include]` after `~/.gitconfig.os` (the per-OS file the installer links) and **overrides** both, so machine-specific values (e.g. a non-default 1Password path) belong here too. Fill in:
+The installer creates `~/.gitconfig.local` from `git/.gitconfig.local.example` on first run. It's loaded via `[include]` after `~/.gitconfig.os` and **overrides** both, so machine-specific values (e.g. a non-default 1Password path) belong here too. Fill in:
 
 - `name` and `email`
-- `signingkey`: the private key stays in 1Password, so there's no key file to point at. Use the public key itself, prefixed with `key::` (`key::ssh-ed25519 AAAA…`). Copy it from the key's item in 1Password, or list the agent's keys with `SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ssh-add -L`. A plain `ssh-add -L` asks the macOS agent, which doesn't have it.
+- `signingkey`: the private key stays in 1Password, so there's no key file to point at. Use the public key itself, prefixed with `key::` (`key::ssh-ed25519 AAAA…`). Copy it from the key's item in 1Password, or list the agent's keys:
+  - macOS: `SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ssh-add -L`. A plain `ssh-add -L` asks the macOS agent, which doesn't have it.
+  - Windows: `C:\Windows\System32\OpenSSH\ssh-add.exe -L`, once the OpenSSH service is disabled. The `ssh-add` that ships with Git for Windows can't reach 1Password's pipe.
 
 Then create `~/.config/git/allowed_signers` with a `you@example.com ssh-ed25519 AAAA…` line per key you trust, so git can verify signatures. Check with a commit and `git log --show-signature -1`.
-
-### Windows Terminal
-
-The dotfiles fragment styles the PowerShell profile, but `profiles.defaults` in Windows Terminal's `settings.json` overrides it. Remove `colorScheme` and `font` from the defaults if they're there; `install.ps1` warns when they are. Set PowerShell (not Windows PowerShell) as the default profile, which a fragment can't do.
-
-### Apps
-
-Sign into the rest (Slack, Spotify, etc.)
-
-### Podman
-
-The `podman-desktop` cask installs only the app. Open Podman Desktop and complete its onboarding to install the `podman` CLI (into `/opt/podman`) and start a machine. The zsh `docker` alias and the `bin/docker` shim both forward to it.
 
 ### Claude Code MCP servers
 
@@ -125,11 +120,27 @@ claude mcp add -s user chrome-devtools -- npx chrome-devtools-mcp@latest
 claude mcp add -s user next-devtools -- npx next-devtools-mcp@latest
 ```
 
-### Logitech mouse
+### Apps
+
+Sign into the rest (Slack, Spotify, etc.)
+
+### macOS only
+
+#### Podman
+
+The `podman-desktop` cask installs only the app. Open Podman Desktop and complete its onboarding to install the `podman` CLI (into `/opt/podman`) and start a machine. The zsh `docker` alias and the `bin/docker` shim both forward to it.
+
+#### Logitech mouse
 
 When using a Logitech mouse, manage it with [Mouser](https://github.com/TomBadash/Mouser) — a lightweight, fully local, open-source alternative to Logitech Options+ — instead of the official Logitech app. There is no official Homebrew cask; download `Mouser-macOS.zip` (Apple Silicon) from the [releases page](https://github.com/TomBadash/Mouser/releases), extract, and move `Mouser.app` to `/Applications`.
 
-### Project tooling (prek + oxfmt + oxlint)
+### Windows only
+
+#### Windows Terminal
+
+The dotfiles fragment styles the PowerShell profile, but `profiles.defaults` in Windows Terminal's `settings.json` overrides it. Remove `colorScheme` and `font` from the defaults if they're there; `install.ps1` warns when they are. Set PowerShell (not Windows PowerShell) as the default profile, which a fragment can't do.
+
+## Project tooling (prek + oxfmt + oxlint)
 
 Pre-commit formatting and linting are managed by [prek](https://github.com/j178/prek) (a Rust-based, drop-in pre-commit alternative) with [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html), [oxlint](https://oxc.rs/docs/guide/usage/linter), and the standard [pre-commit-hooks](https://github.com/pre-commit/pre-commit-hooks). pnpm manages prek itself; oxc and pre-commit-hooks are pinned in `.pre-commit-config.yaml`.
 
@@ -142,4 +153,4 @@ git config blame.ignoreRevsFile .git-blame-ignore-revs     # skip the bulk-forma
 
 The same hooks run in CI on every push to `main` and every PR (`.github/workflows/lint.yml`), using the prek version pinned in `package.json`. Two more CI jobs lint the scripts that no test runs: PSScriptAnalyzer for the PowerShell (settings in `PSScriptAnalyzerSettings.psd1`) and shellcheck for `install.sh`, `claude/statusline.sh` and `bin/docker`. Since commits go straight to `main`, CI flags a problem after the push rather than blocking it; the local hook is still the first line of defence.
 
-`fnm` reads `.node-version` (Node 24); the standalone pnpm binary (Homebrew) reads `devEngines.packageManager` in `package.json` (pnpm 12) and auto-switches to the pinned version.
+`fnm` reads `.node-version` (Node 24); the standalone pnpm binary (Homebrew on macOS, winget on Windows) reads `devEngines.packageManager` in `package.json` (pnpm 12) and auto-switches to the pinned version.
