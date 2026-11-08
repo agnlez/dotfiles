@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `git/.gitconfig.macos` and `git/.gitconfig.windows`: per-OS git config, linked to `~/.gitconfig.os` and included before `~/.gitconfig.local`. macOS holds 1Password's `op-ssh-sign` path. Windows calls `op-ssh-sign.exe` by name (on `PATH` through its app execution alias) and uses Windows' OpenSSH (`core.sshCommand`) so git reaches 1Password's agent pipe. It also sets `core.autocrlf=input`, `core.symlinks` and `core.longpaths`. `install.sh` links the macOS file. **On the Mac, rerun `./install.sh` after pulling**: without `~/.gitconfig.os`, git has no signing program and signed commits fail
+- `claude/settings.json`: `PowerShell(...)` counterparts of every `Bash(...)` allow and ask rule (except `lsof`), since Bash rules don't apply to the PowerShell tool on Windows. Without them, the `ask` guardrails (force push, `reset --hard`, `gh api` writes) didn't cover PowerShell commands
 - `git/.gitignore_global`: ignore `Thumbs.db` and `desktop.ini`, Windows Explorer's metadata files
 - `.gitattributes`: check out every file with LF on all OSes (CRLF for `.cmd`/`.bat`), overriding Git for Windows' system-wide `core.autocrlf=true`, which left shell scripts like `claude/statusline.sh` with CRLF endings that bash can't run
 - `docs/adr/`: adopt ADRs (`0001`) and record the decision to support macOS and Windows from one repo with one directory per tool and one installer per OS (`0002`)

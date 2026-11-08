@@ -12,6 +12,8 @@ Each tool gets a top-level directory. Files are symlinked to their target locati
 
 When a shared config needs a value that differs per OS (an install path, a binary name), that value goes in a per-OS file next to it, named `<file>.macos` or `<file>.windows`, and each installer links only its own. The shared file stays free of OS-specific values. For example, `git/.gitconfig` includes `~/.gitconfig.os`, which `install.sh` links to `git/.gitconfig.macos` and `install.ps1` to `git/.gitconfig.windows`.
 
+When a shared config can't include another file, it holds the settings for both OSes side by side. `claude/settings.json` is one: it has matching `Bash(...)` and `PowerShell(...)` permission rules, because Bash rules don't apply to commands Claude Code runs through its PowerShell tool on Windows.
+
 Single-file root configs live at the repo root (e.g. `.editorconfig` → `~/.editorconfig`).
 
 User scripts live in `bin/`; the installer symlinks each entry into `~/.local/bin/`. POSIX scripts (no extension) are macOS-only; `.cmd` and `.ps1` scripts are Windows-only.
