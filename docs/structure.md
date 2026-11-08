@@ -4,11 +4,11 @@ The dotfiles support macOS and Windows (see [ADR-0002](adr/0002-support-macos-an
 
 Each tool gets a top-level directory. Files are symlinked to their target locations by the installer for the current OS: `install.sh` on macOS, `install.ps1` on Windows. Each directory belongs to one scope:
 
-| Scope   | Directories                                                   | Linked by                     |
-| ------- | ------------------------------------------------------------- | ----------------------------- |
-| Shared  | `atuin/`, `claude/`, `git/`, `starship/`, `.editorconfig`     | both installers               |
-| macOS   | `ghostty/`, `homebrew/`, `zsh/`                               | `install.sh`                  |
-| Windows | `powershell/`, `windows-terminal/`, `winget/` (not yet added) | `install.ps1` (not yet added) |
+| Scope   | Directories                                               | Linked by                     |
+| ------- | --------------------------------------------------------- | ----------------------------- |
+| Shared  | `atuin/`, `claude/`, `git/`, `starship/`, `.editorconfig` | both installers               |
+| macOS   | `ghostty/`, `homebrew/`, `zsh/`                           | `install.sh`                  |
+| Windows | `powershell/`, `scoop/`, `windows-terminal/`, `winget/`   | `install.ps1` (not yet added) |
 
 When a shared config needs a value that differs per OS (an install path, a binary name), that value goes in a per-OS file next to it, named `<file>.macos` or `<file>.windows`, and each installer links only its own. The shared file stays free of OS-specific values. For example, `git/.gitconfig` includes `~/.gitconfig.os`, which `install.sh` links to `git/.gitconfig.macos` and `install.ps1` to `git/.gitconfig.windows`.
 
@@ -21,6 +21,14 @@ User scripts live in `bin/`; the installer symlinks each entry into `~/.local/bi
 The `zsh/.zshenv` file is special: it symlinks to `~/.zshenv` (not `~/.config/zsh/`), because it's the bootstrap file that sets `ZDOTDIR`.
 
 The `claude/` directory contains Claude Code configuration (global CLAUDE.md, settings, rules, skills, templates) symlinked to `~/.claude/`.
+
+## Windows
+
+The Windows directories map to these targets:
+
+- `powershell/profile.ps1` → `$PROFILE.CurrentUserAllHosts` (`Documents\PowerShell\profile.ps1`), so every PowerShell 7 host loads it, IDE terminals included. `powershell/aliases.ps1` is linked next to it, where the profile dot-sources it from. The profile exits early in non-interactive sessions, so its aliases never shadow built-ins in scripts.
+- `windows-terminal/dotfiles.json` → `%LOCALAPPDATA%\Microsoft\Windows Terminal\Fragments\dotfiles\`. It's a [JSON fragment](https://learn.microsoft.com/en-us/windows/terminal/json-fragment-extensions) rather than a linked `settings.json`, because Windows Terminal rewrites its settings file whenever it's changed from the UI. A fragment can't set global settings, and `profiles.defaults` in `settings.json` overrides it, so keep `colorScheme` and `font` out of the defaults.
+- `winget/packages.json` and `scoop/scoopfile.json` aren't linked: `winget import` and `scoop import` read them. They mirror `homebrew/Brewfile` minus macOS-only entries. Scoop covers only what winget lacks.
 
 ## Line endings
 

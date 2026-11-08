@@ -1,19 +1,23 @@
 # Dotfiles
 
-Personal dotfiles for macOS (Apple Silicon).
+Personal dotfiles for macOS (Apple Silicon) and Windows. Windows support is being added in phases: the configs below are in place, `install.ps1` is not yet.
 
 ## What's included
 
-| Directory   | Contents                                                                   |
-| ----------- | -------------------------------------------------------------------------- |
-| `zsh/`      | Zsh config with zinit, fzf (with `fd`), zoxide, atuin history              |
-| `git/`      | Git config with SSH signing (1Password), delta pager, trunk-based defaults |
-| `starship/` | Custom two-line prompt (directory, git, nodejs, docker, duration)          |
-| `ghostty/`  | Terminal config in Ghostty format, read by cmux (Monaspice Nerd Font)      |
-| `atuin/`    | Atuin shell history config (daemon, directory-scoped up-arrow)             |
-| `claude/`   | Claude Code global settings, rules, skills, and templates                  |
-| `homebrew/` | Brewfile with formulas, casks, and fonts                                   |
-| `bin/`      | User scripts symlinked into `~/.local/bin`                                 |
+| Directory           | OS      | Contents                                                                     |
+| ------------------- | ------- | ---------------------------------------------------------------------------- |
+| `zsh/`              | macOS   | Zsh config with zinit, fzf (with `fd`), zoxide, atuin history                |
+| `powershell/`       | Windows | PowerShell 7 profile with PSReadLine, fzf (PSFzf), zoxide, atuin, fnm        |
+| `git/`              | Shared  | Git config with SSH signing (1Password), delta pager, trunk-based defaults   |
+| `starship/`         | Shared  | Custom two-line prompt (directory, git, nodejs, docker, duration)            |
+| `ghostty/`          | macOS   | Terminal config in Ghostty format, read by cmux (Monaspice Nerd Font)        |
+| `windows-terminal/` | Windows | Windows Terminal fragment: color schemes and font for the PowerShell profile |
+| `atuin/`            | Shared  | Atuin shell history config (daemon, directory-scoped up-arrow)               |
+| `claude/`           | Shared  | Claude Code global settings, rules, skills, and templates                    |
+| `homebrew/`         | macOS   | Brewfile with formulas, casks, and fonts                                     |
+| `winget/`           | Windows | winget import list with CLI tools and apps                                   |
+| `scoop/`            | Windows | Scoop import list for what winget lacks (Monaspace Nerd Font, Railway CLI)   |
+| `bin/`              | macOS   | User scripts symlinked into `~/.local/bin`                                   |
 
 ## Before wiping a machine
 
