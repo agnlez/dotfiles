@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Not ported: oh-my-zsh's git aliases, the per-command fzf previews, podman completions and the `docker` alias.
 - `winget/packages.json`: `winget import` list mirroring `homebrew/Brewfile`, plus PowerShell 7 and Windows Terminal. Raycast and WhatsApp come from the Microsoft Store source. Left out: macOS-only entries (`mole`, `cmux`), `portless` (no Windows package), and Podman Desktop, which isn't used on Windows
 - `scoop/scoopfile.json`: `scoop import` list for what winget doesn't package, which is the Monaspace Nerd Font and the Railway CLI
+- `windows-terminal/dotfiles.json`: a Windows Terminal JSON fragment that sets up the PowerShell profile to match Ghostty.
+  - It uses Catppuccin Latte or Gruvbox Material Dark depending on the system theme (the schemes come from iTerm2-Color-Schemes, Ghostty's source).
+  - It also sets MonaspiceNe Nerd Font, an underscore cursor, `8, 4` padding and `~/dev` as the starting directory.
+  - It's a fragment because Windows Terminal rewrites `settings.json`. `profiles.defaults` there overrides fragments, so `colorScheme` and `font` have to stay out of it
+
 - `git/.gitconfig.macos` and `git/.gitconfig.windows`: per-OS git config, linked to `~/.gitconfig.os` and included before `~/.gitconfig.local`. macOS holds 1Password's `op-ssh-sign` path. Windows calls `op-ssh-sign.exe` by name (on `PATH` through its app execution alias) and uses Windows' OpenSSH (`core.sshCommand`) so git reaches 1Password's agent pipe. It also sets `core.autocrlf=input`, `core.symlinks` and `core.longpaths`. `install.sh` links the macOS file. **On the Mac, rerun `./install.sh` after pulling**: without `~/.gitconfig.os`, git has no signing program and signed commits fail
 - `claude/settings.json`: `PowerShell(...)` counterparts of every `Bash(...)` allow and ask rule (except `lsof`), since Bash rules don't apply to the PowerShell tool on Windows. Without them, the `ask` guardrails (force push, `reset --hard`, `gh api` writes) didn't cover PowerShell commands
 - `git/.gitignore_global`: ignore `Thumbs.db` and `desktop.ini`, Windows Explorer's metadata files

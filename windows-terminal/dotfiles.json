@@ -1,0 +1,66 @@
+{
+  "profiles": [
+    {
+      "updates": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+      "colorScheme": {
+        "light": "Catppuccin Latte",
+        "dark": "Gruvbox Material Dark"
+      },
+      "font": {
+        "face": "MonaspiceNe Nerd Font",
+        "size": 10
+      },
+      "cursorShape": "underscore",
+      "padding": "8, 4",
+      "startingDirectory": "%USERPROFILE%\\dev"
+    }
+  ],
+  "schemes": [
+    {
+      "name": "Catppuccin Latte",
+      "black": "#bcc0cc",
+      "red": "#d20f39",
+      "green": "#40a02b",
+      "yellow": "#df8e1d",
+      "blue": "#1e66f5",
+      "purple": "#ea76cb",
+      "cyan": "#179299",
+      "white": "#5c5f77",
+      "brightBlack": "#acb0be",
+      "brightRed": "#e7103f",
+      "brightGreen": "#46b02f",
+      "brightYellow": "#e49931",
+      "brightBlue": "#3878f6",
+      "brightPurple": "#ef95d7",
+      "brightCyan": "#19a1a8",
+      "brightWhite": "#6c6f85",
+      "background": "#eff1f5",
+      "foreground": "#4c4f69",
+      "cursorColor": "#dc8a78",
+      "selectionBackground": "#dc8a78"
+    },
+    {
+      "name": "Gruvbox Material Dark",
+      "black": "#282828",
+      "red": "#ea6962",
+      "green": "#a9b665",
+      "yellow": "#d8a657",
+      "blue": "#7daea3",
+      "purple": "#d3869b",
+      "cyan": "#89b482",
+      "white": "#d4be98",
+      "brightBlack": "#7c6f64",
+      "brightRed": "#ea6962",
+      "brightGreen": "#a9b665",
+      "brightYellow": "#d8a657",
+      "brightBlue": "#7daea3",
+      "brightPurple": "#d3869b",
+      "brightCyan": "#89b482",
+      "brightWhite": "#ddc7a1",
+      "background": "#282828",
+      "foreground": "#d4be98",
+      "cursorColor": "#d4be98",
+      "selectionBackground": "#d4be98"
+    }
+  ]
+}
