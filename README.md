@@ -80,9 +80,9 @@ The install script will:
 2. Install the packages in `winget/packages.json`, with `--no-upgrade` so reruns skip installed ones (upgrade with `winget upgrade --all`)
 3. Install scoop (if missing) and the packages in `scoop/scoopfile.json`
 4. Install the PSFzf module from the PowerShell Gallery
-5. Install the Node version pinned in `.node-version` via fnm and make it the default
-6. Install Claude Code via the native installer
-7. Add `~/.local/bin` and pnpm's bin directory to the user `PATH` and set `PNPM_HOME`, since Windows keeps these as persistent per-user variables rather than in the shell profile
+5. Add `~/.local/bin` and pnpm's bin directory to the user `PATH` and set `PNPM_HOME`, since Windows keeps these as persistent per-user variables rather than in the shell profile
+6. Install the Node version pinned in `.node-version` via fnm and make it the default
+7. Install Claude Code via the native installer
 8. Create `~/dev`, symlink config files to their expected locations, and back up any existing files to `~/.dotfiles-backup/`
 
 As on macOS, a failed package doesn't stop the linking.

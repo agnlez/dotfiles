@@ -195,6 +195,18 @@ if (-not (Get-Module -ListAvailable PSFzf)) {
   }
 }
 
+# --- Environment ---
+# Persistent per-user variables: what zsh/.zshrc exports on macOS. Stored with
+# %USERPROFILE% unexpanded, like Windows' own default PATH entries. Set before
+# the tool installs below, so ~/.local/bin is on PATH when Claude Code's
+# installer checks for it.
+Write-Info 'Setting user environment variables...'
+Add-UserPath '%USERPROFILE%\.local\bin'
+Set-UserVariable PNPM_HOME (Join-Path $env:LOCALAPPDATA 'pnpm')
+Add-UserPath '%USERPROFILE%\AppData\Local\pnpm\bin'
+if ($script:EnvironmentChanged) { Send-EnvironmentChange }
+Sync-SessionPath
+
 # --- Node (version pinned in .node-version) ---
 if (Get-Command fnm -ErrorAction Ignore) {
   Write-Info 'Installing Node via fnm...'
@@ -218,16 +230,6 @@ if (-not (Get-Command claude -ErrorAction Ignore)) {
     Invoke-RestMethod https://claude.ai/install.ps1 | Invoke-Expression
   }
 }
-
-# --- Environment ---
-# Persistent per-user variables: what zsh/.zshrc exports on macOS. Stored with
-# %USERPROFILE% unexpanded, like Windows' own default PATH entries.
-Write-Info 'Setting user environment variables...'
-Add-UserPath '%USERPROFILE%\.local\bin'
-Set-UserVariable PNPM_HOME (Join-Path $env:LOCALAPPDATA 'pnpm')
-Add-UserPath '%USERPROFILE%\AppData\Local\pnpm\bin'
-if ($script:EnvironmentChanged) { Send-EnvironmentChange }
-Sync-SessionPath
 
 # --- Directories ---
 New-Item -ItemType Directory -Force -Path (Join-Path $HOME 'dev') | Out-Null
