@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - The profile returns early in non-interactive sessions (`-Command`, `-File`, `-NonInteractive`), so aliases such as `ls` and `cat` never shadow built-ins in scripts or tools.
   - A `webstorm` fallback finds the launcher under Program Files, which the installer leaves off `PATH`.
   - Not ported: oh-my-zsh's git aliases, the per-command fzf previews, podman completions and the `docker` alias.
-- `winget/packages.json`: `winget import` list mirroring `homebrew/Brewfile`, plus PowerShell 7 and Windows Terminal. Raycast and WhatsApp come from the Microsoft Store source. Left out: macOS-only entries (`mole`, `cmux`), `portless` (no Windows package), and Podman Desktop, which isn't used on Windows
+- `winget/packages.json`: `winget import` list mirroring `homebrew/Brewfile`, plus PowerShell 7 and Windows Terminal. Raycast and WhatsApp come from the Microsoft Store source. Left out: macOS-only entries (`mole`, `cmux`), `portless` (no Windows package), and Podman Desktop, DBeaver, Slack and Chrome, which aren't used on Windows
 - `scoop/scoopfile.json`: `scoop import` list for what winget doesn't package, which is the Monaspace Nerd Font and the Railway CLI
 - `windows-terminal/dotfiles.json`: a Windows Terminal JSON fragment that sets up the PowerShell profile to match Ghostty.
   - It uses Catppuccin Latte or Gruvbox Material Dark depending on the system theme (the schemes come from iTerm2-Color-Schemes, Ghostty's source).

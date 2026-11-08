@@ -28,7 +28,7 @@ The Windows directories map to these targets:
 
 - `powershell/profile.ps1` → `$PROFILE.CurrentUserAllHosts` (`Documents\PowerShell\profile.ps1`), so every PowerShell 7 host loads it, IDE terminals included. `powershell/aliases.ps1` is linked next to it, where the profile dot-sources it from. The profile exits early in non-interactive sessions, so its aliases never shadow built-ins in scripts.
 - `windows-terminal/dotfiles.json` → `%LOCALAPPDATA%\Microsoft\Windows Terminal\Fragments\dotfiles\`. It's a [JSON fragment](https://learn.microsoft.com/en-us/windows/terminal/json-fragment-extensions) rather than a linked `settings.json`, because Windows Terminal rewrites its settings file whenever it's changed from the UI. A fragment can't set global settings, and `profiles.defaults` in `settings.json` overrides it, so keep `colorScheme` and `font` out of the defaults.
-- `winget/packages.json` and `scoop/scoopfile.json` aren't linked: `winget import` and `scoop import` read them. They mirror `homebrew/Brewfile` minus macOS-only entries. Scoop covers only what winget lacks.
+- `winget/packages.json` and `scoop/scoopfile.json` aren't linked: `winget import` and `scoop import` read them. They mirror `homebrew/Brewfile`, minus macOS-only entries and apps not used on Windows (Podman Desktop, DBeaver, Slack, Chrome). Scoop covers only what winget lacks.
 
 ## Line endings
 
