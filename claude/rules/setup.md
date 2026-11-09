@@ -6,7 +6,7 @@ If a higher-priority instruction (managed CLAUDE.md, project conventions, explic
 
 ## Package manager and Node
 
-- **Package manager**: pnpm as a standalone binary (installed with Homebrew on macOS, winget on Windows). Do **not** use Corepack — pnpm v12 (the Rust rewrite) is no longer distributed through Corepack, and the Node-run shim adds startup overhead. Pin the version per project via `devEngines.packageManager` in `package.json`:
+- **Package manager**: pnpm as a standalone binary (installed with Homebrew on macOS, winget on Windows). Do **not** use Corepack — Node.js stopped bundling it from v25 onward (Node 24 is the last line that ships it), and under Corepack pnpm v12 (the Rust rewrite) goes through a Node-run launcher that fetches the native binary on first use, adding startup overhead. pnpm itself still supports Corepack; the reason to avoid it is Node's removal, not pnpm's. In Dockerfiles, install the pinned version with `npm i -g "pnpm@$(node -p "require('./package.json').devEngines.packageManager.version")"` instead of `corepack enable pnpm` (for a top-level `packageManager` pin: `npm i -g "$(node -p "require('./package.json').packageManager")"`). Pin the version per project via `devEngines.packageManager` in `package.json`:
 
   ```json
   "devEngines": {
