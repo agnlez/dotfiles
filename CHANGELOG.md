@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `claude/mcp-servers.json`: the user-scope MCP servers (Chrome DevTools, Next.js DevTools, Playwright, Railway). `install.sh` and `install.ps1` register each one with `claude mcp`, replacing any existing server of the same name, since `~/.claude.json` is runtime state and can't be tracked. The README's manual `claude mcp add` steps are gone.
 - `install.sh` and `install.ps1` link each global skill in `~/.agents/skills` (installed with `npx skills add -g`) into `~/.claude/skills` by absolute path, replacing the `skills` CLI's relative links, which break because `~/.claude/skills` points into this repo. Skills tracked in `claude/skills/` under the same name are left alone.
 - `install.ps1`: the Windows installer, the counterpart of `install.sh`, for PowerShell 7.
   - It checks that symlinks can be created (Developer Mode) and that winget is present.
@@ -94,6 +95,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `homebrew/Brewfile`: drop the `docker-desktop` cask — Docker Desktop is being uninstalled from the machine, so `brew bundle` should no longer reinstall it
 
 ### Fixed
+
+- Claude Code MCP servers started with `npx` failed to connect in projects that pin pnpm through `devEngines.packageManager`: npm refuses to run there (`EBADDEVENGINES`), and Claude Code starts servers from the project root. They now pass `--prefix ${HOME}`, so npm reads the home directory instead. `claude/settings.json` disables the `playwright` plugin, whose `npx` command can't be changed, in favor of the server in `mcp-servers.json`, and its permission rule is now `mcp__playwright`.
 
 - `install.ps1`: set the user environment variables before installing Node and Claude Code. On a first run, Claude Code's installer checked `PATH` before `~/.local/bin` had been added and warned that it was missing
 - `starship/starship.toml`: show the Nerd Font branch and Node.js icons in the `git_branch` and `nodejs` segments, which rendered as a blank space because the glyphs were lost when the file was saved; they're now written as `\u` escapes so they can't be stripped again

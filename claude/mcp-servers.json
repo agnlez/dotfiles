@@ -1,0 +1,29 @@
+{
+  "chrome-devtools": {
+    "type": "stdio",
+    "command": "npx",
+    "args": ["--prefix", "${HOME}", "-y", "chrome-devtools-mcp@latest"]
+  },
+  "next-devtools": {
+    "type": "stdio",
+    "command": "npx",
+    "args": ["--prefix", "${HOME}", "-y", "next-devtools-mcp@latest"]
+  },
+  "playwright": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "--prefix",
+      "${HOME}",
+      "-y",
+      "@playwright/mcp@latest",
+      "--output-dir",
+      "${HOME}/.cache/playwright-mcp"
+    ]
+  },
+  "railway": {
+    "type": "stdio",
+    "command": "railway",
+    "args": ["mcp"]
+  }
+}

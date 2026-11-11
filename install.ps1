@@ -276,6 +276,31 @@ foreach ($item in 'CLAUDE.md', 'settings.json', 'statusline.sh', 'rules', 'skill
   Set-Link (Join-Path $Dotfiles "claude\$item") (Join-Path $claudeDir $item)
 }
 
+# User-scope MCP servers live in ~/.claude.json, which is runtime state and
+# can't be linked, so they're registered through the CLI instead. Arguments are
+# passed one by one rather than as JSON because PowerShell before 7.3 mangles
+# quotes inside native-command arguments.
+$mcpOk = $true
+if (Get-Command claude -ErrorAction Ignore) {
+  Write-Info 'Registering Claude Code MCP servers...'
+  $servers = Get-Content (Join-Path $Dotfiles 'claude\mcp-servers.json') -Raw | ConvertFrom-Json
+  foreach ($server in $servers.PSObject.Properties) {
+    $serverArgs = @($server.Value.args | ForEach-Object { $_.Replace('${HOME}', $HOME) })
+    if ($PSCmdlet.ShouldProcess($server.Name, 'Register user-scope MCP server')) {
+      claude mcp remove -s user $server.Name *> $null
+      claude mcp add -s user $server.Name -- $server.Value.command @serverArgs | Out-Null
+      if ($LASTEXITCODE -eq 0) {
+        Write-Success "MCP server: $($server.Name)"
+      } else {
+        $mcpOk = $false
+      }
+    }
+  }
+} else {
+  $mcpOk = $false
+  Write-Caution "claude isn't on PATH yet, skipping MCP servers."
+}
+
 # The skills CLI's relative links break because ~/.claude/skills points into
 # this repo. Tracked skills of the same name are left alone.
 Get-ChildItem (Join-Path $HOME '.agents\skills') -Directory -ErrorAction Ignore |
@@ -292,6 +317,7 @@ Write-Host ''
 Write-Success 'Done! Open a new terminal to load the updated config.'
 Write-Host ''
 if (-not $packagesOk) { Write-Caution 'Some packages failed: fix the errors above and rerun ./install.ps1.' }
+if (-not $mcpOk) { Write-Caution "Some MCP servers weren't registered: fix the errors above and rerun ./install.ps1." }
 Write-Caution 'Edit ~/.gitconfig.local with your git identity and signing key.'
 Write-Caution 'Commits are signed: enable the 1Password SSH agent, stop and disable the "OpenSSH Authentication Agent" service (it holds the same pipe), and create ~/.config/git/allowed_signers before committing.'
 

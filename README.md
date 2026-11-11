@@ -113,12 +113,13 @@ Then create `~/.config/git/allowed_signers` with a `you@example.com ssh-ed25519 
 
 ### Claude Code MCP servers
 
-User-scope MCP servers live in `~/.claude.json`, which isn't tracked. Re-add them after install:
+User-scope MCP servers live in `~/.claude.json`, which isn't tracked: it's Claude Code's runtime state, holding caches, account details and server credentials. The servers themselves are listed in `claude/mcp-servers.json`, and both installers register each one with `claude mcp`, replacing any existing server of the same name. To add or change a server, edit that file and rerun the installer.
 
-```sh
-claude mcp add -s user chrome-devtools -- npx chrome-devtools-mcp@latest
-claude mcp add -s user next-devtools -- npx next-devtools-mcp@latest
-```
+- `${HOME}` in the file is replaced with your home directory at install time.
+- Servers started with `npx` pass `--prefix ${HOME}`. Claude Code starts MCP servers from the project root, and npm refuses to run when that project's `devEngines.packageManager` names another package manager (`EBADDEVENGINES`). `--prefix` makes npm read your home directory instead, which has no `package.json`.
+- The Playwright server is registered here instead of through the `playwright` plugin, which is disabled in `settings.json`: the plugin starts `npx` without `--prefix`, and its config can't be changed.
+- `install.ps1` passes `command` and `args` to `claude mcp add`, so only `stdio` servers work on Windows.
+- Servers that need credentials, such as SonarQube, aren't in the file. Add them by hand with `claude mcp add -s user`.
 
 ### Apps
 

@@ -123,6 +123,27 @@ link_file "$DOTFILES/claude/rules" "$HOME/.claude/rules"
 link_file "$DOTFILES/claude/skills" "$HOME/.claude/skills"
 link_file "$DOTFILES/claude/templates" "$HOME/.claude/templates"
 
+# User-scope MCP servers live in ~/.claude.json, which is runtime state and
+# can't be linked, so they're registered through the CLI instead.
+mcp_ok=true
+if command -v claude &>/dev/null; then
+  info "Registering Claude Code MCP servers..."
+  while IFS= read -r name; do
+    config="$(jq -c --arg name "$name" --arg home "$HOME" \
+      '.[$name] | walk(if type == "string" then gsub("\\$\\{HOME\\}"; $home) else . end)' \
+      "$DOTFILES/claude/mcp-servers.json")"
+    claude mcp remove -s user "$name" &>/dev/null || true
+    if claude mcp add-json -s user "$name" "$config" >/dev/null; then
+      success "MCP server: $name"
+    else
+      mcp_ok=false
+    fi
+  done < <(jq -r 'keys[]' "$DOTFILES/claude/mcp-servers.json")
+else
+  mcp_ok=false
+  warn "claude isn't on PATH yet, skipping MCP servers."
+fi
+
 # The skills CLI's relative links break because ~/.claude/skills points into
 # this repo. Tracked skills of the same name are left alone.
 for skill in "$HOME"/.agents/skills/*/; do
@@ -137,5 +158,6 @@ echo ""
 success "Done! Open a new terminal to load the updated config."
 echo ""
 $brew_ok || warn "brew bundle failed: fix the errors above and rerun ./install.sh."
+$mcp_ok || warn "Some MCP servers weren't registered: fix the errors above and rerun ./install.sh."
 warn "Edit ~/.gitconfig.local with your git identity and signing key."
 warn "Commits are signed: set up the 1Password SSH agent and ~/.config/git/allowed_signers before committing."

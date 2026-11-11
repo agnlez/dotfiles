@@ -21,6 +21,8 @@ All Claude Code global configuration is managed through `~/dev/dotfiles` and sym
 - `~/dev/dotfiles/claude/skills/` → `~/.claude/skills/`
 - `~/dev/dotfiles/claude/templates/` → `~/.claude/templates/`
 
+User-scope MCP servers are the exception: they live in `~/.claude.json`, which isn't linked. Add or change them in `~/dev/dotfiles/claude/mcp-servers.json` and rerun the installer, which registers them with `claude mcp`.
+
 ## Tool preferences
 
 - Assume `rg`, `fd`, `bat`, `eza`, `jq`, and `yq` are available in the environment
