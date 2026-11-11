@@ -21,6 +21,8 @@ All Claude Code global configuration is managed through `~/dev/dotfiles` and sym
 - `~/dev/dotfiles/claude/skills/` → `~/.claude/skills/`
 - `~/dev/dotfiles/claude/templates/` → `~/.claude/templates/`
 
+When changing `settings.json`, update `~/dev/dotfiles/claude/settings.md` in the same commit — it records why each permission, plugin, hook, and setting is there.
+
 User-scope MCP servers are the exception: they live in `~/.claude.json`, which isn't linked. Add or change them in `~/dev/dotfiles/claude/mcp-servers.json` and rerun the installer, which registers them with `claude mcp`.
 
 ## Tool preferences

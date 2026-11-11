@@ -31,4 +31,5 @@ The only frontmatter Claude Code recognizes is `paths:`, which conditionally loa
 
 - [`../skills/`](skills/) — invokable workflows triggered on demand (e.g. `github-pull-request`).
 - [`../templates/`](templates/) — reusable artifact templates (e.g. ADR template).
+- [`settings.md`](settings.md) — why each permission, plugin, hook, and setting in `settings.json` is there.
 - [`../CLAUDE.md`](CLAUDE.md) — global instructions loaded for every session, lists the dotfiles symlink map.

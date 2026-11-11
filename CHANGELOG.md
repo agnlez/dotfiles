@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `claude/settings.md`: the rationale for every permission group, plugin, hook, and session setting in `claude/settings.json`, which can't hold comments. Reasons come from this changelog and commit bodies; settings with no recorded reason say only what they do. `claude/CLAUDE.md` asks for it to be updated alongside `settings.json`, and `claude/README.md` and `docs/structure.md` link to it
 - `claude/mcp-servers.json`: the user-scope MCP servers (Chrome DevTools, Next.js DevTools, Playwright, Railway). `install.sh` and `install.ps1` register each one with `claude mcp`, replacing any existing server of the same name, since `~/.claude.json` is runtime state and can't be tracked. The README's manual `claude mcp add` steps are gone.
 - `install.sh` and `install.ps1` link each global skill in `~/.agents/skills` (installed with `npx skills add -g`) into `~/.claude/skills` by absolute path, replacing the `skills` CLI's relative links, which break because `~/.claude/skills` points into this repo. Skills tracked in `claude/skills/` under the same name are left alone.
 - `install.ps1`: the Windows installer, the counterpart of `install.sh`, for PowerShell 7.
