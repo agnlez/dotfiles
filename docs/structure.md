@@ -22,6 +22,8 @@ The `zsh/.zshenv` file is special: it symlinks to `~/.zshenv` (not `~/.config/zs
 
 The `claude/` directory contains Claude Code configuration (global CLAUDE.md, settings, rules, skills, templates) symlinked to `~/.claude/`.
 
+Skills installed globally with the `skills` CLI (`npx skills add -g`, which installers such as `npx modern-web-guidance install` run) live in `~/.agents/skills/`, outside the repo. The CLI links them into `~/.claude/skills/` with relative paths, which break because `~/.claude/skills` is itself a link into `claude/skills/`. Rerun the installer after adding one: it links each skill by absolute path, skipping any skill tracked in `claude/skills/` under the same name. These links are machine-local, so list each skill name in `.gitignore`.
+
 ## Windows
 
 The Windows directories map to these targets:

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `install.sh` and `install.ps1` link each global skill in `~/.agents/skills` (installed with `npx skills add -g`) into `~/.claude/skills` by absolute path, replacing the `skills` CLI's relative links, which break because `~/.claude/skills` points into this repo. Skills tracked in `claude/skills/` under the same name are left alone.
 - `install.ps1`: the Windows installer, the counterpart of `install.sh`, for PowerShell 7.
   - It checks that symlinks can be created (Developer Mode) and that winget is present.
   - It installs the winget and scoop lists (`--no-upgrade`, so reruns skip installed packages), the PSFzf module, Node via fnm and Claude Code.

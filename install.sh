@@ -123,6 +123,16 @@ link_file "$DOTFILES/claude/rules" "$HOME/.claude/rules"
 link_file "$DOTFILES/claude/skills" "$HOME/.claude/skills"
 link_file "$DOTFILES/claude/templates" "$HOME/.claude/templates"
 
+# The skills CLI's relative links break because ~/.claude/skills points into
+# this repo. Tracked skills of the same name are left alone.
+for skill in "$HOME"/.agents/skills/*/; do
+  skill="${skill%/}"
+  [ -f "$skill/SKILL.md" ] || continue
+  dst="$HOME/.claude/skills/$(basename "$skill")"
+  [ -e "$dst" ] && [ ! -L "$dst" ] && continue
+  link_file "$skill" "$dst"
+done
+
 echo ""
 success "Done! Open a new terminal to load the updated config."
 echo ""

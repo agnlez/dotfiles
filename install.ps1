@@ -276,6 +276,17 @@ foreach ($item in 'CLAUDE.md', 'settings.json', 'statusline.sh', 'rules', 'skill
   Set-Link (Join-Path $Dotfiles "claude\$item") (Join-Path $claudeDir $item)
 }
 
+# The skills CLI's relative links break because ~/.claude/skills points into
+# this repo. Tracked skills of the same name are left alone.
+Get-ChildItem (Join-Path $HOME '.agents\skills') -Directory -ErrorAction Ignore |
+  Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') } |
+  ForEach-Object {
+    $dst = Join-Path $claudeDir "skills\$($_.Name)"
+    $existing = Get-Item -LiteralPath $dst -Force -ErrorAction Ignore
+    if ($existing -and $existing.LinkType -ne 'SymbolicLink') { return }
+    Set-Link $_.FullName $dst
+  }
+
 # --- Summary ---
 Write-Host ''
 Write-Success 'Done! Open a new terminal to load the updated config.'
