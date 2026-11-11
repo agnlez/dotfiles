@@ -42,6 +42,7 @@
       "Bash(fd:*)",
       "Bash(yq:*)",
       "Bash(lsof:*)",
+      "Bash(pnpx modern-web-guidance@latest:*)",
       "PowerShell(git add:*)",
       "PowerShell(git commit:*)",
       "PowerShell(git fetch:*)",
